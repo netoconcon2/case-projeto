@@ -1,0 +1,3 @@
+<p><%= t('.about_error', doc_name: @document.title).html_safe %></p>
+
+<p><%= t('.info_error', chunk_id: @text_chunk.id, chunk_order: @text_chunk.order, href: link_to(t('.here'), document_url(document_id: @document.id, anchor: "chunk_#{@text_chunk.id}"))).html_safe %></p>

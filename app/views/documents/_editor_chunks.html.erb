@@ -1,0 +1,20 @@
+<div class='chunks'>
+  <%# ------------------------- Chunk search bar -------------------------- %>
+  <div class='search-options'>
+    <%= simple_form_for :search, url: document_editor_search_path, defaults: { required: false }, html: { data: { turbo: true, action: 'input->editor#handleInput', 'editor-target': 'searchForm' } } do |f| %>
+      <div class="f-center flex-s-between">
+        <%= f.input :original, label: t('documents.editor.search_original_chunk'), placeholder: t('documents.editor.search_original_chunk'), label_html: { class: 'visibility-hidden' }, wrapper_html: { class: 'search' } %>
+        <%= f.input :translated, label: t('documents.editor.search_translated_chunk'), placeholder: t('documents.editor.search_translated_chunk'), label_html: { class: 'visibility-hidden' }, wrapper_html: { class: 'search' } %>
+        <%= f.input :sensitive_case, as: :boolean, label: "<span aria-hidden='true'>Aa</span><span class='visibility-hidden'>#{t('documents.editor.case_sensitive')}</span>".html_safe, label_html: { class: 'm-0', data: { tippy_content: t('documents.editor.case_sensitive') } } %>
+        <button type="button" class='btn-arrow' data-tippy-content='<%= t('documents.editor.clean_filters') %>' data-action='editor#cleanFilters' data-editor-target='cleanBtn' disabled>
+          <i class='fas fa-times'></i>
+          <span class="visibility-hidden"><%= t('documents.editor.clean_filters') %></span>
+        </button>
+      </div>
+    <% end %>
+  </div>
+  <div class='table-chunks-container'>
+    <%# ------------------------- Each Chunk row -------------------------- %>
+    <%= render 'chunk_row' %>
+  </div>
+</div>

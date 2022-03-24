@@ -1,0 +1,33 @@
+<nav role="navigation" aria-label='<%= t('.label') %>' class="dash-nav f-column minimized" data-menu-target="dashNav">
+  <div class="dash-nav-icons">
+    <div class="logo f-column">
+      <%= image_tag  "owl-white.png", class: "owl", alt: "owl" %>
+      <%= image_tag  "decode.png", class: "decode", alt: "decode" %>
+    </div>
+    <button remote="true" id="bars" title='<%= t('.button_toggle') %>' tabindex="0" type="button" data-menu-target="btnToggle" data-action="click->menu#minimizeMenu" aria-expanded="false">
+      <div class="hamburger" id="hamburger-3" tabindex="-1">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </button>
+  </div>
+  <div class="dash-nav-items f-column">
+    <div class="dash-nav-options">
+      <%= link_to root_path, class: "dash-nav-item f-column f-center", data: { tippy_content: t('.dashboard') } do %>
+        <%= inline_svg_tag('home.svg', title: t('.dashboard'), aria: true) %>
+        <p><%= t('.dashboard') %></p>
+      <% end %>
+      <%= navbar_links %>
+      <%= link_to edit_user_registration_path, class: "dash-nav-item f-column f-center", data: { tippy_content: t('.profile') } do %>
+        <%= inline_svg_tag('user.svg', title: t('.profile'), aria: true) %>
+        <p><%= t('.profile') %></p>
+      <% end %>
+    </div>
+    <%= link_to destroy_user_session_path, method: :delete, class: "dash-nav-item f-column f-center", data: { tippy_content: t('.sign_out') } do %>
+      <%= inline_svg_tag('logout.svg', title: t('.sign_out'), aria: true) %>
+      <p><%= t('.sign_out') %></p>
+    <% end %>
+  </div>
+</nav>
+<%= render partial:'shared/menu_nav', locals: { page: 'dash' } %>

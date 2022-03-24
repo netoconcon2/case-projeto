@@ -1,0 +1,24 @@
+<%= turbo_frame_tag "term-#{term.id}", class: "grid-turbo" do %>
+  <div id="term_<%= term.id %>" role="row" class="grid-row">
+    <span role="cell"><%= term.source %></span>
+    <span role="cell"><%= term.target %></span>
+    <span role="cell"><%= User.find(term.versions.last.whodunnit).name if term.versions.last %></span>
+    <span role="cell"><%= l(term.updated_at.localtime, format: :short) %></span>
+    <span role="cell">
+      <!-- edit button -->
+      <%= link_to edit_term_path(term), data: { turbo: true, turbo_frame: "term-#{term.id}" } do %>
+        <i class="fas fa-pen mx-1" data-tippy-content="<%= t('.edit') %>"></i>
+        <span class="visibility-hidden">
+          <%= t('.edit') %>
+        </span>
+      <% end %>
+      <!-- destroy button -->
+      <%= link_to term, method: :delete, data: { turbo: true, confirm: t('alert.are_you_sure') } do %>
+        <i class="fas fa-trash" data-tippy-content="<%= t('.delete') %>"></i>
+        <span class="visibility-hidden">
+          <%= t('.delete') %>
+        </span>
+      <% end %>
+    </span>
+  </div>
+<% end %>

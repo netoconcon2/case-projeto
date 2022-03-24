@@ -1,0 +1,10 @@
+invisible:
+  name: 'Additional Package 1'
+  price_cents: 1000
+  words: 100
+
+visible:
+  name: 'Additional Package 2'
+  price_cents: 1000
+  words: 1000
+  status: 1

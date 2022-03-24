@@ -1,0 +1,9 @@
+<%= render 'layouts/base' do %>
+  <div id="page-container" data-locale="<%= I18n.locale %>" data-controller=<%= user_signed_in? ? "menu" : "nav" %> data-turbo="false">
+    <%= render user_signed_in? ? 'shared/dashboard_navbar' : 'shared/navbar' %>
+    <div id="content-wrap" class="<%= user_signed_in? ? 'dash' : 'home f-column' %>">
+      <%= yield %>
+    </div>
+    <%= render 'shared/footer' unless user_signed_in? %>
+  </div>
+<% end %>

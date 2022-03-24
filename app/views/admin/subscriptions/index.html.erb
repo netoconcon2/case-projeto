@@ -1,0 +1,66 @@
+<div class="index-header">
+  <h2><%= t('.manage_subscriptions') %></h2>
+</div>
+
+<div role="table" aria-describedby="table-desc" id="grid-list" class="dash-box">
+  <div class="grid-opt">
+    <h3 id="table-desc">
+      <%= t('.index') %>
+    </h3>
+    <div class="flex-s-between">
+      <div class="pages">
+        <%= paginate @subscriptions, window: 1, right: 1, left: 1 %>
+      </div>
+    </div>
+  </div>
+  <div class="grid-5">
+    <div role="rowgroup" class="grid-headers">
+      <div role="row" class="grid-row">
+        <span role="columnheader"><%= t('.company') %></span>
+        <span role="columnheader"><%= t('.plan') %></span>
+        <span role="columnheader"><%= t('.price') %></span>
+        <span role="columnheader"><%= t('.status') %></span>
+      </div>
+    </div>
+    <div role="rowgroup" class="grid-table">
+      <% @subscriptions.each do |subscription| %>
+        <div role="row" class="grid-row">
+          <span role="cell">
+            <%= subscription["customer"]["name"] %>
+          </span>
+          <span role="cell">
+            <%= subscription["plan"]["name"] %>
+          </span>
+          <span role="cell">
+            <%= Money.new(subscription["plan"]["amount"]).format %>
+          </span>
+          <span role="cell">
+            <%= subscription_statuses subscription["current_transaction"]["status"] %>
+          </span>
+          <span role="cell">
+              <button type="button" data-bs-toggle="modal" data-bs-target="#modal-<%= subscription.id %>" class="link-orange">
+                <i class='fas fa-eye mx-1' data-tippy-content='<%= t('.see_details') %>'></i>
+              </button>
+              <!-- <div class="modal fade" id="modal-<%= subscription.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      ...
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+          </span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

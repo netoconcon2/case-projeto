@@ -1,0 +1,37 @@
+<div id="content-cards" data-controller="input tab">
+  <div id="statuses" role="listbox" aria-labelledby="group-checkboxes-label" class="tab-panel f-column" class="f-column">
+    <span id="group-checkboxes-label"><%= t('.package_status') %></span>
+    <%= form_for :status, url: admin_packages_status_path, remote: true, method: :get, html: { id: "status-form" }, data: { action: "input->tab#handleInput input->input#checkboxBehavior ajax:success->tab#showCards", checkboxes: "package_status" } do |f| %>
+    <%= hidden_field_tag :locale, I18n.locale %>
+    <ul>
+      <li>
+        <label for="package_status_all">
+          <%= check_box_tag( "", "", true, { id: "package_status_all", role: "option", data: { action: "input->input#selectAll" } } ) %>
+          <%= t('.all') %>
+        </label>
+      </li>
+      <% Package.translated_statuses.each do |translation, key, value| %>
+      <li>
+        <label for="status_<%= value %>">
+          <%= check_box_tag( "package[status][]", key, true, { id: "status_#{value}", role: "option" } ) %>
+          <%= translation %>
+        </label>
+      </li>
+      <% end %>
+    </ul>
+    <% end %>
+  </div>
+
+  <div class="index-header cards">
+    <h2><%= t('.manage_packages') %></h2>
+    <div id="links-header">
+      <% if policy(Plan).admin? %>
+      <%= link_to t('.new_package'), new_admin_package_path, class:"btn-orange index-h" %>
+      <% end %>
+      <%= link_to  t('.see_visible_packages'), packages_path, class: "btn-orange index-h" %>
+    </div>
+  </div>
+
+  <div id="cards-container" class="cards-grid">
+  </div>
+</div>

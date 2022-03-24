@@ -1,0 +1,75 @@
+// home banner
+.banner {
+  width: 100%;
+  max-height: calc(90vh - #{$nav-height});
+  & > img {
+    max-width: 100%;
+    max-height: 80vh;
+  }
+}
+// devise banners
+.banner-sign-in {
+  background: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url("owl-inverse.jpg") no-repeat;
+  background-position-x: 60%;
+}
+.banner-sign-up {
+  background: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url("owl.jpg") no-repeat;
+  background-position-x: 40%;
+}
+.banner-sign-in, .banner-sign-up {
+  background-color: $decode-orange;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  color: $white;
+  font-size: 1.4rem;
+  h3 {
+    color: $white;
+    font-weight: 600;
+    font-size: 4rem;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  img {
+    height: 100%;
+  }
+  p {
+    text-align: center;
+  }
+}
+
+@media (max-width: $medium) {
+  .banner-sign-in, .banner-sign-up {
+    h3 {
+      font-size: 3rem;
+    }
+  }
+}
+
+@media (max-width: $small) {
+  .banner-sign-in, .banner-sign-up {
+    padding-bottom: 3rem;
+    padding-top: 2rem;
+    order: -1;
+    p {
+      font-size: 1.2rem;
+      width: 90%;
+    }
+    h3 {
+      font-size: 2.5rem;
+    }
+  }
+  .banner {
+    max-height: calc(90vh - #{$nav-height-lg});
+  }
+}
+@media (max-width: $extra-small) {
+  .banner {
+    & > img {
+      max-width: 225%;
+      position: relative;
+      right: -58%;
+      top: -15vh;
+    }
+  }
+}

@@ -1,0 +1,5 @@
+<% if resource.errors.any? %>
+  document.getElementById('invitation-modal').innerHTML = `<%= render 'new' %>`;
+<% else %>
+  document.getElementById('grid-list').innerHTML = `<%= current_user.admin? ? (render 'admin/users/index') : (render 'users/index') %>`;
+<% end %>

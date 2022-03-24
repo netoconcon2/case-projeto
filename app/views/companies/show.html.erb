@@ -1,0 +1,78 @@
+<div class="d-flex justify-content-between mb-3" data-controller="modal">
+  <h2><%= @company.name %></h2>
+  <% if policy(@company).validated? && @company.plan %>
+    <%= link_to t('.invite_user'), new_user_invitation_path(company: @company.id), remote: true, data: { action: "ajax:success->modal#inviteUser" }, class: "btn-orange" %>
+  <% end %>
+</div>
+<div class="grid-2 row-md mb-3">
+  <div class="dash-box">
+    <div class="d-flex justify-content-between show-info-header">
+      <h3><%= t('.company_details') %></h3>
+      <% if policy(@company).update? %>
+        <%= link_to edit_company_path, class: 'btn-orange' do %>
+          <i class="far fa-edit me-2"></i>
+          <%= t('.edit') %>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="grid-2 show-info">
+      <div class="span">
+        <span><%= t('.name') %></span>
+        <p><%= @company.name %></p>
+      </div>
+      <% if @company.owner.pj? %>
+        <div>
+          <span><%= t('.kind') %></span>
+          <p><%= t('.pj') %></p>
+        </div>
+      <% end %>
+      <div>
+        <span><%= t('.cnpj') %></span>
+        <p><%= @company.cnpj %></p>
+      </div>
+      <div>
+        <span><%= t('.created_at') %></span>
+        <p><%= l(@company.created_at, format: :short) %></p>
+      </div>
+      <div class="">
+        <span><%= t('.responsible') %></span>
+        <p><%= @company.owner.email %></p>
+      </div>
+      <% unless @company.owner.pj? %>
+        <div>
+          <span><%= t('.people') %></span>
+          <p><%= @company.users.size %></p>
+        </div>
+      <% end %>
+      <div>
+        <span><%= t('.status') %></span>
+        <p><%= @company.translated_status %></p>
+      </div>
+      <div>
+        <span><%= t('.current_plan') %></span>
+        <p><%= @company.plan ? @company.plan.name : 'N/A' %></p>
+      </div>
+    </div>
+  </div>
+  <% if @company.completed? || @company.validated? %>
+    <% unless @company.owner.pj? %>
+      <div role="table" aria-describedby="table-desc" id="grid-list" class="dash-box mt-0">
+        <%= render 'users/index' %>
+      </div>
+    <% end %>
+  <% elsif @company.denied? %>
+    <div class="dash-box">
+      <div class="f-center show-message">
+        <p><%= t('.denied') %></p>
+      </div>
+    </div>
+  <% elsif @company.review? %>
+    <div class="dash-box">
+      <div class="f-center show-message">
+        <p>
+          <%= t('.waiting_review') %>
+        </p>
+      </div>
+    </div>
+  <% end %>
+</div>

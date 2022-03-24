@@ -1,0 +1,64 @@
+<div class="content-devise">
+  <%= link_to root_path, class: "link-orange" do %>
+    <i class="fas fa-long-arrow-alt-left me-2"></i>
+    <%= t('.back_home') %>
+  <% end %>
+  <div class="form-container" data-controller="multistep">
+    <div class="f-column f-center">
+      <%= image_tag  "owl.png", class: "logo" %>
+      <h2><%= t(".sign_up") %></h2>
+    </div>
+    <div>
+      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), validate: true, data: { "multistep-target": "form" }, defaults: { input_html: { data: { action: "keyup->multistep#next" } } }) do |f| %>
+        <%= f.error_notification %>
+
+        <div class="tab" data-multistep-target="tab">
+          <div class="grid-2">
+            <%= f.input :first_name,
+                          required: true,
+                          autofocus: true,
+                          input_html: { autocomplete: "first-name" },
+                          validate: true %>
+            <%= f.input :last_name,
+                          required: true,
+                          input_html: { autocomplete: "last-name" },
+                          validate: true %>
+          </div>
+          <%= f.input :email,
+                        required: true,
+                        input_html: { autocomplete: "email" },
+                        validate: true %>
+          <%= f.input :password,
+                        required: true,
+                        hint: (t('devise.shared.minimum_password_length', count: @minimum_password_length) if @minimum_password_length),
+                        input_html: { autocomplete: "new-password" },
+                        validate: true %>
+          <%= f.input :password_confirmation,
+                        required: true,
+                        input_html: { autocomplete: "new-password" } %>
+        </div>
+
+        <div class="tab" data-multistep-target="tab">
+          <%= f.input :which_role,
+                      as: :select,
+                      collection: [[t('activerecord.attributes.user.role_list.pj'), 2], [t('.company'), 1]],
+                      label: t('.account_type'),
+                      validate: true,
+                      include_blank: false %>
+        </div>
+
+      <% end %>
+    </div>
+    <div class="form-actions">
+      <button class="btn-orange" type="button" id="prevBtn" data-action="multistep#nextPrev"
+        data-multistep-target="prevBtn"><%= t('javascript.multistep.prev') %></button>
+      <button class="btn-orange" type="button" id="nextBtn" data-action="multistep#nextPrev"
+        data-multistep-target="nextBtn"><%= t('javascript.multistep.next') %></button>
+    </div>
+  </div>
+  <div role="banner" class="banner-sign-up f-column f-center">
+    <h3><%= t(".header") %></h3>
+    <p><%= t('.message') %></p>
+    <%= link_to t(".sign_in"), new_session_path(resource_name), class: "btn-white" %>
+  </div>
+</div>

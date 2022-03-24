@@ -1,0 +1,66 @@
+<div class="grid-opt">
+  <h3 id="table-desc">
+    <%= t('.users_list') %>
+  </h3>
+  <div class="flex-s-between">
+    <div class="pages">
+      <%= paginate @users, window: 1, right: 1, left: 1 %>
+    </div>
+  </div>
+</div>
+<div class="grid-4">
+  <div role="rowgroup" class="grid-headers">
+    <div role="row" class="grid-row">
+      <span role="columnheader">
+        <%= t('.email') %>
+      </span>
+      <span role="columnheader">
+        <%= t('.created_at') %>
+      </span>
+      <span role="columnheader">
+        <%= t('.role') %>
+      </span>
+      <span role="columnheader">
+        <%= t('.actions') %>
+      </span>
+    </div>
+  </div>
+  <div role="rowgroup" class="grid-table">
+    <% @users.page(@page).each do |user| %>
+      <div role="row" class="<%= user.invitation_token ? " grid-row user-not-completed" : "grid-row" %>">
+        <span role="cell">
+          <% if user.invitation_token %>
+            <em class="alert-cell" data-tippy-content="<%= t('.waiting_accept') %>">
+              <i class="fas fa-exclamation"></i>
+              <i class="far fa-envelope"></i>
+            </em>
+          <% end %>
+          <p class="m-0" style="width: calc(100% - 2rem);">
+            <span class="text-nowrap d-block w-100"><%= user.name %></span>
+
+            (<%= user.email %>)
+          </p>
+        </span>
+        <span role="cell">
+          <%= l(user.created_at, format: :short) %>
+        </span>
+        <span role="cell">
+          <%= user.translated_role %>
+        </span>
+        <span role="cell">
+          <% if policy(user).admin? %>
+            <!-- edit button -->
+            <% if policy(user).edit? %>
+              <%= link_to "<i class='fas fa-pen mx-1' data-tippy-content='#{t('.edit_user')}'></i>".html_safe, edit_admin_user_path(user)  %>
+            <% end %>
+
+            <!-- delete button -->
+            <% if policy(user).destroy? %>
+              <%= link_to "<i class='fas fa-trash mx-1' data-tippy-content='#{t('.delete_user')}'></i>".html_safe, admin_user_path(user), method: :delete, remote: true, data: { confirm: t('.confirm_delete')}  %>
+            <% end %>
+          <% end %>
+        </span>
+      </div>
+    <% end %>
+  </div>
+</div>

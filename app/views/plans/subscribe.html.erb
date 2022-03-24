@@ -1,0 +1,190 @@
+<br>
+<br>
+<br>
+
+ <div data-controller="zipcode masks payment-method">
+  <%= simple_form_for :order, url: plan_subscription_path, method: :post do |f| %>
+    <div class="row mb-4 w-100">
+      <div class="col-12 col-md-6">
+        <div class="card mb-4">
+          <div class="card-header text-center">
+            <h4><%= t('.your_info') %></h4>
+          </div>
+
+          <div class="card-body">
+            <div class="form-group row">
+              <div class="col-12 col-sm-6">
+                <div class="form-group">
+                  <%= f.input :first_name, label: t('.name'), placeholder: t('.your_name') %>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6">
+                <div class="form-group">
+                  <%= f.input :last_name, label: t('.last_name'), placeholder: t('.your_last_name') %>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-12 col-sm-6">
+                <div class="form-group">
+                  <%= f.input :email, label: t('.email'), placeholder: t('.placeholder_email') %>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6">
+                <div class="form-group">
+                  <%= f.input :phone, label: t('.phone_ddd'), placeholder: t('.phone_placeholder'), input_html: { data: { mask: "phone" } }, maxlength: 16 %>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <%= f.input :zipcode, label: t('.zip_code'), placeholder: t('.zip_code_placeholder'), input_html: { data: { action: "input->zipcode#search", mask: "cep" } } %>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <%= f.input :country, label: t('.country'), collection: [[t('country.br'), "br"], [t('country.us') ,"us"]] %>
+                </div>
+              </div>
+            </div>
+
+            <div id="address-form" data-zipcode-target="address">
+              <div class="form-group row">
+                <div class="col-8">
+                  <div class="form-group">
+                    <%= f.input :street, label: t('.address'), placeholder: t('.address_placeholder'), input_html: { data: { "zipcode-target": "street" } } %>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="form-group">
+                    <%= f.input :number, label: t('.street_number'), as: :numeric %>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-12 col-sm-6">
+                  <div class="form-group">
+                    <%= f.input :complement, label: t('.complement'), placeholder: t('.comp_placeholder') %>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                  <div class="form-group">
+                    <%= f.input :neighborhood, label: t('.neighborhood'), placeholder: t('.neighborhood'), input_html: { data: { "zipcode-target": "neighborhood" } } %>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-8">
+                  <div class="form-group">
+                    <%= f.input :city, label: t('.city'), placeholder: t('.city'), input_html: { data: { "zipcode-target": "city" } } %>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="form-group">
+                    <%= f.input :state, label: t('.state'), required: true, as: :select, collection: states_list, prompt: t('.state'), input_html: { data: { "zipcode-target": "state" } } %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6">
+        <div class="card">
+          <div class="card-header text-center">
+            <h4><%= t('.select_payment') %></h4>
+          </div>
+          <div class="card-body">
+            <div class="d-flex nav-tabs">
+<!--               <p class="nav-link active show border w-50" data-action="click->payment-method#creditCard" data-payment-method-target="cardBtn">Cartão de Crédito</p> -->
+<!--               <p class="nav-link show border w-50" data-action="click->payment-method#bankSlip" data-payment-method-target="slipBtn">Boleto</p> -->
+            </div>
+
+
+              <div id="credit-card" data-payment-method-target="creditCard">
+                <div class="tab-content mt-4">
+                  <div class="tab-pane fade show active">
+                  <div class="form-group row">
+
+
+                    <div class="col-12 mb-1">
+                      <%= f.input :"card[number]", label: t('.card_number'), input_html: { data: { mask: "creditCard" } }, maxlength: 19 %>
+                    </div>
+                    <div class="col-12 col-sm-6 mb-1">
+                      <%= f.input :"card[name]", label: t('.card_name'), placeholder: t('.card_name_placeholder') %>
+                    </div>
+                    <div class="col-12 col-sm-6 mb-1">
+                      <%= f.input :"card[document]", label: t('.document'), placeholder: t('.doc_placeholder'), input_html: { data: { mask: "documents", "masks-target": 'documents' } } %>
+                    </div>
+                    <div class="col-12 col-sm-6 mb-1">
+                      <div class="row no-gutters f-around">
+                        <div class="col-12">
+                          <label class="string optional" for="order_card_expiration_month"><%= t('.expiration_date') %></label>
+                        </div>
+                        <div class="col-5">
+                          <%= f.input :"card[expiration_month]", label: false, as: :select, collection: month_number_list, prompt: t('.month') %>
+                        </div>
+                        <div class="col-5">
+                          <%= f.input :"card[expiration_year]", label: false, as: :select, collection: year_list, prompt: t('.year') %>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                      <%= f.input :"card[cvv]", label: t('.security_code'), placeholder: t('.sec_code_placeholder'), input_html: { data: { mask: "numbers" } }, maxlength: 4 %>
+                    </div>
+                  </div>
+                  <div class="form-group w-100">
+                    <%#= f.input :installments, label: "Parcelamento", as: :select, collection: order_installments(@plan) %>
+                  </div>
+                </div>
+              </div>
+              <%= f.submit t('.finish'), name:"card", class: "btn btn-success submit-button", style: "color: #fff; background-color: #F85904; border-color: #F85904" %>
+            </div>
+
+<!--               <div id="bank-slip" data-payment-method-target="bankSlip" hidden="hidden">
+                <div class="tab-content mt-4">
+                  <div class="tab-pane fade show active">
+                    <div class="row w-100">
+                      <div class="col-12 mb-2">
+                        <%= image_tag("Boleto.jpg", class: "img-fluid d-block mx-auto") %>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-12 col-md-12">
+                        <h5>
+                          <%= "Produtos: #{order_single(@order)}" %>
+                        </h5>
+                        <div class="col-12 col-md-12">
+                          <%= f.input :document_boleto, label: "Documento (CPF ou CNPJ)", input_html: { data: { mask: "documents" } } %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
+                <%#= f.submit "Finalizar Pedido", name:"boleto", class: "btn btn-success submit-button", style: "color: #fff; background-color: #F85904; border-color: #F85904" %>
+              </div>
+            </div>
+          </div>
+
+              <h6 class="text-black-50 mt-2"><small></small></h6>
+              <div class="footer-detail">
+                <%= t('.pagarme') %>
+              </div>
+                  </div>
+                </div>
+              </div>
+
+          </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

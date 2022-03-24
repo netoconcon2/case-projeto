@@ -1,0 +1,41 @@
+<%= turbo_frame_tag 'modal' %>
+<%= turbo_stream_from :documents %>
+
+<div class="index-header">
+  <h2><%= t('.documents') %></h2>
+  <% if policy(Document.new).create? %>
+    <%= link_to t('.add_new_document'), new_document_path, class: 'btn-orange'  %>
+  <% end %>
+</div>
+<%= render 'index_filter_form', doc_title: @title, doc_status: @status, doc_date_start: @date_start, doc_date_end: @date_end %>
+<%# ---------------------------- DOCUMENTS LIST ----------------------------- %>
+<div role="table" aria-describedby="table-desc" id="grid-list" class="dash-box" data-controller="input">
+  <%# TITLE AND PAGINATION %>
+  <div class="grid-opt">
+    <h3 id="table-desc"><%= t('.index') %></h3>
+    <div class="flex-s-between">
+      <div class="pages">
+        <%= paginate @documents, window: 1, right: 1, left: 1  %>
+      </div>
+    </div>
+  </div>
+  <div class="grid-6">
+    <%# TABLE HEADERS %>
+    <div role="rowgroup" class="grid-headers">
+      <div role="row" class="grid-row">
+        <span role="columnheader"><%= t('.title') %></span>
+        <span role="columnheader"><%= t('.added_at') %></span>
+        <span role="columnheader"><%= current_user.admin? ? t('.company') : t('.user') %></span>
+        <span role="columnheader"><%= t('.n_of_words') %></span>
+        <span role="columnheader"><%= t('.status') %></span>
+        <span role="columnheader"><%= t('.actions') %></span>
+      </div>
+    </div>
+    <%# TABLE ROWS (DATA) %>
+    <div role="rowgroup" class="grid-table">
+      <% @documents.page(@page).each do |doc| %>
+        <%= render 'document_row', document: doc, user: current_user %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,5 @@
+<%= render 'shared/modal', title: t('documents.editor.new_term'), modal_width: "modal-md-width" do %>
+  <div data-controller='editor'>
+    <%= render 'terms/form', document: @document %>
+  </div>
+<% end %>

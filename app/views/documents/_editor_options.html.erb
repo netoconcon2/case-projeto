@@ -1,0 +1,70 @@
+<%# -------------------------------- TOOLBAR -------------------------------- %>
+<div class='toolbar'>
+  <div class='d-flex'>
+    <button data-action="editor#confirmSelected" data-tippy-content="<%= t('documents.editor.confirm_paragraph') %>">
+      <i class="fas fa-check"></i>
+      <span class="visibility-hidden"><%= t('documents.editor.confirm_paragraph') %></span>
+    </button>
+    <button data-action="editor#confirmAll" data-tippy-content="<%= t('documents.editor.confirm_all_paragraphs') %>">
+      <i class="fas fa-tasks"></i>
+      <span class="visibility-hidden"><%= t('documents.editor.confirm_all_paragraphs') %></span>
+    </button>
+    <button data-action="mousedown->editor#nextUnconfirmed" data-tippy-content="<%= t('documents.editor.next_unconfirmed') %>">
+      <i class="fas fa-angle-double-right"></i>
+      <span class="visibility-hidden"><%= t('documents.editor.next_unconfirmed') %></span>
+    </button>
+    <%= link_to document_editor_row_path(document), data: { action: "modal#turboModal", tippy_content: t('documents.editor.go_to_row_number'), turbo: true, turbo_frame: "row_modal", modal_title: t('javascript.modal.editor.enter_number'), frame_id: 'row_modal', frame_attributes: "data-controller='editor'" } do %>
+      <i class="fas fa-sort-numeric-down"></i>
+      <span class="visibility-hidden"><%= t('documents.editor.go_to_row_number') %></span>
+    <% end %>
+  </div>
+  <%# --- Rich text toolbar --- %>
+  <div id="chunk-trix-toolbar">
+    <button id="bold" data-action="editor#applyFormat" data-tippy-content="<%= t('documents.rich_text_toolbar.bold') %>">
+      <i class="fas fa-bold"></i>
+      <span class="visibility-hidden"><%= t('documents.rich_text_toolbar.bold') %></span>
+    </button>
+    <button id="italic" data-action="editor#applyFormat" data-tippy-content="<%= t('documents.rich_text_toolbar.italic') %>">
+      <i class="fas fa-italic"></i>
+      <span class="visibility-hidden"><%= t('documents.rich_text_toolbar.italic') %></span>
+    </button>
+    <button id="strike" data-action="editor#applyFormat" data-tippy-content="<%= t('documents.rich_text_toolbar.strike') %>">
+      <i class="fas fa-strikethrough"></i>
+      <span class="visibility-hidden"><%= t('documents.rich_text_toolbar.strike') %></span>
+    </button>
+    <button id="underline" data-action="editor#applyFormat" data-tippy-content="<%= t('documents.rich_text_toolbar.underline') %>">
+      <i class="fas fa-underline"></i>
+      <span class="visibility-hidden"><%= t('documents.rich_text_toolbar.underline') %></span>
+    </button>
+    <button data-action="editor#applyHeader" data-tippy-content="<%= t('documents.rich_text_toolbar.heading') %>">
+      <i class="fas fa-heading"></i>
+      <span class="visibility-hidden"><%= t('documents.rich_text_toolbar.heading') %></span>
+    </button>
+    <button id="undo" data-action="editor#undo" data-tippy-content="<%= t('documents.rich_text_toolbar.undo_style') %>">
+      <i class="fas fa-undo"></i>
+      <span class="visibility-hidden"><%= t('documents.rich_text_toolbar.undo_style') %></span>
+    </button>
+    <button id="redo" data-action="editor#redo" data-tippy-content="<%= t('documents.rich_text_toolbar.redo_style') %>">
+      <i class="fas fa-redo"></i>
+      <span class="visibility-hidden"><%= t('documents.rich_text_toolbar.redo_style') %></span>
+    </button>
+  </div>
+  <div data-tippy-content="<%= t('documents.rich_text_toolbar.changes_history') %>" >
+    <button id="versions" data-action="editor#textChunkVersions" disabled>
+      <i class="fas fa-history"></i>
+      <span class="visibility-hidden"><%= t('documents.rich_text_toolbar.changes_history') %></span>
+    </button>
+  </div>
+  <%# --------------------------- EXPORT TO DOCX ---------------------------- %>
+  <div class='dropdown'>
+    <button type='button' id='dropdownMenuButton' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+      <i class="fas fa-download me-2"></i></i> <%= t('documents.export_docx.export_document') %>
+    </button>
+    <div class='dropdown-menu dropdown-menu-right' aria-labelledby='dropdownMenuButton'>
+      <%= link_to t('documents.export_docx.original_file'), export_original_document_path(document), class: 'dropdown-item mb-1 text-start ps-3' %>
+      <%= link_to t('documents.export_docx.translated_file'), export_document_path(document), class: 'dropdown-item mb-1 text-start ps-3' %>
+      <%= link_to t('documents.export_docx.rich_text_file'), export_rich_text_document_path(document), class: 'dropdown-item mb-1 text-start ps-3' %>
+      <%= link_to t('documents.export_docx.bicolumn_file'), export_bicolumn_document_path(document), class: 'dropdown-item mb-1 text-start ps-3' %>
+    </div>
+  </div>
+</div>

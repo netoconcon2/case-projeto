@@ -1,0 +1,109 @@
+<div class="banner f-center">
+  <%= image_tag "banner.gif", alt: t('.banner_text') %>
+</div>
+<div id="about">
+  <div class="about home-box">
+    <%= image_tag "laptop", alt: "" %>
+    <div>
+      <h3 class="upcase"><%= t('.decode_is').html_safe %></h3>
+      <p><%= t('.about_decode') %></p>
+      <%= link_to t('.get_started'), new_user_registration_path, class: "btn-navy-border" %>
+    </div>
+  </div>
+</div>
+<div id="differential">
+  <div class="differential bg-gray bg-lg f-column f-center gap">
+    <div class="grid-3 f-center">
+      <div class="card-home">
+        <%= image_tag "agility", alt: "" %>
+        <div class="card-content">
+          <h4><%= t('.agility') %></h4>
+          <p>
+            <%= t('.agility_message') %>
+          </p>
+        </div>
+      </div>
+      <div class="card-home">
+        <%= image_tag "efficiency", alt: "" %>
+        <div class="card-content">
+          <h4><%= t('.efficiency') %></h4>
+          <p><%= t('.efficiency_message') %></p>
+        </div>
+      </div>
+      <div class="card-home">
+        <%= image_tag "security", alt: "" %>
+        <div class="card-content">
+          <h4><%= t('.security') %></h4>
+          <p><%= t('.security_message') %></p>
+        </div>
+      </div>
+      <div class="card-home">
+        <%= image_tag "respect", class: 'lg-img', alt: "" %>
+        <div class="card-content">
+          <h4><%= t('.respect') %></h4>
+          <p><%= t('.respect_message') %></p>
+        </div>
+      </div>
+      <div class="card-home">
+        <%= image_tag "quality", alt: "" %>
+        <div class="card-content">
+          <h4><%= t('.quality') %></h4>
+          <p><%= t('.quality_message') %></p>
+        </div>
+      </div>
+      <div class="card-home">
+        <%= image_tag "transparency", class: 'lg-img', alt: "" %>
+        <div class="card-content align-self-start">
+          <h4><%= t('.transparency') %></h4>
+          <p><%= t('.transparency_message') %></p>
+        </div>
+      </div>
+    </div>
+    <%= link_to t('.get_started'), new_user_registration_path, class: "btn-navy-border" %>
+  </div>
+</div>
+<div id="our-way">
+  <div class="our-way">
+    <div class="grid-3">
+      <div class="f-center">
+        <%= image_tag 'step', class: "step-img", alt: "" %>
+        <div class="card-step step1">
+          <div class="f-column">
+            <%= image_tag 'doc_xxx', class: "card-icon", alt: "" %>
+            <h4><%= t('.access') %></h4>
+          </div>
+        </div>
+      </div>
+      <div class="f-center">
+        <%= image_tag 'step2', class: "step-img", alt: "" %>
+        <div class="card-step step2">
+          <div class="f-column">
+            <%= image_tag 'folder_lock', class: "card-icon", alt: "" %>
+            <h4><%= t('.budget') %></h4>
+          </div>
+        </div>
+      </div>
+      <div class="f-center">
+        <%= image_tag 'step3', class: "step-img", alt: "" %>
+        <div class="card-step step3">
+          <div class="f-column">
+            <%= image_tag 'folder_arrow', class: "card-icon", alt: "" %>
+            <h4><%= t('.translation') %></h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="contact">
+  <div class="contact home-box navy-bg">
+    <div class="grid-2-min">
+      <%= image_tag 'owl-white-orange', alt: "" %>
+      <div class="f-column gap">
+        <h3 class="upcase lg-light-white"><%= t('.want_more') %></h3>
+        <span class="upcase md-bold-orange"><%= t('.contact_us') %></span>
+      </div>
+    </div>
+    <%= render 'shared/contact_form' %>
+  </div>
+</div>

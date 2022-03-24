@@ -1,0 +1,9 @@
+<%= turbo_frame_tag "turbo_editor_doc_#{@document.id}" do %>
+  <div id="doc_<%= @document.id %>" class='editor' data-controller="editor modal turbo-frame-render" data-editor-url-value="<%= @base_url %>" data-editor-document-id-value="<%= @document.id %>">
+    <div class="editor-options">
+      <%= render 'editor_options', document: @document %>
+    </div>
+    <%= render 'editor_chunks' %>
+    <%= render 'editor_glossary', document: @document %>
+  </div>
+<% end %>

@@ -1,0 +1,2 @@
+class TextChunkPolicy < ApplicationPolicy
+end

@@ -1,0 +1,16 @@
+<%# --------------------- ONBOARDING TUTORIAL - STEP 1 ---------------------- %>
+<div id="dashboard-tutorial1" class="pt-3 dashboard-tutorial-card">
+  <i class="fas fa-times tutorial-close-button" data-action= "click->onboarding#hideTutorial" data-current-highlight= 'dashboard-tutorial-card'></i>
+  <div class="flex-grow-1 d-flex flex-column justify-content-center">
+    <%= image_tag 'laptop.png' %>
+    <h3 class="upcase mt-5 mb-3 tutorial-label"><%= t('tutorial.dashboard.welcome') %>!</h3>
+  </div>
+  <%= link_to t('tutorial.dashboard.get_started'),
+              "",
+              class: 'btn-navy-border',
+              data: { action: 'click->onboarding#nextStep',
+                      current_number: 1,
+                      current_highlight: 'dashboard-tutorial-card',
+                      next_step_highlight: (current_user.manager? || current_user.owner?) ? 'navbar-plans' : 'navbar-documents',
+                      manager_or_owner: (current_user.manager? || current_user.owner?) } %>
+</div>

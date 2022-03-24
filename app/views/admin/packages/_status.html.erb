@@ -1,0 +1,25 @@
+<% @packages.each do |package| %>
+  <div class="card-square f-column">
+    <div class="card-square-options">
+      <button type="button" id="toggle-btn-<%= package.id %>" title="<%= t('.package_options') %>" class="f-center btn-circle" aria-haspopup="true" aria-expanded="false" data-bs-toggle="dropdown">
+        <i class="fas fa-ellipsis-v"></i>
+      </button>
+      <div class="dropdown-menu" aria-labelledby="toggle-btn-<%= package.id %>">
+        <%= link_to t('.see_details'), admin_package_path(package), class: "f-center" %>
+        <%= link_to t('.edit'),  edit_admin_package_path(package), class: "f-center" %>
+      </div>
+    </div>
+    <div class="card-square-content">
+      <h3><%= package.name %></h3>
+      <p><%= t('.value') %> <em><%= package.price.format %></em></p>
+      <p><%= t('.words_number') %> <em><%= package.words %></em></p>
+      <p><%= t('.status') %> <em><%= package.translated_status %></em></p>
+    </div>
+    <% case package.status %>
+    <% when "invisible" %>
+    <%= link_to t('.visualize'), admin_package_visualize_path(package), method: :post, class: "btn-orange" %>
+    <% when "visible" %>
+    <%= link_to t('.invisiblize'), admin_package_invisiblize_path(package), method: :post, class: "btn-orange" %>
+    <% end %>
+  </div>
+<% end %>

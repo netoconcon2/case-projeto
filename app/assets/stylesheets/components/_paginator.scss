@@ -1,0 +1,39 @@
+.pages {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  span {
+    border-radius: .3rem;
+    border: 1px solid $white;
+    height: 1.5rem;
+    width: 1.5rem;
+    font-size: 1rem;
+    line-height: .8rem;
+    margin: .3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .page {
+    color: $decode-orange;
+    transition: border .2s;
+    &:hover {
+      text-decoration: none;
+      border-color: $decode-orange;
+    }
+    &.current {
+      color: $white;
+      background: $decode-orange;
+      &:hover {
+        border-color: $white;
+      }
+    }
+
+  }
+  a {
+    color: $decode-orange;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}

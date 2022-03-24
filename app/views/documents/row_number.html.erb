@@ -1,0 +1,6 @@
+<%= turbo_frame_tag "row_modal" do %>
+  <% simple_form_for :row_number, url: document_editor_path(@document), remote: true, method: :get, html: { class: 'd-flex', data: { action: 'ajax:success->editor#goRowNumber', turbo: false } } do |f| %>
+    <%= f.input :order, as: :integer, label: false, input_html: { min: 1, max: @document.text_chunks.order(order: :desc).first.order, aria: { labelledby: 'swal2-title' }, data: { action: 'input->editor#orderValidation' } } %>
+    <%= f.submit t('.jump'), class: 'ms-3 btn-orange' %>
+  <% end %>
+<% end %>

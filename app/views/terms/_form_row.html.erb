@@ -1,0 +1,26 @@
+<div role="row" class="grid-row">
+  <span role="cell">
+    <%= f.input :source, wrapper: :vertical_simplified_form, label: false, autofocus: true %>
+  </span>
+  <span role="cell">
+    <%= f.input :target, wrapper: :vertical_simplified_form, label: false %>
+  </span>
+  <span role="cell">
+    <%= current_user.name %>
+  </span>
+  <span role="cell"></span>
+  <span role="cell">
+    <button type="submit" class="inline-form-button">
+      <i class="fas fa-check text-success"></i>
+      <span class="visibility-hidden">
+        <%= t('.save') %>
+      </span>
+    </button>
+    <%= yield %>
+  </span>
+  <% if @term.errors.any? %>
+    <span role="cell" class="invalid-feedback">
+      <%= t('.fill_all_terms') %>
+    </span>
+  <% end %>
+</div>

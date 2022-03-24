@@ -1,0 +1,10 @@
+<div id="chunk_status_<%= txt_chunk.id %>" class="f-center text_chunk_status<%= ' unconfirmed' if txt_chunk.need_review? || (txt_chunk.reviewed? && current_user.admin?) %>">
+  <% if txt_chunk.need_review? || (txt_chunk.reviewed? && current_user.admin?) %>
+    <%= link_to text_chunk_confirm_path(txt_chunk), method: :patch, class: 'btn-arrow', title: txt_chunk.errors.any? ? t('.cannot_confirm') : t('.confirm_paragraph'), disabled: txt_chunk.errors.any? do %>
+      <i class='fas fa-check'></i>
+    <% end %>
+    <span><%= txt_chunk.translated_status %></span>
+  <% else %>
+    <span id="chunk_status_<%= txt_chunk.id %>" class='check'><%= txt_chunk.translated_status %></span>
+  <% end %>
+</div>

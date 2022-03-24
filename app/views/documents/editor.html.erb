@@ -1,0 +1,12 @@
+<%= turbo_frame_tag 'modal' %>
+
+<div id="doc_<%= @document.id %>" class='editor' data-controller="editor modal" data-editor-url-value="<%= @base_url %>">
+  <%# ---------------------------- EDITOR HEADER ---------------------------- %>
+  <div class="editor-options">
+    <strong class='d-block mx-2 my-3'><%= @document.title %></strong>
+    <%= render 'editor_options', document: @document %>
+  </div>
+  <%= render 'editor_chunks' %>
+  <%= render 'editor_glossary', document: @document %>
+  <%= render 'editor_changes_history' %>
+</div>

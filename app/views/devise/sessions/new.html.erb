@@ -1,0 +1,36 @@
+<div class="content-devise" id="sign-in">
+  <%= link_to root_path, class: "link-orange" do %>
+    <i class="fas fa-long-arrow-alt-left me-2"></i>
+    <%= t('.back_home') %>
+  <% end %>
+  <div class="banner-sign-in f-column f-center">
+    <h3><%= t(".header") %></h3>
+    <p><%= t(".message") %></p>
+    <%= link_to t(".sign_up"), new_registration_path(resource_name), class: "btn-white" %>
+  </div>
+  <div class="form-container">
+    <div class="f-column f-center">
+      <%= image_tag  "owl-light.png", class: "logo" %>
+      <h2><%= t(".form_header") %></h2>
+    </div>
+    <div>
+
+      <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class:"f-column" }) do |f| %>
+        <div class="form-inputs">
+          <%= f.input :email,
+                      required: false,
+                      autofocus: true,
+                      input_html: { autocomplete: "email" } %>
+        <%= f.input :password,
+                      required: false,
+                      input_html: { autocomplete: "current-password" } %>
+        <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+      </div>
+      <%= f.button :submit, t(".sign_in"), class: "btn-light-orange" %>
+      <% end %>
+      <div class="f-center f-grow">
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
+  </div>
+</div>

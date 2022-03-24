@@ -1,0 +1,32 @@
+// This is where you override default Bootstrap variables
+// 1. All Bootstrap variables are here => https://github.com/twbs/bootstrap/blob/master/scss/_variables.scss
+// 2. These variables are defined with default value (see https://robots.thoughtbot.com/sass-default)
+// 3. You can override them below!
+
+// General style
+$font-family-sans-serif:  $body-font;
+$headings-font-family:    $headers-font;
+$font-size-base:          1rem;
+
+// Buttons & inputs' radius
+$border-radius:    2px;
+$border-radius-lg: 2px;
+$border-radius-sm: 2px;
+
+// Override other variables below!
+$spacer: 1rem;
+.dropdown-menu > a:hover {
+  background-color: $light-orange;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+textarea.form-control {
+  min-height: 18rem !important;
+}
+
+.table > :not(:first-child) {
+    border-top: 2px solid $gray !important;
+}

@@ -1,0 +1,50 @@
+<%= turbo_frame_tag 'modal' %>
+<%= turbo_frame_tag 'flash' %>
+<div class="index-header">
+  <h2><%= t('.glossaries') %></h2>
+  <%= link_to t('.add_new_glossary'), new_glossary_path, class: 'btn-orange', data: { 'turbo-frame': 'modal', turbo: true } %>
+</div>
+<div id="filters-form" class="dash-box" data-controller="input" data-provide='datepicker'>
+  <%= simple_form_for :query, :method => :get, url: glossaries_path, html: { class: "grid-search-short", id: "query_glossary_form" } do |f| %>
+    <div class="query_text">
+      <%= f.input :name, label: t('.name_query_label'), required: false, placeholder: t('.name_query_placeholder'), input_html: { value: @name } %>
+    </div>
+    <div class="form-submit">
+      <% if params[:query].present? %>
+        <%= link_to glossaries_path, class: "btn-clean", data: { tippy_content: t('.clean_filters') } do %>
+          <i class='fas fa-times'></i>
+          <span class="visibility-hidden"><%= t('.clean_filters') %></span>
+        <% end %>
+      <% end %>
+      <%= f.submit t('.search'), class: "btn-orange" %>
+    </div>
+  <% end %>
+</div>
+
+<div role="table" aria-describedby="table-desc" id="grid-list" class="dash-box">
+  <div class="grid-opt">
+    <h3 id="table-desc"><%= t('.index') %></h3>
+    <div class="flex-s-between">
+      <div class="pages">
+        <%= paginate @glossaries, window: 1, right: 1, left: 1  %>
+      </div>
+    </div>
+  </div>
+  <div class="grid-5">
+    <div role="rowgroup" class="grid-headers">
+      <div role="row" class="grid-row">
+        <span role="columnheader"><%= t('.name') %></span>
+        <span role="columnheader"><%= t('.languages') %></span>
+        <span role="columnheader"><%= t('.added_terms') %></span>
+        <span role="columnheader"><%= t('.updated_at') %></span>
+        <span role="columnheader"><%= t('.actions') %></span>
+      </div>
+    </div>
+    <div role="rowgroup" class="grid-table">
+      <%= turbo_frame_tag 'glossaries_list' %>
+      <% @glossaries.page(@page).each do |glossary| %>
+        <%= render 'glossary_row', glossary: glossary %>
+      <% end %>
+    </div>
+  </div>
+</div>

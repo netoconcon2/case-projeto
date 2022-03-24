@@ -1,0 +1,732 @@
+// general form
+.was-validated .form-control:invalid, .form-control.is-invalid,
+.was-validated .form-control:valid, .form-control.is-valid {
+  background-position: right 1rem center;
+}
+.form-control {
+  height: $input-height;
+  border-radius: $b-radius;
+  transition: border .3s;
+  border-color: $gray;
+  &:focus:not(:disabled), &:active:not(:disabled) {
+    border-color: $orange;
+    box-shadow: none;
+    background-color: $light-orange;
+    & ~ button {
+      border-color: $decode-orange;
+    }
+  }
+}
+
+.form-group {
+  margin-bottom: 1rem;
+  text-align: start;
+  label {
+    font-size: calc(.8rem + .2vw);
+    margin-bottom: 0.25rem;
+  }
+}
+
+.form-check {
+  padding-left: 0;
+  margin-bottom: 0;
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.invalid-feedback {
+  color: $red;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+form ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  li {
+    label {
+      display: flex;
+      align-items: center;
+      line-height: 2rem;
+      margin: .5rem 0;
+      padding: 0 .75rem;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    input {
+      margin-right: 1rem;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+input[type="checkbox"] {
+  appearance: none;
+  height: 1rem;
+  display: flex;
+  align-items: center;
+  &::before {
+    content: "\f0c8";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 400;
+    font-size: 1rem;
+    color: $decode-orange;
+    height: .8rem;
+    background: $white;
+    display: flex;
+    align-items: center;
+  }
+  &:checked::before {
+    content: "\f14a";
+    font-weight: 900;
+    color: $decode-orange;
+  }
+  &:focus:checked::before, &:focus::before {
+    color: $orange;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+// contact home form
+#contact {
+  .form-group {
+    margin: 0;
+    position: relative;
+    &.string, &.email {
+      height: 4vw;
+    }
+  }
+  .form-group.text {
+    margin-top: 1rem;
+  }
+  input.form-control {
+    border: none;
+    background: transparent;
+    border-bottom: .1rem solid rgba(255, 255, 255, .6);
+    border-radius: 0;
+    color: $gray;
+    height: 2.2vw;
+    font-size: 1vw;
+  }
+  textarea {
+    font-size: 1vw;
+    color: $gray;
+    border: .1rem solid rgba(255, 255, 255, .6);
+    background: transparent;
+    min-height: 5vw;
+    height: 7vw;
+    max-height: 10vw;
+    transition: border-color .3s;
+    &:focus {
+      border-color: $decode-orange;
+      & ~ label {
+        color: $decode-orange;
+      }
+    }
+    &:focus, &[value]:not([value=""]) {
+      & ~ label {
+        top: -2vw;
+        font-size: $home-label-sm;
+        padding: 0;
+      }
+    }
+    & ~ label {
+      position: absolute;
+      top: .5vw;
+    }
+  }
+  label {
+    font-size: 1.15vw;
+    position: relative;
+    bottom: 2.75vw;
+    line-height: 2vw;
+    transition: .3s;
+    padding: 0 1rem;
+    height: min-content;
+    z-index: -1;
+  }
+  input:focus {
+    & ~ label {
+      color: $decode-orange;
+    }
+    & ~ .focus-border {
+      width: 100%;
+    }
+  }
+  input:focus, input[value]:not([value=""]) {
+    & ~ label {
+      bottom: 4vw;
+      font-size: $home-label-sm;
+      padding: 0;
+    }
+  }
+  small {
+    padding: 0 .5rem;
+    font-size: $home-label-sm;
+    line-height: 2rem;
+    color: $gray !important;
+  }
+  button[type="submit"] {
+    margin-top: 2vw;
+    position: relative;
+    &::after {
+      content: "\f054";
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      position: absolute;
+      right: 2rem;
+    }
+  }
+}
+.focus-border {
+  position: absolute;
+  height: .1rem;
+  width: 0;
+  background: $decode-orange;
+  left: 0;
+  top: 2.1vw;
+  transition: width .6s;
+}
+// country select
+.form-group.company_country {
+  display: flex;
+  flex-direction: column;
+}
+// select2
+.select2-container {
+  width: auto !important;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered,
+.select2-container--default .select2-selection--single .select2-selection__arrow,
+.select2-container .select2-selection--single {
+  height: 2.4rem;
+  display: flex;
+  align-items: center;
+}
+.select2-container--default .select2-selection--single {
+  border-color: $gray;
+  outline: none;
+  transition: border-color .2s;
+  &:focus, &[aria-expanded="true"] {
+    border-color: $decode-orange;
+  }
+  &[aria-expanded="true"] {
+    border-bottom: transparent;
+    b {
+      transform: rotateZ(180deg);
+      &::before {
+        color: $decode-orange !important;
+      }
+    }
+  }
+}
+.select2-dropdown {
+  border-color: $decode-orange;
+}
+.select2-container--default .select2-search--dropdown .select2-search__field {
+  border-color: $gray;
+  outline: none;
+  transition: border-color .2s;
+  &:focus {
+    border-color: $decode-orange;
+  }
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow b {
+  border: none;
+  height: auto;
+  width: auto;
+  left: auto;
+  top: auto;
+  transition: transform .2s;
+  &::before {
+    content: "\f078";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: .75rem;
+    color: #495057;
+  }
+}
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+  background-color: $decode-orange;
+}
+.select2-results__option {
+  min-height: 1.75rem;
+}
+.form-control.is-valid ~ .select2-container--default .select2-selection--single {
+  border-color: #28a745;
+  padding-right: calc(1.5em + 0.75rem);
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='%2328a745' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right calc(1.5em + 0.1875rem) center;
+  background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+// form from devise
+#new_user {
+  & > .btn-orange, & > .btn-light-orange {
+    align-self: center;
+  }
+}
+
+// form from document index
+form.row {
+  align-items: flex-end;
+  justify-content: space-around;
+  margin: 0;
+  .form-group {
+    width: -webkit-fill-available;
+  }
+}
+.collapse-inputs {
+  display: contents;
+}
+.form-submit {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 1rem;
+  min-width: 10rem;
+  order: -1;
+  a {
+    margin: 0;
+  }
+  .btn-clean {
+    margin-right: 1rem;
+  }
+}
+.query_date_start {
+  position: relative;
+}
+.query_date_end {
+  margin-left: 1rem;
+}
+.query_title, .query_name, div.search {
+  order: -2;
+  position: relative;
+  &::before {
+    content: url(search.svg);
+    height: .8rem;
+    width: .8rem;
+    position: absolute;
+    bottom: .9rem;
+    left: 1rem;
+  }
+  input {
+    padding-left: 3rem;
+  }
+}
+.simple_form .btn-arrows {
+  order: -2;
+}
+#query_status {
+  width: 10rem;
+  -moz-appearance:none;
+  -webkit-appearance:none;
+  appearance:none;
+  background: url('down-arrow.svg');
+}
+.datepicker {
+  position: relative;
+  display: flex;
+  align-items: center;
+  &.form-group {
+    margin: 0;
+  }
+  a {
+    position: absolute;
+    width: 2rem;
+    right: 0;
+    padding: 0;
+    background: $white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    border-radius: 0 .4rem .4rem 0;
+    color: $decode-orange;
+    transition: color .2s, background .2s;
+    border: 1px solid #ced4da;
+    &:hover {
+      color: $white;
+      background: $decode-orange;
+    }
+  }
+  .form-control {
+    background: $white;
+  }
+  .form-control:focus {
+    background: $light-orange;
+  }
+  &.query_date_start {
+    margin-right: 2rem;
+  }
+}
+input.btn-orange, input.btn-light-orange {
+  width: -webkit-fill-available;
+}
+// Select status input
+#status-form {
+  label {
+    padding: 0;
+  }
+}
+.query_enum {
+  & > div {
+    border: none;
+  }
+  .ms-drop input[type="checkbox"] {
+    margin-top: 0;
+  }
+  .ms-drop.bottom {
+    box-shadow: none;
+    border-top: none;
+    border-radius: 0 0 .4rem .4rem;
+    border-color: $gray;
+    li {
+      height: $input-height;
+      display: flex;
+      align-items: center;
+      &:hover {
+        background-color: $light-orange;
+      }
+    }
+    ul > li label {
+      display: flex;
+      align-items: center;
+    }
+    input[type="checkbox"] {
+      appearance: none;
+    }
+  }
+  .ms-parent button.ms-choice {
+    border: 1px solid $gray;
+    border-radius: $b-radius;
+    transition: border 0s .4s, border-radius 0s .4s;
+    &.active {
+      border-bottom-color: $white;
+      border-radius: $b-radius $b-radius 0 0;
+      transition: none;
+      .icon-caret::before {
+        color: $decode-orange;
+      }
+    }
+    &:focus {
+      border-color: $decode-orange;
+      & ~ .ms-drop {
+        border-color: $decode-orange;
+      }
+    }
+    &.active:focus {
+      border-bottom-color: $white;
+    }
+    & > div.icon-caret {
+      border: none;
+      position: relative;
+      right: 0;
+      top: 0;
+      height: 100%;
+      width: auto;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+    }
+  }
+}
+button.ms-choice {
+  min-width: 8rem;
+  &:focus {
+    outline: none;
+  }
+}
+.ms-choice {
+  & > span {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.form-control {
+  button {
+    &:focus {
+      background: $light-orange;
+    }
+  }
+}
+div.icon-caret {
+  &::before {
+    content: "\f107";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    padding: 0 .5rem;
+    color: #495057;
+    transition: transform .4s, color .4s;
+  }
+  &.open::before {
+    transform: rotate(180deg);
+  }
+}
+.file {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  small {
+    margin: 0;
+    display: flex;
+    align-items: center;
+  }
+  i {
+    color: $red;
+    margin-left: .5rem;
+  }
+}
+
+@media (min-width: $large) {
+  .form-submit {
+    order: 1;
+  }
+}
+@media (max-width: $large) {
+  .query {
+    flex-wrap: wrap;
+  }
+  #contact {
+    textarea {
+      min-height: 7vw;
+      height: 8vw;
+      max-height: 12vw;
+    }
+    form {
+      padding: 0 2vw;
+    }
+    button[type="submit"] {
+      margin-top: 1vw;
+    }
+    label {
+      font-size: 1.2vw;
+    }
+    textarea, input.form-control {
+      font-size: 1.2vw;
+    }
+    input:focus,
+    input[value]:not([value=""]),
+    textarea:focus,
+    textarea[value]:not([value=""]) {
+      & ~ label {
+        font-size: 1vw;
+      }
+    }
+    small {
+      font-size: 1vw;
+    }
+    .form-group.string,
+    .form-group.email {
+      height: 5vw;
+    }
+  }
+}
+@media (max-width: $small) {
+  #contact {
+    textarea {
+      min-height: 10vw;
+      height: 14vw;
+      max-height: 18vw;
+    }
+    form {
+      padding: 0 2vw;
+    }
+    button[type="submit"] {
+      margin-top: 1vw;
+    }
+    label {
+      font-size: 1.75vw;
+      bottom: 3.5vw;
+    }
+    textarea, input.form-control {
+      font-size: 1.75vw;
+    }
+    input.form-control {
+      height: 4.5vw;
+    }
+    input:focus,
+    input[value]:not([value=""]),
+    textarea:focus,
+    textarea[value]:not([value=""]) {
+      & ~ label {
+        font-size: 1.5vw;
+      }
+    }
+    small {
+      font-size: 1.5vw;
+    }
+    input:focus,
+    input[value]:not([value=""]) {
+      & ~ label {
+        bottom: 6.5vw;
+      }
+    }
+    textarea {
+      & ~ label {
+        top: 1.5vw;
+      }
+      &:focus, &[value]:not([value=""]) {
+        & ~ label {
+          top: -3vw;
+        }
+      }
+    }
+    .form-group.string,
+    .form-group.email {
+      height: 8vw;
+    }
+    .focus-border {
+      top: 4.3vw;
+    }
+  }
+}
+@media (max-width: $extra-small) {
+  #contact {
+    textarea {
+      min-height: 4rem;
+      height: 8rem;
+      max-height: 12rem;
+    }
+    form {
+      padding: 0 2vw;
+    }
+    button[type="submit"] {
+      margin: 1rem;
+    }
+    label {
+      font-size: 1rem;
+      bottom: 1.4rem;
+    }
+    textarea, input.form-control {
+      font-size: 1rem;
+    }
+    input.form-control {
+      height: 2rem;
+      font-size: 1rem;
+    }
+    input:focus,
+    input[value]:not([value=""]),
+    textarea:focus,
+    textarea[value]:not([value=""]) {
+      & ~ label {
+        font-size: .8rem;
+      }
+    }
+    small {
+      font-size: .8rem;
+    }
+    input:focus,
+    input[value]:not([value=""]) {
+      & ~ label {
+        bottom: 3rem;
+      }
+    }
+    textarea {
+      & ~ label {
+        top: .8rem;
+      }
+      &:focus,
+      &[value]:not([value=""]) {
+        & ~ label {
+          top: -1.2rem;
+        }
+      }
+    }
+    .form-group.string,
+    .form-group.email {
+      height: 3.5rem;
+    }
+    .focus-border {
+      top: 1.85rem;
+    }
+  }
+  .form-submit {
+    order: 1;
+  }
+  input.file {
+      visibility: hidden;
+      width: 0px;
+  }
+  .query_date_end {
+    margin-left: 0;
+  }
+}
+
+.boolean-field{
+  position: absolute;
+  transform: scale(0);
+}
+
+.boolean-field + label{
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 10px;
+  color: $decode-orange;
+  background: rgba($decode-orange, 0.3);
+  &:hover{
+   background: $decode-orange;
+   color: white;
+  }
+}
+
+.boolean-field:checked + label{
+  background-color: $decode-orange;
+  color: white;
+}
+
+// Inline form
+.form-check-inline {
+  label {
+    margin: 0;
+  }
+  .form-check-label {
+    color: #212529 !important;
+  }
+}
+
+// New glossary form
+.inline-form-button {
+  border: none;
+  background: none;
+}
+
+// Forms that should not have margin-bottom in the form-group class
+.form-no-margin-bottom {
+  .form-group {
+      margin-bottom: 0;
+  }
+}
+
+// Checkbox forms
+.form-check-input[type="checkbox"] {
+  border: none;
+  background: none;
+  margin-left: 0 !important;
+  margin-top: 0;
+  &:checked {
+    background: none;
+  }
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+// Max width
+.max-width-1000 {
+  max-width: 1000px;
+}

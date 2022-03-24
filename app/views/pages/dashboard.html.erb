@@ -1,0 +1,19 @@
+<div class="content-dash">
+  <% if current_user.admin? %>
+    <div class="text-center">
+      <h3><%= t('.welcome_admin') %></h3>
+      <%= render 'shared/adminmenu' %>
+    </div>
+  <% else %>
+    <% if current_user.company %>
+      <%= render 'companies/company_dashboard', company: @company %>
+    <% else %>
+      <div class="text-center">
+        <h3><%= t('.welcome_user') %></h3>
+        <p><%= t('.to_complete', register_link: link_to(t('.register_link'), new_company_path)).html_safe %></p>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+<%= render 'dashboard_tutorial' if (current_user.sign_in_count == 1 && (Time.now - current_user.current_sign_in_at) <= 60 && !current_user.admin?) %>

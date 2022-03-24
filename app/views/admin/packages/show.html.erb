@@ -1,0 +1,29 @@
+<div class="form-banner">
+  <div class="form-box">
+    <div class="form-area">
+        <div class="f-column f-center">
+          <h2> <%= @package.name %> </h2>
+        </div>
+        <br>
+          <div class="d-flex">
+            <%= link_to t('.edit'),  edit_admin_package_path(@package), class: "btn-orange btn-sm me-5" %>
+            <%= link_to t('.erase'),
+             admin_package_path(@package),
+            method: :delete,
+            data: { confirm: t('alert.are_you_sure') }, class: "btn-orange btn-sm btn-deactivate" %>
+          </div>
+        <br>
+        <div class="container devise-form">
+          <hr>
+          <h3><%= t('.details') %></h3>
+
+          <h4><%= t('.value')%> : <%= @package.price.format %></h4>
+          <!-- <p><%= t('.value_message') %></p> -->
+
+          <h4><%= t('.words') %> <%= @package.words %></h4>
+          <!-- <p><%= t('.words_message') %></p> -->
+          <br>
+        </div>
+    </div>
+  </div>
+</div>

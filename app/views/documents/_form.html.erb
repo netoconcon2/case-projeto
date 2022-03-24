@@ -1,0 +1,47 @@
+<%= simple_form_for document, html: { 'data-controller'=>'input toggle' } do |f| %>
+  <%# All users with access to this page can edit the title %>
+  <%= f.input :title, label: t('.document_title'), autofocus: true %>
+  <%# Manager can edit the user of an existing document %>
+  <% unless document.id.nil? %>
+    <% if current_user.manager? %>
+      <%= f.input :user_id, collection: users, label: t('.users'), autofocus: true %>
+    <% end %>
+  <% end %>
+  <% if document.id.nil? %>
+    <%# Users should be able to see the rest of the form only if it is a new document %>
+    <div class="row">
+      <div class="col-12 col-sm-4 col-lg-3">
+        <%= f.input :source,
+                    label: t('documents.form.source_language'),
+                    collection: language_select_options %>
+      </div>
+      <div class="col-12 col-sm-4 col-lg-3">
+        <%= f.input :target,
+                    label: t('documents.form.target_language'),
+                    collection: language_select_options %>
+      </div>
+    </div>
+    <%= f.input :original_text,
+                label: t('.original_text'),
+                wrapper_html: {'data-toggle-target'=>'option1'},
+                input_html: {'data-toggle-target'=>'form1'} %>
+    <%# ---------------------------- TOGGLE BUTTON ---------------------------- %>
+    <div class="d-flex align-items-center">
+      <label class="btn-switch mb-3">
+        <%= check_box_tag(:switch, true, false, data: { action: 'change->toggle#switchVisible change->toggle#deleteForm' }, class: 'btn-switch') %>
+        <span class="slider round"></span>
+      </label>
+      <p class="ms-3"><%= t('.send_docx_file') %></p>
+    </div>
+    <%# ----------------------------------------------------------------------- %>
+    <%= f.input :doc,
+                as: :file,
+                label: '+ ' + t('.select_file'),
+                label_html: { class: 'btn btn-secondary mb-0' },
+                input_html: { accept: '.docx', 'data-action'=>'change->input#handleChange','data-input-target'=>'fileInput', class: 'd-none', 'data-toggle-target'=>'form2' },
+                wrapper_html: { class: 'gap d-none', 'data-toggle-target'=>'option2' },
+                hint: '',
+                hint_html: { 'data-input-target'=>'span',class: 'ms-2' } %>
+  <% end %>
+  <%= f.submit t('.save'), class: 'btn btn-orange' %>
+<% end %>

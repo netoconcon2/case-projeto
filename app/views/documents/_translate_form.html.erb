@@ -1,0 +1,28 @@
+<div data-controller="translation">
+  <%= simple_form_for document, url: translate_document_path(id: document.id), data: { action: 'submit->translation#translate', "translation-target": 'form' }, html: { class: 'row align-items-center max-width-1000' } do |f| %>
+    <div class="row p-0">
+      <div class="col-12 col-sm-4 col-lg-3 px-0 pe-sm-3">
+        <%= f.input :source,
+                    label: t('documents.form.source_language'),
+                    collection: language_select_options %>
+      </div>
+      <div class="col-12 col-sm-4 col-lg-3 px-0">
+        <%= f.input :target,
+                    label: t('documents.form.target_language'),
+                    collection: language_select_options %>
+      </div>
+    </div>
+    <%= f.input :original_text,
+                input_html: {
+                    rows: 13,
+                    data: { "translation-target": 'original' }
+                  },
+                wrapper_html: { class: 'p-0' } %>
+    <%= f.submit t('.translate'),
+                  class: "mb-1 w-100 btn btn-orange",
+                  disabled: !((user.company == document.company && user.company.available_words.positive?) && (user.manager? || document.user == user)),
+                  id: 'translate',
+                  data: { "translation-target": 'submit' } %>
+    </div>
+  <% end %>
+</div>

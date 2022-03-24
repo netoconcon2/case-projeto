@@ -1,0 +1,84 @@
+<div class="container">
+  <div class="cards-grid">
+
+    <%= link_to admin_applies_path, class: "card-square f-column text-decoration-none" do %>
+      <div>
+        <div class="menu-icon">
+          <i class="fas fa-check-circle" width="80"></i>
+        </div>
+        <div class="menu-info p-2">
+          <h6><%= t('.approvals') %></h6>
+          <span><%= t('.pending', count: @apply_number) %></span>
+        </div>
+      </div>
+    <% end %>
+
+    <%= link_to documents_path, class: "card-square f-column text-decoration-none" do %>
+      <div class="">
+        <div class="menu-icon">
+          <%= inline_svg_tag('document.svg', title: t('.documents'), aria: true, width: 80, height: 80) %>
+        </div>
+        <div class="menu-info p-2">
+          <h6><%= t('.revisions') %></h6>
+          <span><%= t('.pending', count: @revisions_number) %></span>
+        </div>
+      </div>
+    <% end %>
+
+    <%= link_to admin_companies_path, class: "card-square f-column text-decoration-none" do %>
+      <div class="">
+        <div class="menu-icon">
+          <%= image_tag "customer.png", width: 80 %>
+        </div>
+        <div class="menu-info">
+          <h6><%= t('.companies') %></h6>
+        </div>
+      </div>
+    <% end %>
+
+    <%= link_to admin_users_path, class: "card-square f-column text-decoration-none" do %>
+      <div class="">
+        <div class="menu-icon">
+          <%= image_tag "customer.png", width: 80 %>
+        </div>
+        <div class="menu-info">
+          <h6><%= t('.users') %></h6>
+        </div>
+      </div>
+    <% end %>
+
+    <%= link_to admin_plans_path, class: "card-square f-column text-decoration-none" do %>
+      <div class="">
+        <div class="menu-icon">
+          <%= image_tag "cash-icon.png", width: 80 %>
+        </div>
+        <div class="menu-info">
+          <h6><%= t('.plans') %></h6>
+        </div>
+      </div>
+    <% end %>
+
+    <%= link_to admin_packages_path, class: "card-square f-column text-decoration-none" do %>
+      <div class="">
+        <div class="menu-icon">
+          <%= image_tag "cash-icon.png", width: 80 %>
+        </div>
+        <div class="menu-info">
+          <h6><%= t('.packages') %></h6>
+        </div>
+      </div>
+    <% end %>
+
+    <%= link_to admin_subscriptions_path, class: "card-square f-column text-decoration-none" do %>
+      <div class="">
+        <div class="menu-icon">
+          <%= image_tag "cash-icon.png", width: 80 %>
+        </div>
+        <div class="menu-info">
+          <h6><%= t('.subscriptions') %></h6>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+</div>

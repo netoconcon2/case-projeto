@@ -1,0 +1,179 @@
+<div class="d-flex justify-content-between mb-3" data-controller="modal">
+  <h2><%= "#{t('activerecord.models.company')} ##{@company.id}" %></h2>
+  <div class="flex-s-between">
+    <% unless @company.owner.pj? %>
+      <%= link_to t('.invite_user'), new_user_invitation_path(company: @company.id), remote: true, data: { action: "ajax:success->modal#inviteUser" }, class: "btn-orange" %>
+    <% end %>
+    <%= link_to t('.back'), admin_companies_path, class: 'btn-orange' %>
+  </div>
+</div>
+<div class="grid-2 row-md mb-3">
+  <div class="dash-box">
+    <div class="d-flex justify-content-between show-info-header">
+      <h3><%= t('.company_details') %></h3>
+      <%= link_to edit_admin_company_path(@company), class: 'btn-orange' do %>
+        <i class="far fa-edit me-2"></i>
+        <%= t('.edit') %>
+      <% end %>
+    </div>
+    <div class="grid-2 show-info">
+      <div class="span grid-2">
+        <div>
+          <span><%= t('.name') %></span>
+          <p><%= @company.name %></p>
+        </div>
+        <div>
+          <span>
+            <%= t('.status') %>
+          </span>
+          <p>
+            <%= @company.translated_status %>
+          </p>
+        </div>
+      </div>
+      <% if @company.owner.pj? %>
+        <div>
+          <span><%= t('.kind') %></span>
+          <p><%= t('.pj') %></p>
+        </div>
+      <% else %>
+        <div>
+          <span><%= t('.cnpj') %></span>
+          <p><%= @company.cnpj %></p>
+        </div>
+      <% end %>
+      <div>
+        <span><%= t('.created_at') %></span>
+        <p><%= l(@company.created_at, format: :short) %></p>
+      </div>
+      <div class="">
+        <span><%= t('.responsible') %></span>
+        <p><%= @company.owner.email %></p>
+      </div>
+      <% unless @company.owner.pj? %>
+        <div>
+          <span><%= t('.people') %></span>
+          <p><%= @company.users.size %></p>
+        </div>
+        <div>
+          <span>
+            <%= t('.phone') %>
+          </span>
+          <p>
+            <%= @company.phone %>
+          </p>
+        </div>
+        <div>
+          <span>
+            <%= t('.zipcode') %>
+          </span>
+          <p>
+            <%= @company.zip_code %>
+          </p>
+        </div>
+        <div class="grid-3 span">
+          <div>
+            <span><%= t('.country') %></span>
+            <p><%= @company.country %></p>
+          </div>
+          <div>
+            <span>
+              <%= t('.state') %>
+            </span>
+            <p>
+              <%= @company.state %>
+            </p>
+          </div>
+          <div>
+            <span>
+              <%= t('.city') %>
+            </span>
+            <p>
+              <%= @company.city %>
+            </p>
+          </div>
+        </div>
+        <div class="grid-2 span">
+          <div>
+            <span>
+              <%= t('.street') %>
+            </span>
+            <p>
+              <%= @company.street %>
+            </p>
+          </div>
+          <div class="grid-2">
+            <div>
+              <span>
+                <%= t('.street_number') %>
+              </span>
+              <p>
+                <%= @company.street_number %>
+              </p>
+            </div>
+            <div>
+              <span>
+                <%= t('.neighborhood') %>
+              </span>
+              <p>
+                <%= @company.neighborhood %>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <span>
+            <%= t('.street_line_2') %>
+          </span>
+          <p>
+            <%= @company.street_line_2 %>
+          </p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="dash-box">
+    <% if @company.completed? %>
+      <div class="show-info-header">
+        <h3><%= t('.plan_details') %></h3>
+      </div>
+      <div class="show-info grid-2">
+        <div>
+          <span><%= t('.plan') %></span>
+          <p><%= @company.plan.name %></p>
+        </div>
+        <div>
+          <span><%= t('.available_words') %></span>
+          <p><%= @company.available_words %></p>
+        </div>
+        <div>
+          <span><%= t('.status_plan') %></span>
+          <p><%= @company.translated_plan_status %></p>
+        </div>
+      </div>
+    <% elsif @company.validated? %>
+      <div class="f-center show-message">
+        <p><%= t('.no_plan') %></p>
+      </div>
+    <% elsif @company.denied? %>
+      <div class="f-center show-message">
+        <p>
+          <%= t('.denied') %>
+        </p>
+      </div>
+    <% elsif @company.review? %>
+      <div class="show-message f-column f-center">
+        <p><%= t('.need_to_be_validated') %></p>
+        <div class="btn-2 flex-s-between">
+          <%= link_to t('.validate'), admin_company_validate_path(@company), method: :post, class: "btn-orange", data: { confirm: t('.are_you_sure') } %>
+          <%= link_to t('.deny'), admin_company_deny_path(@company), method: :post, class: "btn-orange", data: { confirm: t('.are_you_sure') } %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<% unless @company.owner.pj? %>
+  <div role="table" aria-describedby="table-desc" id="grid-list" class="dash-box">
+    <%= render 'admin/users/index' %>
+  </div>
+<% end %>

@@ -1,0 +1,33 @@
+<% @plans.each do |plan| %>
+  <div class="card-square f-column plan-<%= plan.status %>">
+    <div class="card-square-options">
+      <button type="button" id="toggle-btn-<%= plan.id %>" title="<%= t('.plan_options') %>"
+        class="f-center btn-circle" aria-haspopup="true" aria-expanded="false" data-bs-toggle="dropdown">
+        <i class="fas fa-ellipsis-v"></i>
+      </button>
+      <div class="dropdown-menu" aria-labelledby="toggle-btn-<%= plan.id %>">
+        <%= link_to t('.see_details'), admin_plan_path(plan), class: "f-center" %>
+        <% unless plan.discarded? %>
+          <%= link_to t('.edit'), edit_admin_plan_path(plan), class: "f-center" %>
+        <% end %>
+        <% if plan.published? %>
+          <%= link_to t('.deactivate'), admin_plan_deactivate_path(plan), method: :post, class: "f-center" %>
+        <% end %>
+      </div>
+    </div>
+    <div class="card-square-content">
+      <h3><%= plan.name %></h3>
+      <p><%= t('.value') %> <em><%= plan.price_cents.format %></em></p>
+      <p><%= t('.words_number') %> <em><%= plan.words %></em></p>
+      <p><%= t('.status') %> <em><%= plan.translated_status %></em></p>
+      <p><%= t('.pagarme') %> <em><%= plan.pagarme_id %></em></p>
+      <p><%= t('.review') %> <em><%= plan.include_review ? t('.include_review') : t('.not_include_review')  %></em></p>
+    </div>
+    <% case plan.status %>
+    <% when "inactive" %>
+    <%= link_to t('.active'), admin_plan_activate_path(plan), method: :post, class: "btn-orange" %>
+    <% when "active" %>
+    <%= link_to t('.publish'), admin_plan_publish_path(plan), method: :post, class: "btn-orange" %>
+    <% end %>
+  </div>
+<% end %>

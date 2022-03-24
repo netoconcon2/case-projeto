@@ -1,0 +1,71 @@
+<div class="f-center container-public-cards">
+  <span class="btn-prices left active">
+    <%= t('.plans') %>
+  </span>
+  <%= link_to t('.packages'), packages_path, class: "btn-prices right" %>
+</div>
+<div class="grid-1-4 container-public-cards">
+  <div class="card-presentation">
+    <h1><%= t('.choose_a_plan') %></h1>
+    <p>
+      <%= t('.presentation') %>
+    </p>
+    <ul>
+      <li><%= t('.machine_learning') %></li>
+      <li><%= t('.unlimited_users') %></li>
+      <li><%= t('.unlimited_files') %></li>
+      <li><%= t('.team_administration') %></li>
+      <li><%= t('.security') %></li>
+      <li><%= t('.access_to_review') %></li>
+    </ul>
+  </div>
+  <div class="cards-grid">
+    <% @plans.each do |plan| %>
+      <div class="card-plan <%= 'plan-active' if current_user&.company&.plan == plan %>">
+        <div>
+          <div class="card-plan-header">
+            <h4><%= plan.name %></h4>
+            <span class=""><%= t('.words_number', count: plan.words) %></span>
+          </div>
+          <div>
+            <% unless plan.installments&. > 1 %>
+              <h3 class="price">
+                <%= humanized_money_with_symbol plan.price_cents %>
+                <span>
+                  <%= payment_period plan.days %>
+                </span>
+              </h3>
+            <% else %>
+              <h3 class="price">
+                <%= humanized_money_with_symbol(plan.price_cents / plan.installments)  %>
+                <span>
+                  <%= payment_period(plan.days / plan.installments) %>
+                </span>
+              </h3>
+              <span><%= plan_duration plan.days %></span>
+            <% end %>
+            <span class="word-price">
+              <%= price_per_word(plan) %>
+              <%= t('.price_per_word') %>
+            </span>
+            <% if plan.include_review %>
+              <span >
+                <div class="review-badge"> Inclui Revisão </div>
+              </span>
+            <% end %>
+          </div>
+        </div>
+        <% if current_user && policy(current_user).validated? %>
+          <% if current_user.company.plan == plan %>
+            <%= link_to t('.cancel_subs'),
+              company_cancel_plan_path(current_user.company),
+              method: :post,
+              data: { confirm: t('alert.cancel_plan') }, class: "btn-orange" %>
+          <% else %>
+            <%= link_to t('.choose_plan'), plan_subscribe_path(plan), class: 'btn-orange', id: "subscribe-#{plan.id}" %>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

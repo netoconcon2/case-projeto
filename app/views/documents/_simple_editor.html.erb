@@ -1,0 +1,10 @@
+<%= turbo_frame_tag "turbo_editor_doc_#{document.id}" do %>
+  <div class="editor-options">
+    <hr class="m-0">
+    <div class="p-3 pt-0" data-controller="user-editor">
+      <%# ------------------------------- HEADER -------------------------------- %>
+      <%= tag.p(t("documents.show.#{document.status}_description"), class: "pt-3") unless document.translated? %>
+      <%= render_show_by_status(document, chunks, user) %>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,78 @@
+<div class="col-12 col-lg-6 px-3 pt-0">
+  <div class="translation-title d-flex">
+    <p><%= t('documents.show.translated_text') %></p>
+    <%# -------------------------- Export to docx --------------------------- %>
+    <div class='dropdown'>
+      <button class='mb-1 w-100 btn btn-orange' type='button' id='dropdownMenuButton' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+        <i class="fas fa-download me-2"></i></i> <%= t('documents.export_docx.export_document') %>
+      </button>
+      <div class='dropdown-menu dropdown-menu-right' aria-labelledby='dropdownMenuButton'>
+        <%= link_to t('documents.export_docx.original_file'), export_original_document_path(document), class: 'dropdown-item mb-1' %>
+        <%= link_to t('documents.export_docx.translated_file'), export_document_path(document), class: 'dropdown-item mb-1' %>
+        <%= link_to t('documents.export_docx.rich_text_file'), export_rich_text_document_path(document), class: 'dropdown-item mb-1' %>
+        <%= link_to t('documents.export_docx.bicolumn_file'), export_bicolumn_document_path(document), class: 'dropdown-item mb-1' %>
+      </div>
+    </div>
+  </div>
+  <div class="user-editor overflow-hidden position-relative">
+    <%# ------------------------- Rich Text Toolbar ------------------------- %>
+      <div class="user-toolbar">
+      <div class="toolbar border-0 d-flex justify-content-between">
+
+      <%# Shows the toolbar if the document can be updated %>
+        <div id="chunk-trix-toolbar">
+          <button id="bold" data-action="user-editor#applyFormat" data-tippy-content="<%= t('documents.rich_text_toolbar.bold') %>">
+            <i class="fas fa-bold"></i>
+            <span class="visibility-hidden"><%= t('documents.rich_text_toolbar.bold') %></span>
+          </button>
+          <button id="italic" data-action="user-editor#applyFormat" data-tippy-content="<%= t('documents.rich_text_toolbar.italic') %>">
+            <i class="fas fa-italic"></i>
+            <span class="visibility-hidden"><%= t('documents.rich_text_toolbar.italic') %></span>
+          </button>
+          <button id="strike" data-action="user-editor#applyFormat" data-tippy-content="<%= t('documents.rich_text_toolbar.strike') %>">
+            <i class="fas fa-strikethrough"></i>
+            <span class="visibility-hidden"><%= t('documents.rich_text_toolbar.strike') %></span>
+          </button>
+          <button id="underline" data-action="user-editor#applyFormat" data-tippy-content="<%= t('documents.rich_text_toolbar.underline') %>">
+            <i class="fas fa-underline"></i>
+            <span class="visibility-hidden"><%= t('documents.rich_text_toolbar.underline') %></span>
+          </button>
+          <button data-action="user-editor#applyHeader" data-tippy-content="<%= t('documents.rich_text_toolbar.heading') %>">
+            <i class="fas fa-heading"></i>
+            <span class="visibility-hidden"><%= t('documents.rich_text_toolbar.heading') %></span>
+          </button>
+          <button id="undo" data-action="user-editor#undo" data-tippy-content="<%= t('documents.rich_text_toolbar.undo_style') %>">
+            <i class="fas fa-undo"></i>
+            <span class="visibility-hidden"><%= t('documents.rich_text_toolbar.undo_style') %></span>
+          </button>
+          <button id="redo" data-action="user-editor#redo" data-tippy-content="<%= t('documents.rich_text_toolbar.redo_style') %>">
+            <i class="fas fa-redo"></i>
+            <span class="visibility-hidden"><%= t('documents.rich_text_toolbar.redo_style') %></span>
+          </button>
+        </div>
+
+      <button class="copy-text" data-action="user-editor#copyText">
+        <i class="fas fa-clipboard"></i> <%= t('documents.rich_text_toolbar.copy_text') %>
+      </button>
+      </div>
+    </div>
+
+    <%# ------------------------ Translation Chunks ------------------------- %>
+    <div class="scrollable-box ps-2">
+
+        <%# Show rich text in a form if document can be updated %>
+        <table id="tableChunks">
+          <% chunks.each do |chunk| %>
+            <tr id="chunk_<%= chunk.id %>" data-controller='user-editor-row' class='chunk-row'>
+              <td class='translated-chunk'>
+                <%= simple_form_for chunk, method: :patch, data: { turbo: true } do |f| %>
+                  <%= f.input :rich_translated, as: :string, wrapper: :editor_form, input_html: { id: "text_chunk_translated_#{chunk.id}" } %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+
+    </div>
+  </div>
+</div>

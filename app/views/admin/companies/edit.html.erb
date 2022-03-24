@@ -1,0 +1,59 @@
+<%= simple_form_for(@company, url: admin_company_path(@company), validate: true, html: { class: "" }, data: { controller: 'masks', turbo: false }) do |f| %>
+<div class="dash-box">
+    <h3><%= t('.edit_company', company: @company.name).html_safe %></h3>
+    <div class="grid-2">
+      <%= f.input :name,
+                  required: true,
+                  validate: true %>
+      <%= f.association :owner, label_method: :name %>
+    </div>
+    <div class="grid-2">
+      <%= f.input :status,
+                  collection: Company.translated_statuses,
+                  required: true,
+                  validate: true %>
+      <%= f.input :available_words %>
+    </div>
+    <% if @company.company? %>
+      <div class="grid-2">
+        <%= f.input :phone,
+                    required: true,
+                    validate: true,
+                    input_html: { data: { mask: "phone" } } %>
+        <%= f.input :cnpj,
+                    required: true,
+                    validate: true,
+                    input_html: { data: { mask: "cnpj" } } %>
+      </div>
+      <h3><%= t('.address') %></h3>
+      <div class="grid-2">
+        <%= f.input :zip_code,
+                    required: true,
+                    validate: true,
+                    input_html: { data: { mask: "cep" } } %>
+        <%= f.input :country,
+                    as: :string,
+                    required: true,
+                    validate: true,
+                    input_html: { class: "select2" } %>
+      </div>
+      <div class="grid-2">
+        <%= f.input :state,
+                    required: true,
+                    validate: true %>
+        <%= f.input :city,
+                    required: true,
+                    validate: true %>
+      </div>
+      <div class="grid-3">
+        <%= f.input :neighborhood, required: true, validate: true %>
+        <%= f.input :street, required: true, validate: true %>
+        <%= f.input :street_number, required: true, validate: true %>
+      </div>
+      <div class="grid-2">
+        <%= f.input :street_line_2, validate: true %>
+      </div>
+    <% end %>
+    <%= f.button :submit, t('.submit'), class: "btn-orange" %>
+  </div>
+<% end %>

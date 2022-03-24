@@ -1,0 +1,34 @@
+<%= turbo_frame_tag "document-show-#{document.id}" do %>
+  <%# -------------------------------- HEADER --------------------------------- %>
+  <div class="document-show-title" data-controller="editor modal">
+    <strong class='d-block'>
+      <%= t('documents.show.document') %>: <em id="<%= "document-#{document.id}-title" %>"><%= document.title %></em>
+      <%# Edit button %>
+      <%= link_to edit_document_path(document), data: { turbo_frame: 'modal', turbo: true }, class: "link-orange" do %>
+        <i class="fas fa-pen" data-tippy-content="<%= t('documents.index.edit_document') %>"></i>
+        <span class="visibility-hidden"><%= t('documents.index.edit_document') %></span>
+      <% end %>
+      - <%= t('documents.show.n_of_words') %>: <%= document.original_text.split.size %>
+    </strong>
+    <%# Editor toggle %>
+    <div class="d-flex align-items-center" data-editor-target="toggleLinks">
+      <span class="me-2">Editor</span>
+      <div class="btn-toggle-link op1 line-height-0 d-none", data-action="click->toggle#linkChange click->editor#simpleEditor">
+        <div class="slider"></div>
+      </div>
+      <div class="btn-toggle-link op2 line-height-0", data-action="click->toggle#linkChange click->editor#advancedEditor">
+        <div class="slider"></div>
+      </div>
+    </div>
+  </div>
+  <%= turbo_frame_tag "turbo_editor_doc_#{document.id}" do %>
+    <div class="editor-options">
+      <hr class="m-0">
+      <div class="p-3 pt-0" data-controller="user-editor">
+        <%# ------------------------------- HEADER -------------------------------- %>
+        <%= tag.p(t("documents.show.#{document.status}_description"), class: "pt-3") unless document.translated? %>
+        <%= render_show_by_status(document, chunks, user) %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

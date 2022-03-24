@@ -1,0 +1,18 @@
+<tbody id="chunk_<%= txt.id %>" data-controller='editor-row'>
+  <tr class='chunk-row'>
+    <td class='order-num'><%= txt.order %></td>
+    <td class='original-chunk'><%= txt.original %></td>
+    <td class='translated-chunk'>
+      <%# if policy(document).edit? && txt.approved? %>
+        <%#= txt.translated %>
+      <%# else %>
+        <%= simple_form_for txt, method: :patch, data: { turbo: true } do |f| %>
+          <%= f.input :rich_translated, as: :string, wrapper: :editor_form, input_html: { id: "text_chunk_translated_#{txt.id}" } %>
+        <% end %>
+      <%# end %>
+    </td>
+    <td class='actions'>
+      <%= render 'documents/chunk_confirm_btn', txt_chunk: txt %>
+    </td>
+  </tr>
+</tbody>

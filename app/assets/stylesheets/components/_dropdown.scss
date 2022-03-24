@@ -1,0 +1,115 @@
+.card-square-options .dropdown-menu {
+  display: block;
+  visibility: hidden;
+  opacity: 0;
+  border-radius: .5rem;
+  border: 0;
+  box-shadow: 0.1rem 0rem .7rem 0.1rem rgba(0, 0, 0, 0.1);
+  left: auto !important;
+  top: 3rem !important;
+  right: 1rem;
+  width: 9rem;
+  transform: none !important;
+  transition: visibility .1s linear,opacity .1s linear;
+  a {
+    color: $dark-gray;
+    transition: background-color .2s, color .2s;
+    line-height: 2.2rem;
+    font-weight: 300;
+    font-size: .9rem;
+    &:hover, &:focus {
+      outline: none;
+      text-decoration: none;
+      color: $decode-orange;
+      background-color: $light-orange;
+    }
+  }
+  &.show {
+    visibility: visible;
+    opacity: 1;
+  }
+  &::before {
+    content: "";
+    height: 0;
+    width: 0;
+    position: absolute;
+    top: -.5rem;
+    right: .35rem;
+    border-left: .4rem solid transparent;
+    border-right: .4rem solid transparent;
+    border-bottom: .6rem solid $white;
+  }
+}
+
+// Dropdown checkbox
+#enum-dropdown {
+  position: relative;
+  min-width: 14rem;
+  .dropdown-menu {
+    display: block;
+    visibility: hidden;
+    overflow: hidden;
+    border-radius: 0 0 $b-radius $b-radius;
+    border: 1px solid #e5e5e5;
+    min-width: auto;
+    width: 100%;
+    max-height: 0;
+    margin: 0;
+    padding: 0;
+    transition: max-height .4s, visibility .4s, border-color .2s, border-top .2s .4s;
+    &.show {
+      visibility: visible;
+      max-height: 20rem;
+      border-top: 0;
+    }
+  }
+  .dropdown-toggle-button:focus ~ .dropdown-menu {
+    border-color: $decode-orange;
+    transition: max-height .4s, visibility .4s, border-color .2s .3s, border-top .2s .4s;
+  }
+  label {
+    transition: background-color .2s;
+    &:hover {
+      background-color: $light-orange;
+    }
+  }
+}
+#enum-dropdown label {
+  input:focus & {
+    background-color: $light-orange;
+  }
+}
+
+.dropdown-toggle-button {
+  position: relative;
+  text-align: start;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  &::after {
+    content: "\f107";
+    position: absolute;
+    right: 0;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    padding: 0 .5rem;
+    color: #495057;
+    transition: transform .4s, color .4s;
+  }
+  &[aria-expanded="true"] {
+    border-radius: $b-radius $b-radius 0 0;
+    border-bottom-color: $white;
+    border-bottom-color: transparent !important;
+    transition: border-color .2s, background-color .2s, border-bottom-color 0s;
+    &::after {
+      transform: rotateZ(180deg);
+      color: $decode-orange;
+    }
+  }
+  &[aria-expanded="false"] {
+    transition: border-color .2s .3s, border-radius 0s .4s, background-color .2s;
+  }
+}
+
+@media (max-width: $extra-small) {
+}

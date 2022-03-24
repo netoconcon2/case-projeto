@@ -1,0 +1,105 @@
+<div class="index-header">
+  <h2><%= t('.manage_users') %></h2>
+</div>
+<div id="filters-form" class="dash-box" data-controller="input" data-provide='datepicker'>
+  <%= simple_form_for :query, :method => :get, url: admin_users_path, html: { class: "grid-search" }, data: { checkboxes: "query_role", action: "input->input#dropdownCheckbox" } do |f| %>
+    <div class="query_text">
+      <%= f.input :name, label: t('.name_query_label'), required: false, placeholder: t('.name_query_placeholder'), input_html: { value: @name } %>
+      <button type="button" class="btn-arrows collapsed" title="<%= t('javascript.toggle_btn') %>" data-bs-toggle="collapse" data-bs-target=".multicollapse" aria-expanded="false" aria-controls="multiCollapse1 multiCollapse2">
+        <i class="fas fa-angle-double-up"></i>
+      </button>
+    </div>
+    <div id="multiCollapse1" class="query_enum collapse multicollapse show">
+      <div class="form-group select required query_enum f-column">
+        <span id="role_label"><%= t('.role') %></span>
+        <div id="enum-dropdown" role="listbox" aria-labelledby="role_label">
+          <button id="dropdownSelectBtn" class="dropdown-toggle-button form-control" type="button" data-bs-toggle="dropdown"
+            aria-expanded="false" aria-haspopup="true" title="<%= t('javascript.dropdown_select.title') %>">
+          </button>
+          <ul class="dropdown-menu">
+            <% @roles.each do |translation, key, value| %>
+              <li>
+                <label for="role_<%= value %>">
+                  <%= check_box_tag( "query[role][]", value.to_i, @role.include?(value.to_s), { id: "role_#{value}", role: "option", data: { action: "input->input#selectAll focus->input#dropdownInputFocus blur->input#dropdownInputBlur" } } ) %>
+                  <%= translation %>
+                </label>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div id="multiCollapse2" class="query_date collapse multicollapse show">
+      <div class="flex-s-between">
+        <%= f.input :date_start, label: t('.date_start_query_label'), required: false, wrapper_html: { data: { "input-target": "dateStartGroup" } }, input_html: { value: @date_start, autocomplete: "off", placeholder: t('.date_query_placeholder'), data: { action: "input->input#inputmaskDate" }} %>
+        <%= f.input :date_end, label: t('.date_end_query_label'), required: false, input_html: { value: @date_end, autocomplete: "off", placeholder: t('.date_query_placeholder'), data: { action: "input->input#inputmaskDate"} } %>
+      </div>
+    </div>
+    <div class="form-submit">
+      <% if params[:query].present? %>
+        <%= link_to admin_users_path, class: "btn-clean", data: { tippy_content: t('.clean_filters') } do %>
+          <i class='fas fa-times'></i>
+          <span class="visibility-hidden"><%= t('.clean_filters') %></span>
+        <% end %>
+      <% end %>
+      <%= f.submit t('.search'), class: "btn-orange" %>
+    </div>
+  <% end %>
+</div>
+
+<div role="table" aria-describedby="table-desc" id="grid-list" class="dash-box">
+  <div class="grid-opt">
+    <h3 id="table-desc"><%= t('.users_list') %></h3>
+    <div class="flex-s-between">
+      <div class="pages">
+        <%= paginate @users, window: 1, right: 1, left: 1  %>
+      </div>
+    </div>
+  </div>
+  <div class="grid-5">
+    <div role="rowgroup" class="grid-headers">
+      <div role="row" class="grid-row">
+        <span role="columnheader"><%= t('.name_and_email') %></span>
+        <span role="columnheader"><%= t('.created_at') %></span>
+        <span role="columnheader"><%= t('.company') %></span>
+        <span role="columnheader"><%= t('.role') %></span>
+        <span role="columnheader"><%= t('.actions') %></span>
+      </div>
+    </div>
+    <div role="rowgroup" class="grid-table">
+      <% @users.page(@page).each do |user| %>
+        <div role="row" class="<%= user.invitation_token ? "grid-row user-not-completed" : "grid-row" %>">
+          <span role="cell">
+            <% if user.invitation_token %>
+              <em class="alert-cell" data-tippy-content="<%= t('.waiting_accept') %>">
+                <i class="fas fa-exclamation"></i>
+                <i class="far fa-envelope"></i>
+              </em>
+            <% end %>
+            <p class="m-0" style="width: calc(100% - 2rem);">
+              <span class="text-nowrap d-block w-100"><%= user.name %></span>
+
+              (<%= user.email %>)
+            </p>
+          </span>
+          <span role="cell"><%= l(user.created_at, format: :short) %></span>
+          <span role="cell"><%= user.company ? user.company.name : "<strong>#{t('.no_company')}</strong>".html_safe %></span>
+          <span role="cell"><%= user.translated_role %></span>
+          <span role="cell">
+            <% if policy(user).admin? %>
+              <!-- edit button -->
+              <% if policy(user).edit? %>
+                <%= link_to "<i class='fas fa-pen mx-1' data-tippy-content='#{t('.edit_user')}'></i>".html_safe, edit_admin_user_path(user)  %>
+              <% end %>
+
+              <!-- delete button -->
+              <% if policy(user).destroy? %>
+                <%= link_to "<i class='fas fa-trash mx-1' data-tippy-content='#{t('.delete_user')}'></i>".html_safe, admin_user_path(user), method: :delete, remote: true, data: { confirm: user.owner? && !user.pj? ? t('.confirm_delete_owner') : t('.confirm_delete')}  %>
+              <% end %>
+            <% end %>
+          </span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

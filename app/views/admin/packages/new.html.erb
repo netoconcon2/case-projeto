@@ -1,0 +1,21 @@
+<div class="form-banner">
+  <div class="form-box">
+    <div class="form-area">
+        <div class="f-column f-center">
+          <h2><%= t('.new_package') %></h2>
+        </div>
+        <br>
+        <div class="container devise-form" data-controller="masks">
+          <%= simple_form_for @package, url: admin_packages_path do |f| %>
+          <%= f.input :name %>
+          <br>
+          <%= f.input :price, input_html: { data: { mask: "money" } } %>
+          <br>
+          <%= f.input :words %>
+          <br>
+          <%= f.button :submit, t('.submit'), class: "btn-orange" %>
+          <% end %>
+        </div>
+    </div>
+  </div>
+</div>

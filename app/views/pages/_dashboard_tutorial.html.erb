@@ -1,0 +1,26 @@
+<div id="dashboard-tutorial" class="transparent-overlay" data-controller="onboarding" data-onboarding-target="tutorialOverlay">
+  <div id="dashboard-tutorial-card" class="onboarding-step step-highlight">
+    <%# ---------------------- FIRST PAGE OF TUTORIAL ----------------------- %>
+    <% if !current_user.admin? %>
+      <%# Show full tutorial if user has access to Plans and Packages pages %>
+      <%# Show only document page if user does not have access to Plans and Packages pages %>
+      <%= render 'dashboard_tutorial1' %>
+      <%= render 'dashboard_tutorial2' if current_user.manager? || current_user.owner? %>
+      <%= render 'dashboard_tutorial3' if current_user.manager? || current_user.owner? %>
+      <%= render 'dashboard_tutorial4' %>
+      <%= render 'dashboard_tutorial5' %>
+      <%= render 'dashboard_tutorial6' %>
+      <%# ------------------------- STEPS INDICATORS -------------------------- %>
+      <ol class="steps-indicators-all mt-2">
+        <li id = "stepIndicator1", class="active-step"></li>
+        <% if current_user.manager? || current_user.owner? %>
+          <li id = "stepIndicator2"></li>
+          <li id = "stepIndicator3"></li>
+        <% end %>
+        <li id = "stepIndicator4"></li>
+        <li id = "stepIndicator5"></li>
+        <li id = "stepIndicator6"></li>
+      </ol>
+    <% end %>
+  </div>
+</div>

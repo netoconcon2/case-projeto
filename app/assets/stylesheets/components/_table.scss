@@ -1,0 +1,58 @@
+.table {
+  background-color: $white;
+  table-layout: fixed;
+  td {
+    border-right: 1px solid $gray;
+    &:last-child {
+      border-right: none;
+   }
+  }
+  .order-num {
+    text-align: center;
+    vertical-align: middle;
+    width: calc(1rem + 1vw);
+  }
+  .actions {
+    width: auto;
+    width: calc(4rem + 4vw);
+    span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 100%;
+      font-size: .8rem;
+    }
+    & > *, .check {
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      gap: .5rem;
+    }
+    .btn-arrow {
+      margin: 0;
+    }
+  }
+  [contenteditable] {
+    &:focus {
+      outline: none;
+    }
+  }
+  tbody + tbody {
+    border: none;
+  }
+}
+.editor-table {
+  tbody {
+    &:not(.selected) {
+      tr {
+        &:hover {
+          background: #FCE7D160;
+        }
+      }
+    }
+    &.selected {
+      tr {
+        background: $light-orange;
+      }
+    }
+  }
+}

@@ -1,0 +1,101 @@
+document_0:
+  title: "Test Title"
+  original_text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  translated_text: 'Aquele que ama ou exerce ou deseja a dor, pode ocasionalmente adquirir algum prazer na labuta. Para dar um exemplo trivial, qual de nós se submete a laborioso exercício físico, exceto para obter alguma vantagem com isso. Desmoralizado pelos encantos do prazer, percebe que a dor não resulta em prazer algum. Está tão cego pelo desejo que não pode prever quem não cumprirá seu dever por fraqueza de vontade.'
+  source: <%= Document::LANGUAGES.first %>
+  target: <%= Document::LANGUAGES.last %>
+  user: reginald
+  company: sparrow
+  status: 3
+document_1:
+  title: 'Number Five quote'
+  original_text: "I’d ask what you’re up to, Klaus, but then it occurred to me… I don’t care."
+  translated_text: 'Eu perguntaria o que você está fazendo, Klaus, mas então me lembrei... Não ligo.'
+  source: <%= Document::LANGUAGES.first %>
+  target: <%= Document::LANGUAGES.last %>
+  user: reginald
+  company: sparrow
+  status: 2
+document_2:
+  title: Doc for glossary test
+  original_text: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  translated_text: Aquele que ama ou exerce ou deseja a dor, pode ocasionalmente adquirir algum prazer na labuta. Para dar um exemplo trivial, qual de nós se submete a laborioso exercício físico, exceto para obter alguma vantagem com isso. Desmoralizado pelos encantos do prazer, percebe que a dor não resulta em prazer algum. Está tão cego pelo desejo que não pode prever quem não cumprirá seu dever por fraqueza de vontade.
+  source: <%= Document::LANGUAGES.first %>
+  target: <%= Document::LANGUAGES.last %>
+  user: reginald
+  company: sparrow
+  status: 2
+document_to_destroy:
+  title: 'This Document will be destroyed! 😱'
+  original_text: "I'm bound to be destroyed during the tests. Poor me..."
+  translated_text: 'Estou destinado a ser destruído durante os testes. Coitado de mim...'
+  source: <%= Document::LANGUAGES.first %>
+  target: <%= Document::LANGUAGES.last %>
+  user: reginald
+  company: sparrow
+  status: 2
+# empire documents =============================================
+document_01:
+  title: 'Two baccas'
+  original_text: 'noises noises'
+  translated_text: 'ruídos ruídos'
+  source: <%= Document::LANGUAGES.first %>
+  target: <%= Document::LANGUAGES.last %>
+  company: empire
+  user: vader
+  created_at: <%= (1..20).to_a.sample.days.ago %>
+  status: 3
+<% 2.upto(15) do |i| %>
+document_<%= i %>:
+  title: <%= Faker::Movies::StarWars.character %>
+  status: <%= i % 4 %>
+  original_text: <%= Faker::Movies::StarWars.quote %>
+  source: <%= Document::LANGUAGES.first %>
+  target: <%= Document::LANGUAGES.last %>
+  company: empire
+  user: vader
+  created_at: <%= (1..20).to_a.sample.days.ago %>
+<% end %>
+<% 16.upto(30) do |i| %>
+document_<%= i %>:
+  title: <%= Faker::Movies::StarWars.planet %>
+  status: <%= i % 4 %>
+  original_text: <%= Faker::Movies::StarWars.quote %>
+  source: <%= Document::LANGUAGES.first %>
+  target: <%= Document::LANGUAGES.last %>
+  company: empire
+  user: trooper
+  created_at: <%= (1..20).to_a.sample.days.ago %>
+<% end %>
+
+# rebels documents =============================================
+<% 31.upto(45) do |i| %>
+document_<%= i %>:
+  title: <%= Faker::Movies::StarWars.specie %>
+  status: <%= i % 4 %>
+  original_text: <%= Faker::Movies::StarWars.quote %>
+  source: <%= Document::LANGUAGES.first %>
+  target: <%= Document::LANGUAGES.last %>
+  company: rebels
+  user: luke
+<% end %>
+<% 46.upto(60) do |i| %>
+document_<%= i %>:
+  title: <%= Faker::Movies::StarWars.vehicle %>
+  status: <%= i % 4 %>
+  original_text: <%= Faker::Movies::StarWars.quote %>
+  source: <%= Document::LANGUAGES.first %>
+  target: <%= Document::LANGUAGES.last %>
+  company: rebels
+  user: chewbaca
+<% end %>
+document_last:
+  title: 'Last document of Empire *duuun*'
+  original_text: 'Any last words?'
+  translated_text: 'Alguma palavra final?'
+  source: <%= Document::LANGUAGES.first %>
+  target: <%= Document::LANGUAGES.last %>
+  user: trooper
+  company: empire
+  status: 2
+  updated_at: <%= Time.now + 10.day %>

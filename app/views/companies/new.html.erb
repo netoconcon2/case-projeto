@@ -1,0 +1,41 @@
+<div class="index-header">
+  <h3><%= t('.header') %></h3>
+</div>
+<%= simple_form_for @company do |f| %>
+  <div class="dash-box" data-controller="masks">
+      <%= f.input :name, required: true, validate: true %>
+      <div class="grid-2">
+        <%= f.input :phone, required: true, validate: true, input_html: { data: { mask: "phone" } } %>
+        <%= f.input :cnpj, required: true, validate: true, input_html: { data: { mask: "cnpj" } } %>
+      </div>
+      <h3>
+        <%= t('.address') %>
+      </h3>
+      <div class="grid-2">
+        <%= f.input :zip_code, required: true, validate: true, input_html: { data: { mask: "cep" } } %>
+        <%= f.input :country,
+                    as: :string,
+                    required: true,
+                    validate: true,
+                    input_html: { class: "" } %>
+      </div>
+      <div class="grid-2">
+        <% options={ form: f, field_names: { :country=> :country, :state => :state, :city => :city } } %>
+          <%= f.input :state,
+                      required: true,
+                      validate: true %>
+          <%= f.input :city,
+                      required: true,
+                      validate: true %>
+      </div>
+      <div class="grid-3">
+        <%= f.input :neighborhood, required: true, validate: true %>
+        <%= f.input :street, required: true, validate: true %>
+        <%= f.input :street_number, required: true, validate: true %>
+      </div>
+      <div class="grid-2">
+        <%= f.input :street_line_2, validate: true %>
+      </div>
+      <%= f.button :submit, t('.submit'), class: "btn-orange" %>
+  </div>
+<% end %>

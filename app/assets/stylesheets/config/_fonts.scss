@@ -1,0 +1,59 @@
+// Import Google fonts
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;600;700;800&family=Work+Sans:wght@100;200;300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800;900&display=swap');
+
+// Define fonts for body and headers
+$body-font: 'Montserrat', sans-serif;
+$headers-font: 'Work Sans', "sans-serif";
+
+// To use a font file (.woff) uncomment following lines
+// @font-face {
+//   font-family: "Font Name";
+//   src: font-url('FontFile.eot');
+//   src: font-url('FontFile.eot?#iefix') format('embedded-opentype'),
+//        font-url('FontFile.woff') format('woff'),
+//        font-url('FontFile.ttf') format('truetype')
+// }
+// $my-font: "Font Name";
+
+@font-face {
+  font-family: "Futura Std";
+  src: font-url('FuturaStd-Book.otf') format("opentype");
+  font-weight: 100;
+}
+@font-face {
+  font-family: "Futura Std";
+  src: font-url('FuturaStd-Heavy.otf') format("opentype");
+  font-weight: 300;
+}
+@font-face {
+  font-family: "Futura Std";
+  src: font-url('FuturaStd-Bold.otf') format("opentype");
+  font-weight: 600;
+}
+@font-face {
+  font-family: "Futura Std";
+  src: font-url('FuturaStd-ExtraBold.otf') format("opentype");
+  font-weight: 900;
+}
+@font-face {
+  font-family: "Futura xBlk BT";
+  src: font-url('Futuraxk.ttf') format('truetype');
+}
+@font-face {
+  font-family: "Futura Book";
+  src: font-url('Futura-Book.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "Futura Md BT";
+  src: font-url('FuturaMdBT-Regular.ttf') format('truetype');
+  font-weight: 300;
+}
+@font-face {
+  font-family: "Futura Md BT";
+  src: font-url('FuturaMdBT-Bold.ttf') format('truetype');
+  font-weight: 600;
+}
+

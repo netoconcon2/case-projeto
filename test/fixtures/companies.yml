@@ -1,0 +1,128 @@
+disney:
+  owner: walter
+  name: "The Walt Disney Company"
+  status: 1
+  cnpj: 11.111.111/1111-11
+  street: Lorem Ipsum street
+  street_number: 111
+  zip_code: 04242-424
+  city: Townsville
+  state: Somewhere
+  country: BR
+  phone: (11) 96666-6666
+  neighborhood: Limoeiro
+  created_at: <%= 5.days.ago %>
+northern:
+  owner: neto
+  name: "Northern Ventures"
+  status: 0
+  cnpj: 22.222.222/2222-22
+  street: Lorem Ipsum street
+  street_number: 222
+  zip_code: 04242-424
+  city: Townsville
+  state: Somewhere
+  country: BR
+  phone: (11) 96666-6666
+  neighborhood: Limoeiro
+sparrow:
+  owner: reginald
+  name: "Sparrow Academy"
+  status: 2
+  plan: visible_one
+  available_words: 10_000
+  cnpj: 33.333.333/3333-33
+  street: Lorem Ipsum street
+  street_number: 333
+  zip_code: 04242-424
+  city: Townsville
+  state: Somewhere
+  country: BR
+  phone: (11) 96666-6666
+  neighborhood: Limoeiro
+  created_at: <%= 10.days.ago %>
+empire:
+  name: "Death Star"
+  status: 2
+  owner: vader
+  plan: visible_one
+  available_words: 10_000
+  cnpj: 44.444.444/4444-44
+  street: Lorem Ipsum street
+  street_number: 444
+  zip_code: 04242-424
+  city: Townsville
+  state: Somewhere
+  country: BR
+  phone: (11) 96666-6666
+  neighborhood: Limoeiro
+rebels:
+  name: "Rebels agains the machine"
+  status: 2
+  owner: luke
+  plan: activated
+  cnpj: 55.555.555/5555-55
+  street: Lorem Ipsum street
+  street_number: 555
+  zip_code: 04242-424
+  city: Townsville
+  state: Somewhere
+  country: BR
+  phone: (11) 96666-6666
+  neighborhood: Limoeiro
+hut:
+  name: 'Jabba The Hut'
+  status: 2
+  owner: jabba
+  plan: visible_one
+  available_words: 10_000
+  cnpj: 66.666.666/6666-66
+  street: Lorem Ipsum street
+  street_number: 666
+  zip_code: 04242-424
+  city: Townsville
+  state: Somewhere
+  country: BR
+  phone: (11) 96666-6666
+  neighborhood: Limoeiro
+  created_at: <%= 20.days.ago %>
+jarjar:
+  name: 'Jar Jar'
+  status: 1
+  owner: jarjar
+  cnpj: 77.777.777/7777-77
+  street: Lorem Ipsum street
+  street_number: 777
+  zip_code: 04242-424
+  city: Townsville
+  state: Somewhere
+  country: BR
+  phone: (11) 96666-6666
+  neighborhood: Limoeiro
+  created_at: <%= 20.days.ago %>
+cat_cafe:
+  name: 'Cat cafe'
+  status: 0
+  owner: howell
+  cnpj: 88.888.888/8888-88
+  street: Lorem Ipsum street
+  street_number: 888
+  zip_code: 04242-424
+  city: Townsville
+  state: Somewhere
+  country: BR
+  phone: (11) 96666-6666
+  neighborhood: Limoeiro
+fish_cafe:
+  name: 'Fish cafe'
+  status: 3
+  owner: wesley
+  cnpj: 88.888.888/8888-88
+  street: Lorem Ipsum street
+  street_number: 888
+  zip_code: 04242-424
+  city: Townsville
+  state: Somewhere
+  country: BR
+  phone: (11) 96666-6666
+  neighborhood: Limoeiro

@@ -1,0 +1,77 @@
+<div data-controller="masks">
+  <div class="form-banner">
+    <div class="form-box">
+      <div class="form-area">
+          <div class="f-column f-center">
+            <h2>Novo Plano</h2>
+          </div>
+          <br>
+          <div class="container devise-form">
+            <%= simple_form_for [:admin, @plan] do |f| %>
+
+            <h4>Nome do Plano</h4>
+
+            <%= f.input :name, label: false %>
+            <br>
+
+            <h4>Valor a cobrar</h4>
+
+            <%= f.input :price_cents, label: false, input_html: { data: { mask: "money" } } %>
+
+            <br>
+
+            <h4>Dias</h4>
+            <p>Prazo, em dias, para cobrança das parcelas. Ex: Para um plano mensal, dias = 30.</p>
+            <p> <strong>OBS: O dia da cobrança não será constante.</strong> </p>
+
+          <br>
+
+            <%= f.input :days, label: false %>
+            <br>
+
+
+            <h4>Dias de Teste</h4>
+
+            <p>Dias para teste gratuito do plano. Valor começará a ser cobrado no dia posterior ao fim deste periodo.</p>
+
+            <%= f.input :trial_days, label: false %>
+            <br>
+
+            <h4>Renovações</h4>
+            <p>Número de renovações que poderão ser feitas nesse plano.</p>
+            <p><strong>OBS: a cobrança feita na ativação da assinatura não é considerada.</strong></p>
+            <p><strong>OBS: deixar vazio irá renovar indefinidamente, ou até o plano ser cancelado.</strong></p>
+
+            <%= f.input :charges, label: false %>
+            <br>
+
+            <h4>Parcelas</h4>
+            <p>Número de parcelas entre cada cobrança (charges).</p>
+            <p>Ex: Para criar um Plano anual válido por 2 anos, com cada transação dividida em 12 vezes, os parâmetros deverão ser: </p>
+            <ul>
+              <li>dias = 365</li>
+              <li>parcelas = 12</li>
+              <li>renovações = 1</li>
+            </ul>
+
+            <%= f.input :installments, label: false %>
+            
+            <br>
+
+            <h4>Palavras para Traduzir</h4>
+            <p>Palavras que o cliente terá direito a traduzir por mês.</p>
+
+            <%= f.input :words, label: false %>
+            <br>
+
+            <%= f.input :include_review, label: "Incluir Revisão", input_html: {class: "boolean-field btn"} %>
+            <br>
+
+
+            <%= f.button :submit, "Criar Plano", class: "btn-block btn-orange" %>
+            <% end %>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

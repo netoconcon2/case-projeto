@@ -1,0 +1,63 @@
+<div class="show-info-header p-3">
+  <h3 id="table-desc">
+    <%= t('.users_list') %>
+  </h3>
+  <div class="flex-s-between">
+    <div class="pages">
+      <%= paginate @users, window: 1, right: 1, left: 1 %>
+    </div>
+  </div>
+</div>
+<div class="<%= current_user.manager? ? 'grid-4' : 'grid-3' %>">
+  <div role="rowgroup" class="grid-headers">
+    <div role="row" class="grid-row">
+      <span role="columnheader">
+        <%= t('.email') %>
+      </span>
+      <span role="columnheader">
+        <%= t('.created_at') %>
+      </span>
+      <span role="columnheader">
+        <%= t('.role') %>
+      </span>
+      <% if current_user.manager? %>
+        <span role="columnheader">
+          <%= t('.actions') %>
+        </span>
+        <% end %>
+    </div>
+  </div>
+  <div role="rowgroup" class="grid-table">
+    <% @users.page(@page).each do |user| %>
+      <div role="row" class="<%= user.invitation_token ? " grid-row user-not-completed" : "grid-row" %>">
+        <span role="cell" class="<%= 'pending_invite' if user.invitation_token %>">
+          <% if user.invitation_token %>
+            <em class="alert-cell" data-tippy-content="<%= t('.waiting_accept') %>">
+              <i class="fas fa-exclamation"></i>
+              <i class="far fa-envelope"></i>
+            </em>
+          <% end %>
+          <p class="m-0" style="width: calc(100% - 2rem);">
+            <span class="text-nowrap d-block w-100"><%= user.name %></span>
+
+            (<%= user.email %>)
+          </p>
+        </span>
+        <span role="cell">
+          <%= l(user.created_at, format: :short) %>
+        </span>
+        <span role="cell">
+          <%= user.translated_role %>
+        </span>
+        <% if current_user.manager? && user.invitation_token.present? %>
+          <span role="cell">
+            <%= link_to remove_user_invitation_path(invitation_token: user.invitation_token), method: :delete, data: {
+              confirm: t('.are_you_sure_invitation') } do %>
+              <i class="fas fa-trash text-danger"></i>
+              <% end %>
+          </span>
+          <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

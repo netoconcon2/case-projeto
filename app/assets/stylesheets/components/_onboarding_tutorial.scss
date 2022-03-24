@@ -1,0 +1,111 @@
+// CARDS WITH THE TUTURIAL STEPS
+.onboarding-step {
+  height: $extra-small;
+  width: 450px;
+  background-color: $orange;
+  border-radius: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  padding: 64px;
+  position: relative;
+  img {
+    max-width: 100%;
+    width: 100%;
+  }
+  svg {
+    max-height: 7rem;
+    max-width: 100%;
+    fill: $white;
+  }
+  i {
+    color: $white;
+    font-size: 10rem;
+  }
+  a {
+    display: block;
+  }
+  a:hover {
+    color: $white;
+    text-decoration: none;
+  }
+  p {
+    font-family: "Futura Std", sans-serif;
+    color: $white;
+    font-weight: 100;
+  }
+  .tutorial-close-button {
+    font-size: 2rem;
+    color: $white;
+    opacity: 0;
+    transition: 0.5s;
+    position: absolute;
+    top: 1.2rem;
+    right: 1.5rem;
+  }
+  &:hover{
+    .tutorial-close-button {
+      opacity: 0.8;
+    }
+  }
+}
+
+// Sets the tutorial in small screens
+@media (max-width: $small) {
+  .onboarding-tutorial {
+    justify-content: flex-start;
+    align-items: flex-start;
+    position: fixed;
+  }
+  .onboarding-step {
+    height: 100vh;
+    width: 100vh;
+    border-radius: 0;
+  }
+}
+
+// Text with navy background
+.tutorial-label {
+  font-family: 'Futura Std', sans-serif;
+  color: $white;
+  background-color: $navy;
+  padding: 4px;
+  font-weight: 300;
+}
+
+// Container for the tutorial card contents
+.dashboard-tutorial-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  opacity: 1;
+}
+
+// STEPS INDICATORS
+.steps-indicators-all {
+  list-style-type: none;
+  padding: 0;;
+  margin: 0;
+  li {
+    background-color: black;
+    opacity: 0.15;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-grid;
+  }
+  li:not(:last-of-type) {
+    margin-right: 4px;
+  }
+  .active-step {
+    background-color: $white;
+    opacity: 0.8;
+    transition-duration: 0.5s;
+  }
+}
+
+.step-highlight {
+  box-shadow: 0 0 0px 100vw $modal-bg;
+}

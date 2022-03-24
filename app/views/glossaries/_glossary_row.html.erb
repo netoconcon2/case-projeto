@@ -1,0 +1,27 @@
+<%= turbo_frame_tag glossary, class: "grid-turbo" do %>
+  <div role="row" class="grid-row">
+    <span role="cell"><%= glossary.name %></span>
+    <span role="cell"><%= languages(glossary) %></span>
+    <span role="cell"><%= glossary.terms.count %></span>
+    <span role="cell"><%= l(glossary.updated_at.localtime, format: :short) %></span>
+    <span role="cell" data-controller='modal'>
+      <%# Show button %>
+      <%= link_to glossary_path(glossary) do %>
+        <i class="fas fa-eye mx-1" data-tippy-content="<%= t('glossaries.index.see_glossary') %>"></i>
+        <span class="visibility-hidden"><%= t('glossaries.index.see_glossary') %></span>
+      <% end %>
+      <% if policy(glossary).edit? %>
+      <%# Edit button %>
+        <%= link_to edit_glossary_path(glossary), data: { turbo: true, turbo_frame: 'modal' } do %>
+          <i class="fas fa-pen mx-1" data-tippy-content="<%= t('glossaries.index.edit_glossary') %>"></i>
+          <span class="visibility-hidden"><%= t('glossaries.index.edit_glossary') %></span>
+        <% end %>
+        <%# Delete button %>
+        <%= link_to glossary, method: :delete, data: { confirm: t('alert.are_you_sure'), turbo: true } do %>
+          <i class="fas fa-trash mx-1" data-tippy-content="<%= t('glossaries.index.delete_glossary') %>"></i>
+          <span class="visibility-hidden"><%= t('glossaries.index.delete_glossary') %></span>
+        <% end %>
+      <% end %>
+    </span>
+  </div>
+<% end %>

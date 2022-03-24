@@ -1,0 +1,975 @@
+pt-BR:
+  languages:
+    pt-BR: Português
+    pt: Português
+    en: Inglês
+  javascript:
+    reset_input: Limpar entrada de arquivo de documento
+    toggle_btn: Mostrar/Esconder filtros avançados
+    search: PESQUISAR
+    dropdown_select:
+      zero: Nenhum selecionado
+      one: 1 selecionado
+      all: Todos selecionados
+      other: "%{count} selecionados"
+      title: Abrir/Fechar caixa de seleção múltipla
+      label: Status do %{model}
+    multistep:
+      next: Próximo
+      prev: Anterior
+      submit: Enviar
+    modal:
+      invite:
+        invite_user: Convide um(a) usuário(a)
+      editor:
+        enter_number: Insira o número da linha
+        error_invalid_value: Apenas números são aceitos
+        error_negative: O valor minímo é 1
+        error_maximum: O valor máximo é %{max_value}
+  activerecord:
+    attributes:
+      company:
+        name: Nome
+        owner: Responsável
+        cnpj: CNPJ
+        status: Status
+        created_at: Criado em
+        plan: Plano
+        available_words: Palavras disponíveis
+        street: Rua
+        street_line_2: Complemento
+        street_number: Número
+        zip_code: Código postal
+        neighborhood: Bairro
+        city: Cidade
+        state: Estado
+        phone: Telefone
+        country: País
+        status_list:
+          review: Em revisão
+          validated: Validado
+          completed: Completo
+          denied: Não aprovado
+        plan_status_list:
+          active: "Ativo"
+          pending: "Pendente"
+          unpaid: "Sem Pagamento"
+          canceled: "Cancelado"
+          ended: "Encerrado"
+          paid: "Pago"
+      document:
+        original_text: Texto original
+        source: Idioma inicial
+        status_list:
+          being_reviewed: Sendo revisado
+          being_translated: Sendo traduzido
+          original: Não enviado
+          translated: Traduzido
+        target: Idioma final
+        title: Título
+        translated_text: Texto traduzido
+      package:
+        name: Nome
+        price: Valor
+        words: Quantidade de palavras
+        payment_methods: Métodos de pagamento
+        status_list:
+          invisible: Não visível
+          visible: Visível
+      plan:
+        name: Nome
+        pagarme_id: PagarMe ID
+        price: Valor
+        days: Duração
+        trial_days: Dias de teste
+        payment_methods: Métodos de pagamento
+        charges: Renovações
+        installments: Parcelas
+        invoice_reminder: Dia para lembrete
+        words: Quantidade de palavras
+        status: Status
+        payment_methods_list:
+          boleto: Boleto Bancário
+          credit_card: Cartão de cŕedito
+        status_list:
+          active: Ativo
+          discarded: Descartado
+          inactive: Inativo
+          published: Publicado
+      user:
+        first_name: Nome
+        last_name: Sobrenome
+        company: Empresa
+        password: Senha
+        role: Papel
+        which_role: Tipo de conta
+        role_list:
+          admin: Administrador
+          employee: Funcionário
+          manager: Gerenciador
+          pj: Autônomo
+          company: Empresa
+      text_chunk:
+        status_list:
+          translated: Traduzido
+          edited: Editado
+          reviewed: Revisado
+          approved: Aprovado
+      glossary:
+        language_1: Idioma 1
+        language_2: Idioma 2
+        name: Nome
+      term:
+        glossary: Glossário
+        source: Termo 1
+        target: Termo 2
+    errors:
+      messages:
+        bad_format: com formato inválido
+      models:
+        company:
+          attributes:
+            owner:
+              must_belong_to_the_same_company: deve pertencer a empresa
+              not_right_role: deve ter papel de gerenciador ou autônomo
+            plan:
+              plan_blank: não deve ficar em branco se a empresa possuir status completo
+        plan:
+          attributes:
+            pagarme_id:
+              inactive_plan: deve estar presente se o plano não possuir status inativo
+              not_inactive_plan: deve estar ausente se o plano possuir status inativo
+        user:
+          attributes:
+            company:
+              more_than_one_user: está limitada a apenas um usuário caso o responsável
+                seja autônomo
+              pj_cannot_belong: 'inválida. Usuários autônomos devem ser os únicos
+                na própria empresa.'
+            password:
+              too_long:
+                one: 'muito longa (máximo: 1 caracter)'
+                other: 'muito longa (máximo: %{count} caracteres)'
+              too_short:
+                one: 'muito curta (mínimo: 1 caracter)'
+                other: 'muito curta (mínimo: %{count} caracteres)'
+        text_chunk:
+          attributes:
+            responsible:
+              wrong_role: 'deve ser administrador, o dono do documento ou gerenciador da empresa do documento'
+        glossary:
+          attributes:
+            language_2:
+              languages_should_be_different: deve ser diferente do primeiro idioma
+        document:
+          attributes:
+            target:
+              same_language: deve ser diferente do idioma inicial
+    models:
+      company: Empresa
+      document: Documento
+      package: Pacote
+      plan: Plano
+      user: Usuário(a)
+  alert:
+    are_you_sure: Você tem certeza?
+    minimum_words: Seu texto deve ter pelo menos 5 palavras para ser traduzido!
+    cancel_plan: Você tem certeza que deseja cancelar a assinatura? Essa ação não
+      poderá ser desfeita.
+    confirm_translation: Este documento tem %{count} palavras
+    delete_company: Você tem certeza que deseja deletar essa empresa? Essa ação não
+      poderá ser desfeita.
+    error_translation: Alguma coisa deu errado durante a tradução. Por favor, tente
+      novamente em instantes ou contate o suporte.
+    no_words_available: Sua empresa não tem palavras o suficiente para traduzir este
+      documento. Por favor, contrate um pacote avulso ou assine um novo plano.
+    not_changed: Esta versão do documento já foi traduzida!
+    plan_not_disabled: "Esse plano não pode ser desativado, pois ainda há assinantes"
+    unauthorize_page: "A página não pôde ser acessada."
+    error_cancel: "Não foi possível cancelar"
+  notice:
+    doc_ready: "A empresa foi notificada que o documento está pronto!"
+    doc_not_available: "O documento foi atualizado, mas ainda não foi disponibilizado."
+    doc_removed: 'Documento removido!'
+    doc_updated: Documento atualizado!
+    imported_terms:
+      zero: "Nenhum termo foi importado. Por favor, revise seu arquivo."
+      one: "1 termo importado."
+      other: "%{count} termos importados."
+    transaction_slip: "Transação Aprovada! Seu saldo será liberado após confirmação de pagamento do boleto"
+    transaction_card: "Compra Aprovada! Seu saldo será liberado em alguns minutos"
+    error_transaction: "Compra Recusada! Favor verificar os dados"
+    error_subscribe: "Não foi possível assinar seu plano, verifique seus dados"
+    sucessfull_subscribe: "Seu plano foi assinado com sucesso!"
+  admin:
+    applies:
+      index:
+        manage_company: Gerenciar aplicações de empresa
+        name_query_label: Qual empresa você está procurando?
+        name_query_placeholder: Procure pelo nome da empresa ou responsável
+        status: Status
+        date_start_query_label: Data início
+        date_end_query_label: Data final
+        date_query_placeholder: dd/mm/aaaa
+        clean_filters: Limpar filtros
+        query_submit_button: PESQUISAR
+        index: Lista de Empresas
+        company: Empresa
+        created_at: Criado em
+        responsible: Responsável
+        actions: Ações
+        see_btn: Ver Empresa
+        edit_btn: Editar Empresa
+        delete_btn: Deletar Empresa
+    companies:
+      edit:
+        edit_company: "Editar <em>%{company}</em>"
+        submit: Salvar alterações
+        address: Endereço
+      index:
+        manage_company: Gerenciar Empresa
+        see_app: Ver aplicações
+        name_query_label: Qual empresa você está procurando?
+        name_query_placeholder: Procure pelo nome da empresa ou responsável
+        status: Status
+        date_start_query_label: Data início
+        date_end_query_label: Data final
+        date_query_placeholder: dd/mm/aaaa
+        clean_filters: Limpar filtros
+        query_submit_button: PESQUISAR
+        index: Lista de Empresas
+        company: Empresa
+        created_at: Criado em
+        responsible: Responsável
+        plan: Plano Atual
+        actions: Ações
+        no_plan: Sem plano
+        see_btn: Ver Empresa
+        edit_btn: Editar Empresa
+        delete_btn: Deletar Empresa
+        search: Pesquisar
+      show:
+        invite_user: Convidar usuário
+        back: Voltar a todas companhias
+        company_details: Detalhes da empresa
+        edit: Editar
+        name: 'Nome:'
+        status: 'Status:'
+        kind: 'Tipo de empresa:'
+        pj: Autônomo (apenas um usuário)
+        cpnj: 'CNPJ:'
+        created_at: Criado
+        responsible: Responsável
+        people: Nº de usuários
+        phone: Telefone
+        zipcode: CEP
+        country: País
+        state: Estado
+        city: Cidade
+        street: Rua
+        street_number: Número
+        neighborhood: Bairro
+        street_line_2: Complemento
+        plan_details: Detalhes do plano atual
+        plan: 'Nome do plano:'
+        available_words: 'Palavras restantes:'
+        status_plan: Status do Plano
+        no_plan: Empresa sem plano no momento
+        denied: Empresa não aprovada na avaliação. Aguardando atualização das informações.
+        need_to_be_validated: 'Está empresa precisa ser avaliada. Após checar as informações escolha uma das opções abaixo:'
+        validate: Aprovar
+        deny: Rejeitar
+        are_you_sure: Você tem certeza? Isso enviará um email notificando o responsável
+    documents:
+      index:
+        documents: Gerenciar Documentos
+        name_query_label: Qual documento você está procurando?
+        name_query_placeholder: Procure pelo título ou conteúdo do documento
+        status: Status
+        actions: Ações
+        editor_document: Revisar tradução
+        date_start_query_label: Data início
+        date_end_query_label: Data final
+        date_query_placeholder: dd/mm/aaaa
+        clean_filters: Limpar filtros
+        query_submit_button: PESQUISAR
+        index: Lista de documentos
+        title: Título
+        added_at: Adicionado em
+        company: Empresa
+      show:
+        header: "Revisando <em>%{title}</em>"
+        original_text: Texto original
+        translated_text: Texto traduzido
+        document_ready: O documento está pronto
+        update_document: Atualizar documento
+    packages:
+      index:
+        package_status: Status do Pacote
+        all: Todos
+        manage_packages: Gerenciar Pacotes Adicionais
+        new_package: Novo Pacote
+        see_visible_packages: Ver Pacotes Visíveis
+      status:
+        edit: Editar
+        invisiblize: Tornar não visível
+        package_options: Abrir/Fechar opções do pacote
+        see_details: Ver detalhes
+        status: Status
+        value: Valor
+        visualize: Tornar visível
+        words_number: Qtd. de palavras
+      show:
+        details: Detalhes do Pacote
+        value: Valor
+        word: Palavras
+        edit: Editar pacote
+        erase: Excluir pacote adicional
+      new:
+        new_package: Novo Pacote Adicional
+        submit: Criar Pacote
+      edit:
+        edit_package: Editar Pacote
+        submit: Salvar alterações
+    plans:
+      index:
+        plan_status: Status do Plano
+        all: Todos
+        manage_plans: Gerenciar Planos
+        new_plan: Novo Plano
+        see_visible_plans: Ver Planos Visíveis
+      new:
+        review: Incluir Revisão
+        charges: Renovação
+        charges_description: 'Por favor, preencha o número de renovações do plano
+          que deseja. Caso queira que o plano seja renovado indefinidamente, até ser
+          cancelado ou desativado, deixe vazio. <br /> <strong>Obs:</strong> Em caso
+          do método de pagamento ser cartão de cŕedito, a cobrança realizada na ativação
+          do plano <strong>não é considerada</strong>. Se sua intenção for criar um
+          plano que renove até completar um ano, usando em cartão de crédito como
+          método de pagamento, escolha 11 renovações. '
+        charges_label: Número de renovações
+        days: Duração
+        days_description: 'Por favor, preencha a duração do plano em <strong>dias</strong>.
+          Ela representa o valor que será cobrado durante todo o período do plano,
+          com ou sem parcelas. Você pode optar com uma duração menor e escolher o
+          número de renovações do plano ou um período maior e escolher número de parcelas.
+          <br /> <strong>Obs:</strong> O dia da cobrança não será constante. '
+        days_label: Duração do plano
+        follow_steps: Siga os seguintes passos e leia atentamente a descrição de cada
+          um para criar um novo plano.
+        installments: Parcelas
+        installments_description: Por favor, preencha o número de parcelas. Elas serão
+          cobradas dentro do período de duração do plano.
+        installments_label: Número de parcelas
+        name: Nome
+        name_description: Por favor, preencha um nome para o plano abaixo. Recomendamos
+          um nome curto e elegante, mas não se preocupe que você será capaz de modificar
+          depois.
+        name_label: Nome do Plano
+        new_plan: Novo Plano
+        payment: Pagamento
+        payment_description: Por favor, escolha quais meios de pagamento o plano aceitará.
+          Pode ser cartão de crédito, boleto ou ambos.
+        payment_label: Método de pagamento
+        price: Valor
+        price_description: Por favor, preencha o valor que será cobrado. Você poderá
+          colocar um preço maior para ser parcelado ou um menor e ativar a renovação
+          do plano.
+        price_label: Valor a cobrar
+        trial: Teste
+        trial_description: 'Por favor, preencha o número de dias que deseja disponibilizar
+          para teste gratuito do plano. O valor começará a ser cobrado no dia posterior
+          ao fim desse período. '
+        trial_label: Dias de teste
+        words: Palavras
+        words_description: 'Por favor, preencha o número de palavras que o cliente
+          terá durante a <strong>duração do plano</strong>. <br /> <strong>Obs:</strong>
+          As palavras são renovadas junto com o plano, ou seja, caso crie um plano
+          com duração de um ano, elas só irão ser reabastecidas após um ano. '
+        words_label: Número de palavras
+      edit:
+        edit_plan: Editar plano
+      show:
+        plan_name: "Plano <em>%{name}</em>"
+        edit: Editar plano
+        subscribers: "Assinantes do Plano: "
+        subs_number: "Número de Assinantes: %{count}"
+        deactivate: Desativar
+        to_cancel: Para cancelar um plano, é preciso que não tenha nenhum assinante
+        details: "Detalhes do Plano: "
+        value: "Valor: %{price}"
+        value_message: Valor que será cobrado recorrentemente (em centavos). Deve ser no mínimo 1 real.
+        days: "Duração em dias: %{days}"
+        days_message: "Tempo, em dias, para cobrança das parcelas. "
+        days_obs: "OBS: O dia da cobrança não será constante."
+        trial_days: "Dias para teste: %{days}"
+        trial_message: Dias para teste gratuito do plano. Valor começará a ser cobrado passado esses dias.
+        payment_method: "Método de pagamento: %{payment}"
+        payment_message: Meios de pagamentos aceitos. Pode ser boleto, cartão de crédito ou ambos.
+        charges: "Número de Renovações: %{charges}"
+        charge_message: Número de renovações que o plano terá. Caso esteja vazio irá cobrar o usuário indefinidamente.
+        charge_obs: "OBS: No caso de cartão de crédito, a cobrança feita na ativação da assinatura não é considerada."
+        installments: "Número de parcelas: %{number}"
+        installments_message: Número de parcelas dentro da duração do plano antes citado.
+        installment_example: "Ex: Plano anual, válido por 2 anos, sendo que cada transação será dividida em 12 vezes. Nossos parâmetros serão: days = 365, installments = 12, charges = 1 (cartão de crédito) ou charges = 2 (boleto)."
+        installments_obs: "OBS: Boleto sempre terá installments = 1."
+        invoice: "Dia para Lembrete: %{day}"
+        invoice_message: Dias para que o cliente seja avisado sobre o vencimento do boleto.
+        words: "Números de palavras: %{words}"
+        words_message: Número de palavras que serão disponibilizadas para tradução dentro da duração do plano antes citado.
+      status:
+        active: Ativar
+        deactivate: Desativar
+        edit: Editar
+        pagarme: Pagarme Id
+        plan_options: Abrir/Fechar opções de plano
+        publish: Publicar
+        see_details: Ver detalhes
+        status: Status
+        value: Valor
+        words_number: Qtd. de palavras
+        review: Revisão
+        include_review: "Sim"
+        not_include_review: "Não"
+    subscriptions:
+      index:
+        manage_subscriptions: Gerenciar assinaturas
+        index: Lista de assinaturas
+        company: Empresa
+        plan: Plano
+        price: Valor
+        status: Status
+        see_details: Ver detalhes
+        paid: Pagamento recebido
+        waiting_payment: Esperando pagamento
+    users:
+      index:
+        manage_users: Gerenciar usuários
+        name_query_label: Qual usuário você está procurando?
+        name_query_placeholder: Procure pelo nome ou email
+        role: Papel
+        status: Status
+        date_start_query_label: Data início
+        date_end_query_label: Data final
+        date_query_placeholder: dd/mm/aaaa
+        clean_filters: Limpar filtros
+        search: Pesquisar
+        users_list: Lista de usuários
+        email: Email
+        created_at: Criado
+        company: Empresa
+        actions: Ações
+        waiting_accept: Aguardando convite ser aceito
+        see_user: Ver usuário
+        edit_user: Editar usuário
+        delete_user: Deletar usuário
+        confirm_delete: Você tem certeza que quer deletar esse usuário?
+        confirm_delete_owner: Você tem certeza que quer deletar esse usuário? Isso deleterá sua empresa e todos usuários contidos nela.
+      edit:
+        update: Atualizar informações
+  companies:
+    company_dashboard:
+      review: Sua empresa está sendo avaliada por nosso time técnico. Entraremos em contato assim que possível. 🙂
+      denied: Sua empresa infelizmente não passou na nossa avaliação. Por favor, atualize as informações da sua empresa.
+      company_details: Detalhes da conta
+      kind: Tipo de conta
+      pj: Autônomo (apenas um usuário)
+      created_at: "Inscrito em: "
+      responsible: "Responsável: "
+      edit: Editar
+      status: "Status: "
+      plan: "Plano atual: "
+      docs: Documentos registrados
+      docs_per_user: Documentos por funcionário
+      analyze_docs: Analisar documentos
+      analyze_users: Analisar funcionários
+      additional_data: Dados adicionais
+      no_translated_doc: ""
+      total_translated:
+        zero: "Sua empresa ainda não fez <br> nenhuma tradução..."
+        one: "<em>%{count}</em><br />palavra traduzida!"
+        other: "<em>%{count}</em><br />palavras traduzidas!"
+      start_now: Comece agora!
+      add_new: Adicione um novo!
+      see_documents: Veja os documentos
+      total_docs:
+        zero: "Não há nenhum documento para ser traduzido no momento"
+        one: "<em>%{count}</em><br /> palavra precisando de tradução"
+        other: "<em>%{count}</em><br /> palavras precisando de tradução"
+      total_words:
+        zero: "Não há palavras no estoque..."
+        one: "<em>%{count}</em><br /> palavra no estoque!"
+        other: "<em>%{count}</em><br /> palavras no estoque!"
+      buy_package: Contrate um pacote!
+      sub_plan: Assine um novo plano!
+    show:
+      invite_user: Convidar usuário
+      actions: Ações
+      are_you_sure: Você tem certeza? Isso enviará um email notificando o responsável
+        da empresa.
+      company_details: Detalhes da empresa
+      cpnj: 'CNPJ:'
+      created_at: Criado
+      deny: Rejeitar
+      edit: Editar
+      email: Email
+      kind: 'Tipo de empresa:'
+      name: 'Nome:'
+      need_to_be_validated: 'Está empresa precisa ser avaliada. Após checar as informações
+        escolha uma das opções abaixo:'
+      people: Nº de usuários
+      pj: Autônomo (apenas um usuário)
+      plan_details: Detalhes do plano atual
+      responsible: Responsável
+      status: 'Status:'
+      current_plan: "Plano atual: "
+      validate: Aprovar
+      waiting_accept: Aguardando convite ser aceito
+      waiting_review: Aguardando avaliação da empresa
+      denied: Sua empresa infelizmente não passou na nossa avaliação. Por favor, clique em editar e atualize as informações da sua empresa.
+    new:
+      header: Complete seu registro com as informações de sua empresa
+      submit: Cadastrar empresa
+    edit:
+      update: Atualizar dados da empresa
+      submit: Atualizar empresa
+  documents:
+    chunk_confirm_btn:
+      cannot_confirm: Paragráfo inválido
+      confirm_paragraph: Confirmar paragráfo
+    editor:
+      case_sensitive: Sensível a letras maiúsculas e minúsculas
+      clean_filters: Limpar filtros
+      confirm_all_paragraphs: Confirmar todos parágrafos aparentes
+      confirm_options: Opções de confirmação
+      confirm_paragraph: Confirmar parágrafo selecionado
+      created_at: Criado em
+      go_to_row_number: Vá para linha pelo número
+      mark_rows_as_approved: Aprovar linhas
+      mark_rows_as_reviewed: Marcar linhas como revisadas
+      next_unconfirmed: Próximo parágrafo não confirmado
+      new_term: Novo termo
+      previous_version: Tradução anterior
+      redo: Refazer
+      search_original_chunk: Procurar parágrafo original
+      search_translated_chunk: Procurar parágrafo traduzido
+      select_glossaries: Selecionar glossários
+      terms: Termos
+      undo: Desfazer
+      user: Usuário
+    export_docx:
+      bicolumn_file: Bicolunado (original + tradução)
+      export_document: Exportar .docx
+      original_file: Texto original (formatação original)
+      rich_text_file: Texto traduzido (com formatação)
+      translated_file: Texto traduzido (formatação original)
+    form:
+      document_title: Título do Documento
+      users: Usuário(a)
+      or: ou
+      original_text: Texto original do documento
+      save: Salvar
+      select_file: Selecionar arquivo
+      send_docx_file: Enviar arquivo DOCX
+      source_language: Idioma inicial
+      target_language: Idioma final
+      translation_kind: Tipo de tradução
+    index:
+      actions: Ações
+      add_new_document: Adicionar novo documento
+      added_at: Entrou em
+      company: Empresa
+      delete_document: Deletar documento
+      documents: Documentos
+      edit_document: Editar documento
+      editor_document: Revisar tradução
+      index: Lista de documentos
+      see_document: Ver documento
+      status: Status
+      title: Título
+      translate_document: Traduzir Documento
+      user: Usuário(a)
+      n_of_words: Palavras
+    index_filter_form:
+      clean_filters: Limpar filtros
+      date_end_query_label: Data final
+      date_query_placeholder: dd/mm/aaaa
+      date_start_query_label: Data início
+      name_query_label: Qual documento você está procurando?
+      name_query_placeholder: Procure pelo título ou conteúdo do documento
+      open_close_multiple_selection: Abrir/Fechar caixa de seleção múltipla
+      search: PESQUISAR
+    new:
+      add_new_document: Adicionar um novo documento
+    rich_text_toolbar:
+      bold: Negrito
+      changes_history: Histórico de versões
+      copy_text: Copiar texto
+      heading: Cabeçalhos
+      italic: Itálico
+      redo_style: Refazer estilo
+      strike: Tachado
+      underline: Sublinhado
+      undo_style: Desfazer estilo
+    row_number:
+      jump: Ir
+    select_glossaries:
+      save: Salvar
+    show:
+      being_translated_description: O documento ainda está sendo traduzido. Você receberá um email assim que a tradução for concluída.
+      being_reviewed_description: O documento já foi traduzido e está sendo revisado pela nossa equipe de tradutores. Você receberá um email assim que a revisão for concluída.
+      document: Documento
+      original_description: Este documento ainda não foi enviado para tradução. Revise as informações e clique no botão 'Traduzir'.
+      original_text: Texto original
+      translated_description: Este é seu texto traduzido. Você poderá editá-lo, copiar o teor inteiro para a área de transferência ou fazer o download em arquivo docx.
+      translated_text: Texto traduzido
+      n_of_words: Palavras
+    translate_form:
+      send_doc: "Enviar documento <em>%{title}</em> para tradução"
+      translate: Traduzir!
+      translation_kind: Tipo de tradução
+  packages:
+    index:
+      words_number:
+        one: "%{count} palavra"
+        other: "%{count} palavras"
+      choose_a_package: Escolha um pacote
+      presentation: Agilidade, qualidade técnica e segurança. Compre um pacote adicional de palavras e traduza hoje seus documentos jurídicos.
+      machine_learning: Machine Learning dinâmica
+      unlimited_files: Documentos ilimitados
+      security: Segurança
+      access_to_review: Acesso ao pedido de revisão por uma equipe especializada
+      less_1_cent: Menos de 1 centavo
+      price_per_word: por palavra
+      buy_package: Compre este pacote
+      plans: Planos
+      packages: Pacotes
+    checkout:
+      your_info: 1 - Dados do titular
+      select_payment: 2 - Selecionar Pagamento
+      card: Cartão de crédito
+      slip: Boleto
+      name: Nome
+      last_name: Sobrenome
+      your_name: Digite seu nome
+      your_last_name: Digite seu sobrenome
+      email: E-mail
+      placeholder_email: seu@email.com.br
+      phone_ddd: Celular com DDD
+      phone_placeholder: (__) _____-____
+      zip_code: CEP
+      zip_code_placeholder: 00000-000
+      address: Endereço
+      address_placeholder: Rua, Avenida, Travessa...
+      street_number: Número
+      complement: Complemento
+      comp_placeholder: Bloco, Apto...
+      neighborhood: Bairro
+      city: Cidade
+      state: Estado
+      country: País
+      document: Documento
+      document_slip: "Documento (CPF ou CNPJ)"
+      card_number: Número do cartão
+      card_name: Nome no cartão
+      card_name_placeholder: Como impresso no cartão
+      expiration_date: Data de expiração
+      month: Mês
+      year: Ano
+      product: "Produto: %{order}"
+      slip: Boleto
+      security_code: Cód. de segurança
+      sec_code_placeholder: 3 ou 4 dígitos
+      cpf: CPF do titular
+      cpf_placeholder: Para envio da nota fiscal
+      cpf_slip: CPF (Para emissão da Nota Fiscal)
+      slip_payment: Pagamentos por boleto só podem ser efetuados à vista
+      slip_time: A compensação do pagamento pode levar até 3 dias úteis
+      slip_platform: O Boleto será gerado por meio da plataforma Appmax
+      slip_email: Depois do pagamento, fique atento ao seu e-mail para acompanhar o envio do seu pedido (verifique também a caixa de SPAM)
+      finish: Finalizar Pedido
+      tax: Taxa de 2.99% a.m
+      policy: Política de privacidade
+      terms: Termos de compra
+      doc_placeholder: Documento
+      pagarme: Esta compra setá processada pelo Pagarme
+      finish: "Finalizar Pedido"
+  plans:
+    index:
+      days:
+        one: "/ cada %{count} dia"
+        other: "/ cada %{count} dias"
+      weekly: / Semana
+      biweekly: / Quinzena
+      monthly: / Mês
+      annually: / Ano
+      semiannual: Semestral
+      bimonthly: Bimestral
+      quarterly: Trimestral
+      yearly: Anual
+      less_1_cent: Menos de 1 centavo
+      words_number:
+        one: "%{count} palavra"
+        other: "%{count} palavras"
+      price_per_word: por palavra
+      choose_a_plan: Escolha um plano
+      presentation: Agilidade, qualidade técnica e segurança. Escolha um plano e tenha acesso completo à nossa plataforma.
+      machine_learning: Machine Learning dinâmica
+      unlimited_users: Usuários ilimitados
+      team_administration: Administração da equipe
+      security: Segurança
+      access_to_review: Acesso ao pedido de revisão por uma equipe especializada
+      unlimited_files: Documentos ilimitados
+      choose_plan: Escolha esse plano
+      cancel_subs: Cancelar assinatura
+      cancel_plan: Você tem certeza que deseja cancelar a assinatura? Essa ação não poderá ser desfeita.
+      packages: Pacotes
+      plans: Planos
+    subscribe:
+      your_info: 1 - Dados do titular
+      select_payment: 2 - Selecionar Pagamento
+      card: Cartão de crédito
+      slip: Boleto
+      name: Nome
+      last_name: Sobrenome
+      your_name: Digite seu nome
+      your_last_name: Digite seu sobrenome
+      email: E-mail
+      placeholder_email: seu@email.com.br
+      phone_ddd: Celular com DDD
+      phone_placeholder: (__) _____-____
+      zip_code: CEP
+      zip_code_placeholder: 00000-000
+      address: Endereço
+      address_placeholder: Rua, Avenida, Travessa...
+      street_number: Número
+      complement: Complemento
+      comp_placeholder: Bloco, Apto...
+      neighborhood: Bairro
+      city: Cidade
+      state: Estado
+      country: País
+      card_number: Número do cartão
+      card_name: Nome no cartão
+      card_name_placeholder: Como impresso no cartão
+      document: Documento
+      doc_placeholder: CPF ou CNPJ
+      expiration_date: Data de expiração
+      month: Mês
+      year: Ano
+      security_code: Cód. de segurança
+      sec_code_placeholder: 3 ou 4 dígitos
+      doc_placeholder: Documento
+      finish: Finalizar Pedido
+      pagarme: Essa compra será processada pelo Pagarme.
+  users:
+    index:
+      users_list: Lista de usuários
+      email: Email
+      created_at: Criado
+      role: Papel
+      actions: Ações
+      waiting_accept: Aguardando convite ser aceito
+      are_you_sure_invitation: Você tem certeza que quer deletar esse usuário?
+  text_chunks:
+    update:
+      mark_as_approved: Aprovar tradução
+      mark_as_reviewed: Marcar tradução como revisada
+  glossaries:
+    index:
+      actions: Ações
+      add_new_glossary: Novo glossário
+      added_terms: Termos adicionados
+      clean_filters: Limpar filtros
+      date_end_query_label: Data final
+      date_query_placeholder: dd/mm/aaaa
+      date_start_query_label: Data início
+      delete_glossary: Deletar glossário
+      edit_glossary: Editar glossário
+      glossaries: Glossários
+      index: Lista de glossários
+      languages: Idiomas
+      name: Nome
+      name_query_label: Qual glossário você está procurando?
+      new_glossary: Novo glossário
+      name_query_placeholder: Busque pelo nome do glossário
+      search: FILTRAR
+      see_glossary: Ver glossário
+      updated_at: Última modificação em
+    form:
+      has_header: O arquivo possui cabeçalho
+      select_file: Selecionar arquivo
+      submit: Salvar
+    show:
+      term: "Termo %{language}"
+      new_term: Adicionar termo
+      actions: Ações
+      import_terms: Importar termos
+      modified_by: Modificado por
+      modified_at: Modificado em
+  terms:
+    form:
+      save: Salvar
+      select_glossary: Selecionar glossário
+      term_of: "Termo em %{language}"
+      go_back: Voltar
+      continue: Continuar
+    form_row:
+      save: Salvar
+      cancel: Cancelar
+      fill_all_terms: Por favor, preencha todos campos de termos
+    edit:
+      cancel: Cancelar
+    row_content:
+      edit: Editar termo
+      delete: Deletar termo
+  pages:
+    home:
+      decode_is: "<strong>O Decode é uma plataforma de</strong> inteligência artificial"
+      about_decode: especializada na tradução de conteúdos e documentos da área jurídica. Do português para o inglês e vice-versa. Com agilidade, qualidade técnica e melhor custo-benefício.
+      get_started: COMECE A USAR
+      agility: Agilidade
+      agility_message: Tradução  pronta em minutos.
+      efficiency: Especialização
+      efficiency_message: Somos os únicos no mercado especialistas em tradução jurídica.
+      security: Segurança rigorosa
+      security_message: Privacidade garantida.
+      respect: Respeito à privacidade
+      respect_message: Nosso software não permite o compartilhamento dos seus documentos com terceiros.
+      quality: Qualidade técnica jurídica
+      quality_message: Constante treinamento da inteligência artificial por tradutores formados em Direito.
+      transparency: Transparência
+      transparency_message: Investimento sem surpresas calculado com base na quantidade de palavras.
+      access: Você sobe o texto a ser traduzido.
+      budget: Nossa inteligência artificial traduz o texto para você.
+      translation: Você baixa a sua tradução em minutos.
+      revision: E tem mais! Se desejar incluir uma <em>revisão final</em>, a equipe do DECODE faz isso para você. Basta sinalizar na hora do pedido.
+      want_more: Quer saber mais sobre o decode?
+      contact_us: Fale conosco.
+      banner_text: 'Textos jurídicos traduzidos com eficiência. Tecnologia formada por experientes tradutores formados em direito. Inovação, rapidez e segurança a serviço do seu negócio. '
+    dashboard:
+      welcome_admin: Bem-vindo ao painel de admin do Decode!
+      welcome_user: Bem-vindo ao painel de usuário do Decode!
+      to_complete: "Para completar seu registro, %{register_link}"
+      register_link: cadastre aqui sua empresa!
+  dropdown:
+    toggle_filters: Minimizar ou maximizar filtros
+    toggle_option: Abrir ou Fechar opcões do %{model}
+  errors:
+    messages:
+      not_saved: Not saved
+  flash:
+    invitation_not_found: Convite não encontrado
+    invitation_removed: Convite excluído
+  home:
+    h1-banner: H1 Banner PT
+  kaminari:
+    next_page:
+      pagination:
+        next: Next
+    prev_page:
+      pagination:
+        previous: Previous
+  pagination:
+    current_page: Página Atual, Página %{page}
+    first: Primeiro
+    go_to: Vá para página %{page}
+    label: Paginação
+    last: Último
+    next: Próximo
+    previous: Anterior
+  country:
+    br: Brasil
+    us: Estados Unidos
+  shared:
+    dashboard_navbar:
+      additional_package: Pacotes Adicionais
+      applies: Aplicações
+      button_toggle: Minimizar ou maximizar barra de navegação
+      company: Empresa
+      dashboard: Dashboard
+      documents: Documentos
+      glossaries: Glossários
+      label: Barra de navegação da Dashboard
+      manage_companies: Gerenciar Empresas
+      manage_packages: Gerenciar Pacotes
+      manage_plans: Gerenciar Planos
+      manage_users: Gerenciar Usuários
+      notification: Notificações
+      plans: Planos
+      profile: Perfil
+      register_company: Registrar Empresa
+      see_plans: Ver Planos
+      see_packages: Ver Pacotes
+      sign_out: Sair
+      user: Usuário
+    menu_nav:
+      english: Inglês
+      pt-br: Português (Brasil)
+    navbar:
+      button_toggle: Minimizar ou maximizar barra de navegação
+      decode: O DECODE
+      diff: DIFERENCIAIS
+      our_way: COMO FUNCIONA
+      talk_to_us: FALE COM A GENTE
+      get_started: COMECE A USAR
+      prices: PREÇOS
+    footer:
+      rights: Todos os direitos reservados.
+      policy: Política de privacidade
+      terms: Termos e Condições
+      legal: Aviso legal
+      developed: Desenvolvido pela Northern
+    contact_form:
+      name: Nome*
+      email: E-mail*
+      company: Empresa*
+      message: Mensagem*
+      hint: Preenchimento obrigatório*
+      send: Enviar
+    adminmenu:
+      approvals: Aprovações
+      pending:
+        zero: "Nenhuma pendente"
+        one: "%{count} pendente"
+        other: "%{count} pendentes"
+      revisions: Revisões
+      companies: Empresas
+      users: Usuários
+      plans: Planos
+      packages: Pacotes
+      subscriptions: Assinaturas
+  translation_mailer:
+    review:
+      subject: Nova tradução para revisão
+      document_translated_message: "Olá! O documento <strong>%{title}</strong>, da empresa %{company}, acaba de ser traduzido e requer revisão e liberação à empresa"
+      this_link: neste link
+      waiting_review: "Por favor, revise o documento %{href} e, se estiver tudo certo, não se esqueça de <strong>marcar o documento como pronto</strong>, caso contrário a tradução não estará disponível para a empresa."
+    ready:
+      subject: Tradução concluída!
+      hello: "Olá! Temos boas novas para você!"
+      here: aqui
+      finished_document: "Seu documento <strong>%{title}</strong> acabou de ser traduzido e está disponível %{href}. "
+      case_not_able: Caso não seja capaz de visualizar, mande-nos um email com o assunto "DOCUMENTO INDISPONIVEL" que responderemos assim que possível.
+      thanks: Agradecemos sua escolha por um inglês jurídico sem complicações!
+  admin_mailer:
+    text_chunk_error:
+      subject: Erro na quebra do texto de um documento
+      about_error: Ocorreu um erro na tradução do documento <strong>%{doc_name}</strong> durante a quebra e junção do texto original com sua tradução correspondente. O número de paragráfos de ambos devia ser o mesmo, mas apresentou uma inconformidade, ocasionando a criação de um pedaço de texto maior que o devido.
+      info_error: Por favor, cheque a linha %{chunk_order} do documento através do link %{href}
+      here: aqui
+  tutorial:
+    dashboard:
+      welcome: Bem vindo ao Decode
+      get_started: Começar
+      skip_tutorial: Pular tutorial
+      next: Próximo
+      previous: Anterior
+      optional: Opcional
+      document_presentation: Copie e cole o texto que você quer traduzir ou envie um arquivo docx
+      send_document: Envie o documento para tradução
+      wait_for_translation: Aguarde até documento ser traduzido (você receberá um email com a notificação).
+      open_document: Abra o documento traduzido
+      edit_and_download: Você poderá editar o conteúdo, copiar o texto traduzido ou fazer o download em docx
+      finish_tutorial: Concluir

@@ -1,0 +1,12 @@
+<%= turbo_frame_tag "term-#{@term.id}" do %>
+  <%= simple_form_for @term, url: term_path(@term), method: :patch, html: { data: { turbo: true } } do |f| %>
+    <%= render 'terms/form_row', f: f do %>
+      <%= link_to  term_path(@term), data: { turbo: true } do %>
+        <i class="fas fa-times"></i>
+        <span class="visibility-hidden">
+          <%= t('.cancel') %>
+        </span>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

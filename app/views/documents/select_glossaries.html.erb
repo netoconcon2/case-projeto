@@ -1,0 +1,23 @@
+<%= render 'shared/modal', title: t('glossaries.index.glossaries'), modal_width: "modal-md-width" do %>
+  <div id="grid-list" class="mt-0" role="table" aria-describedby="table-desc" data-controller='input editor'>
+    <%= simple_form_for :document_glossaries, url: document_document_glossaries_path(document_id: @document.id), html: { id: 'document_glossaries_form', data: { controller: 'input', action: 'change->input#toggleSubmit turbo:submit-end->editor#submitNewTerm', turbo: true } } do |f| %>
+      <div class="grid-2 checkboxes overflow-y-scroll">
+        <div role="rowgroup" class="grid-table">
+          <% @glossaries.each do |glossary| %>
+            <div role="row" class="grid-row">
+              <span role="cell">
+                <%= f.input :"glossary_#{glossary.id}", as: :boolean, label: false, wrapper: false, input_html: { checked: glossary.documents.include?(@document), data: { initial_value: glossary.documents.include?(@document) } } %>
+              </span>
+              <span role="cell">
+                <%= f.label :"glossary_#{glossary.id}", glossary.name, required: false %>
+              </span>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center mt-3">
+        <button type="submit" data-input-target='submitBtn' class='btn-orange' disabled><%= t('documents.form.save') %></button>
+      </div>
+    <% end %>
+  </div>
+<% end %>

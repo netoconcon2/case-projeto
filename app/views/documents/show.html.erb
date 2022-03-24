@@ -1,0 +1,5 @@
+<%= turbo_frame_tag 'modal' %>
+
+<%= turbo_stream_from :documents %>
+<%= render @document, document: @document, chunks: @chunks, base_url: @base_url, user: current_user %>
+

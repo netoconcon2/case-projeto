@@ -1,0 +1,10 @@
+<div id="nav-menu" role="menubar" class="menu-nav <%= page %>">
+  <div class="i18n-icons">
+    <%= link_to url_for(locale: 'en' ), class: "#{ " gray" if I18n.locale !=:en }", aria: { selected: I18n.locale==:en } do %>
+      <%= inline_svg_tag('usa.svg', title: t('.english'), aria: true) %>
+    <% end %>
+    <%= link_to url_for(locale: nil), class: "#{ " gray" if I18n.locale !=:"pt-BR" }", aria: { selected: I18n.locale==:"pt-BR" } do %>
+      <%= inline_svg_tag('brasil.svg', title: t('.pt-br'), aria: true) %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+<div class="dash-box">
+  <h2 class="text-center show-info-header mb-3">Editar informações da conta</h2>
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <%= f.error_notification %>
+
+    <div class="form-inputs">
+      <div class="grid-2">
+        <%= f.input :first_name,
+                      required: true,
+                      autofocus: true,
+                      input_html: { autocomplete: "first-name" },
+                      validate: true %>
+        <%= f.input :last_name,
+                      required: true,
+                      input_html: { autocomplete: "last-name" },
+                      validate: true %>
+      </div>
+      <%= f.input :email,
+                    required: true,
+                    input_html: { autocomplete: "email" },
+                    validate: true %>
+
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <p><%= t(".currently_waiting_confirmation_for_email", email: resource.unconfirmed_email) %></p>
+      <% end %>
+
+      <%= f.input :password,
+                  hint: t(".leave_blank_if_you_don_t_want_to_change_it"),
+                  required: false,
+                  input_html: { autocomplete: "new-password" } %>
+      <%= f.input :password_confirmation,
+                  required: false,
+                  input_html: { autocomplete: "new-password" } %>
+      <%= f.input :current_password,
+                  hint: t(".we_need_your_current_password_to_confirm_your_changes"),
+                  required: true,
+                  input_html: { autocomplete: "current-password" } %>
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit, t(".update"), class: 'btn-orange' %>
+    </div>
+  <% end %>
+
+  <div class="cancel-account mt-3">
+    <h3><%= t(".cancel_my_account") %></h3>
+
+    <p><%= t(".unhappy") %> <%= link_to t(".cancel_my_account"), registration_path(resource_name), data: { confirm: t(".are_you_sure") }, method: :delete %></p>
+   </div>
+</div>

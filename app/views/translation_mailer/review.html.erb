@@ -1,0 +1,2 @@
+<p><%= t('.document_translated_message', title: @document.title, company: @company.name).html_safe %></p>
+<p><%= t('.waiting_review', href: link_to(t('.this_link'), admin_document_url(id: @document.id))).html_safe %></p>

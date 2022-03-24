@@ -1,0 +1,24 @@
+<%= render 'shared/modal', title: t('documents.rich_text_toolbar.changes_history'), modal_width: "modal-lg-width" do %>
+  <div class='editor-content changes'>
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th><%= t('documents.editor.previous_version') %></th>
+          <th><%= t('documents.editor.created_at') %></th>
+          <th><%= t('documents.editor.user') %></th>
+        </tr>
+      </thead>
+      <tbody id="chunk_versions_info">
+        <% PaperTrail::Version.where(item_type: 'TextChunk', item_id: @text_chunk.id).order(created_at: :asc).each_with_index.map { |x, i| [x, i + 1] }.reverse.each do |ver| %>
+          <tr>
+            <td><%= ver[1] %></td>
+            <td><%= ver[0].reify.translated.html_safe %></td>
+            <td><%= l(ver[0].created_at.localtime, format: :short) %></td>
+            <td><%= ver[0].whodunnit ? User.find(ver[0].whodunnit).name : "" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>

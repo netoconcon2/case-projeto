@@ -1,0 +1,18 @@
+<div class="index-header">
+  <h3><%= t('.update') %></h3>
+</div>
+<div class="dash-box" data-controller="masks">
+  <%= simple_form_for @company, url: update_company_path do |f| %>
+    <%= f.input :name %>
+    <%= f.input :cnpj, as: :string, input_html: { data: { mask: "cnpj" }, disabled: true } %>
+    <%= f.input :phone, input_html: { data: { mask: "phone" } } %>
+    <%= f.input :zip_code, input_html: { data: { mask: "cep" } } %>
+    <%= f.input :street %>
+    <%= f.input :street_number %>
+    <%= f.input :street_line_2 %>
+    <%= f.input :neighborhood %>
+    <%= f.input :city %>
+    <%= f.input :state %>
+    <%= f.button :submit, t('.submit'), class: 'btn-orange' %>
+  <% end %>
+</div>

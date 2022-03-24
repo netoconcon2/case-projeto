@@ -1,0 +1,55 @@
+glossary_0:
+  language_1: <%= Glossary::LANGUAGES.first %>
+  language_2: <%= Glossary::LANGUAGES.last %>
+  name: Glossary test
+  company: sparrow
+glossary_1:
+  language_1: <%= Glossary::LANGUAGES.first %>
+  language_2: <%= Glossary::LANGUAGES.last %>
+  name: The second glossary for Sparrow
+  company: sparrow
+glossary_2:
+  language_1: <%= Glossary::LANGUAGES.last %>
+  language_2: <%= Glossary::LANGUAGES.first %>
+  name: The third glossary for Sparrow
+  company: sparrow
+glossary_3:
+  language_1: <%= Glossary::LANGUAGES.first %>
+  language_2: <%= Glossary::LANGUAGES.last %>
+  name: The forth glossary for Sparrow
+  company: sparrow
+glossary_0_1:
+  language_1: <%= Glossary::LANGUAGES.first %>
+  language_2: <%= Glossary::LANGUAGES.last %>
+  name: The first glossary for Empire
+  company: empire
+glossary_0_2:
+  language_1: <%= Glossary::LANGUAGES.first %>
+  language_2: <%= Glossary::LANGUAGES.last %>
+  name: The second glossary for Empire
+  company: empire
+glossary_0_3:
+  language_1: <%= Glossary::LANGUAGES.first %>
+  language_2: <%= Glossary::LANGUAGES.last %>
+  name: The third glossary for Empire
+  company: empire
+glossary_1_1:
+  language_1: <%= Glossary::LANGUAGES.first %>
+  language_2: <%= Glossary::LANGUAGES.last %>
+  name: The first glossary for Rebels
+  company: rebels
+glossary_1_2:
+  language_1: <%= Glossary::LANGUAGES.first %>
+  language_2: <%= Glossary::LANGUAGES.last %>
+  name: The second glossary for Rebels
+  company: rebels
+glossary_1_3:
+  language_1: <%= Glossary::LANGUAGES.first %>
+  language_2: <%= Glossary::LANGUAGES.last %>
+  name: The third glossary for Rebels
+  company: rebels
+glossary_to_destroy:
+  language_1: <%= Glossary::LANGUAGES.first %>
+  language_2: <%= Glossary::LANGUAGES.last %>
+  name: This Glossary will be destroyed! 😱
+  company: empire

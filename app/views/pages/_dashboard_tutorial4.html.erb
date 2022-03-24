@@ -1,0 +1,27 @@
+<%# --------------------- ONBOARDING TUTORIAL - STEP 4 ---------------------- %>
+<div id="dashboard-tutorial4" class="pt-3 dashboard-tutorial-card d-none">
+  <i class="fas fa-times tutorial-close-button" data-action= "click->onboarding#hideTutorial" data-current-highlight= 'navbar-documents'></i>
+  <div class="flex-grow-1 d-flex flex-column justify-content-center">
+    <%= inline_svg_tag('document.svg') %>
+    <h3 class="upcase mt-4 mb-3 tutorial-label"><%= t('documents.new.add_new_document') %></h3>
+    <p class="pb-3"><%= t('tutorial.dashboard.document_presentation') %></p>
+  </div>
+  <div class="dashboard-tutorial-controls d-flex justify-content-between">
+    <%= link_to t('tutorial.dashboard.previous'),
+                "#",
+                class: 'btn-navy-border me-2',
+                data: { action: 'click->onboarding#previousStep',
+                        current_number: 4,
+                        current_highlight: 'navbar-documents',
+                        previous_step_highlight: ((current_user.manager? || current_user.owner?) ? 'navbar-packages' : 'dashboard-tutorial-card'),
+                        manager_or_owner: (current_user.manager? || current_user.owner?) } %>
+    <%= link_to t('tutorial.dashboard.next'),
+                "#",
+                class: 'btn-navy-border',
+                data: { action: 'click->onboarding#nextStep',
+                        current_number: 4,
+                        current_highlight: 'navbar-documents',
+                        next_step_highlight: 'navbar-documents',
+                        manager_or_owner: (current_user.manager? || current_user.owner?) } %>
+  </div>
+</div>

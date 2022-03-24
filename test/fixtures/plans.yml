@@ -1,0 +1,54 @@
+created:
+  name: "Plano Criado"
+  price: 1
+  days: 1
+  trial_days: 1
+  charges: 1
+  installments: 1
+  invoice_reminder: 1
+  words: 10000
+  status: 0
+activated:
+  name: "Plano Ativado"
+  pagarme_id: "12333"
+  price: 1
+  days: 1
+  trial_days: 1
+  charges: 1
+  installments: 1
+  invoice_reminder: 1
+  words: 10000
+  status: 1
+visible_one:
+  name: "Plano Visivel"
+  pagarme_id: "12444"
+  price: 1
+  days: 1
+  trial_days: 1
+  charges: 1
+  installments: 1
+  invoice_reminder: 1
+  words: 10000
+  status: 2
+visible_two:
+  name: "Plano Visivel 2"
+  pagarme_id: "12666"
+  price: 1
+  days: 1
+  trial_days: 1
+  charges: 1
+  installments: 1
+  invoice_reminder: 1
+  words: 10000
+  status: 2
+deactivated:
+  name: "Plano Desativado"
+  pagarme_id: "12555"
+  price: 1
+  days: 1
+  trial_days: 1
+  charges: 1
+  installments: 1
+  invoice_reminder: 1
+  words: 10000
+  status: 3

@@ -1,0 +1,39 @@
+<div class="dash-box">
+  <h2 class="text-center show-info-header mb-3">Editar informações da conta</h2>
+  <%= simple_form_for [:admin, @user] do |f| %>
+    <%= f.error_notification %>
+
+    <div class="form-inputs">
+      <div class="grid-2">
+        <%= f.input :first_name,
+                      required: true,
+                      autofocus: true,
+                      input_html: { autocomplete: "first-name" },
+                      validate: true %>
+        <%= f.input :last_name,
+                      required: true,
+                      input_html: { autocomplete: "last-name" },
+                      validate: true %>
+      </div>
+      <%= f.input :email,
+                    required: true,
+                    input_html: { autocomplete: "email" },
+                    validate: true %>
+
+      <%= f.association :company, include_blank: false %>
+      <% unless @user.pj? %>
+        <%= f.input :role,
+                    collection: User.translated_roles,
+                    label: t('.account_type'),
+                    validate: true,
+                    include_blank: false %>
+      <% end %>
+
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit, t(".update"), class: 'btn-orange' %>
+    </div>
+  <% end %>
+
+</div>

@@ -1,0 +1,18 @@
+<div role="row" class="grid-row" id="<%= "document-row-#{document.id}" %>" data-document-target="documentRow">
+  <span role="cell" id="<%= "document-#{document.id}-title" %>">
+    <%= document.title %>
+  </span>
+  <span role="cell">
+    <%= document.created_at.localtime.strftime('%d/%m/%Y') %>
+  </span>
+  <span role="cell" id="<%= "document-#{document.id}-user" %>">
+    <%= user.admin? ? document.company.name : "#{document.user.first_name.capitalize} #{document.user.last_name.capitalize}" %>
+  </span>
+  <span role="cell">
+    <%= document.original_text.split.size %>
+  </span>
+  <%= render 'document_row_status', document: document %>
+  <span role="cell">
+    <%= index_action_buttons(document, user) %>
+  </span>
+</div>

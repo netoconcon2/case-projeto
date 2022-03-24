@@ -1,0 +1,141 @@
+## ADMIN
+siriguejo:
+  first_name: Siriguejo
+  last_name: Cascudo
+  email: "siriguejo@siricascudo.com"
+  role: 1
+  admin: true
+  sign_in_count: 2
+evilpyrate:
+  first_name: Evil
+  last_name: Pirate
+  email: "evilpyrate@hacker.com"
+  role: 1
+  admin: true
+  sign_in_count: 2
+## MANAGER
+new_user:
+  first_name: New
+  last_name: User
+  email: "new@user.com"
+  role: 1
+  sign_in_count: 2
+walter:
+  first_name: Walter
+  last_name: Disney
+  email: "walter@disney.com"
+  role: 1
+  company: disney
+  created_at: <%= 5.days.ago %>
+  sign_in_count: 2
+neto:
+  first_name: Neto
+  last_name: Concon
+  email: "neto@northern.com"
+  role: 1
+  company: northern
+  sign_in_count: 2
+reginald:
+  first_name: Reginald
+  last_name: Hargreeves
+  email: "reginald@hargreeves.com"
+  role: 1
+  company: sparrow
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'umbrella') %>
+  created_at: <%= 10.days.ago %>
+  sign_in_count: 2
+pogo:
+  first_name: Pogo
+  last_name: Chimp
+  email: "pogo@umbrella.corp"
+  role: 1
+  company: sparrow
+  sign_in_count: 2
+mickey:
+  first_name: Mickey
+  last_name: Mouse
+  email: "mickey@mouse.squeak"
+  role: 1
+  company: disney
+  sign_in_count: 2
+minnie:
+  first_name: Minnie
+  last_name: Mouse
+  email: "minnie@mouse.squeak"
+  role: 1
+  company: disney
+  sign_in_count: 2
+vader:
+  first_name: Darth
+  last_name: Vader
+  email: "vader@empire.com"
+  role: 1
+  company: empire
+  sign_in_count: 2
+luke:
+  first_name: Luke
+  last_name: Skywalker
+  email: "luke@rebels.com"
+  role: 1
+  company: rebels
+  sign_in_count: 2
+howell:
+  first_name: Howell
+  last_name: Priceless
+  email: howell@priceless.com
+  role: 1
+  company: cat_cafe
+  sign_in_count: 2
+wesley:
+  first_name: Wesley
+  last_name: Ocean
+  email: wesley@ocean.com
+  role: 1
+  company: fish_cafe
+  sign_in_count: 2
+## PJ
+jabba:
+  first_name: Jabba
+  last_name: The Hut
+  email: "jabba@hut.com"
+  role: 2
+  company: hut
+  created_at: <%= 20.days.ago %>
+  sign_in_count: 2
+jarjar:
+  first_name: Jarjar
+  last_name: Binks
+  email: 'jarjar@binks.com'
+  role: 2
+  company: jarjar
+  created_at: <%= 20.days.ago %>
+  sign_in_count: 2
+## EMPLOYEE
+donald:
+  first_name: Duck
+  last_name: Donald
+  email: "donald@duck.quack"
+  role: 3
+  company: disney
+  sign_in_count: 2
+trooper:
+  first_name: Storm
+  last_name: Trooper
+  email: "strm_trpr@empire.com"
+  role: 3
+  company: empire
+  sign_in_count: 2
+chewbaca:
+  first_name: Chewbacca
+  last_name: the Wookie
+  email: "chewbs@rebels.com"
+  role: 3
+  company: rebels
+  sign_in_count: 2
+## TRANSLATOR
+grievous:
+  first_name: General
+  last_name: Grievous
+  email: "grievous@empire.com"
+  role: 1
+  sign_in_count: 2

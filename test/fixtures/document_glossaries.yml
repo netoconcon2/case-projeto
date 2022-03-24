@@ -1,0 +1,15 @@
+document_glossary_0_0:
+  document: document_0
+  glossary: glossary_0
+document_glossary_1_0:
+  document: document_1
+  glossary: glossary_2
+document_glossary_1_1:
+  document: document_1
+  glossary: glossary_2
+document_glossary_to_destroy_with_document:
+  document: document_to_destroy
+  glossary: glossary_4
+document_glossary_to_destroy_with_glossary:
+  document: document_0
+  glossary: glossary_to_destroy

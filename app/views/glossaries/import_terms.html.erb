@@ -1,0 +1,14 @@
+<%= render 'shared/modal', title: t('glossaries.show.import_terms'), modal_width: "modal-md-width" do %>
+  <%= simple_form_for @glossary, url: glossary_create_terms_path(glossary_id: @glossary.id), method: :post, data: { controller: 'input' } do |f| %>
+    <%= f.input :xlsx,
+                as: :file,
+                label: t('glossaries.form.select_file'),
+                label_html: { class: 'btn btn-secondary mb-0' },
+                input_html: { accept: '.xlsx', class: 'd-none', data: { action: 'change->input#handleChange', input_target: 'fileInput' } },
+                wrapper_html: { class: 'gap' },
+                hint: '',
+                hint_html: { class: 'ms-2', data: { input_target: 'span', } } %>
+    <%= f.input :has_header, as: :boolean, label: t('glossaries.form.has_header') %>
+    <%= f.submit t('glossaries.form.submit'), class: 'btn btn-orange' %>
+  <% end %>
+<% end %>

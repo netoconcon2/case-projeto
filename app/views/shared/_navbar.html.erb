@@ -1,0 +1,26 @@
+<div class="fixed">
+  <%= render partial: 'shared/menu_nav', locals: { page: 'home' } %>
+  <nav role="navigation" data-nav-target="navbar" class="nav navbar-expand-md nav-min">
+    <%= link_to root_path do %>
+      <div class="logo f-column">
+        <%= image_tag "owlLogo" , alt: "decode owl logo" %>
+        <%= image_tag  "decodeLogo", alt: "Decode" %>
+      </div>
+    <% end %>
+    <button id="nav-home-toggler" title='<%= t('.button_toggle') %>' type="button" class="navbar-toggler collapsed" aria-expanded="false" data-bs-toggle="collapse" data-bs-target="#navbar-links" aria-controls="navbar-links" aria-label="<%= t('.button_toggle') %>">
+    <div class="hamburger" id="hamburger-3" tabindex="-1">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </button>
+    <div id="navbar-links" data-bs-target=".navbar-collapse" data-nav-target="navLinks" class="collapse navbar-collapse">
+      <%= link_to t('.decode'), "#{request.protocol}#{request.host_with_port}/#about" %>
+      <%= link_to t('.diff'), "#{request.protocol}#{request.host_with_port}/#differential" %>
+      <%= link_to t('.our_way'), "#{request.protocol}#{request.host_with_port}/#our-way" %>
+      <%= link_to t('.talk_to_us'), "#{request.protocol}#{request.host_with_port}/#contact" %>
+      <%= link_to t('.prices'), plans_path %>
+      <%= link_to  t('.get_started'), new_user_registration_path, class: "link-orange" %>
+    </div>
+  </nav>
+</div>

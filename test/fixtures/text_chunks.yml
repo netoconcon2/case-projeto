@@ -1,0 +1,43 @@
+chunk_0_0:
+  order: 1
+  original: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+  translated: 'Aquele que ama ou exerce ou deseja a dor, pode ocasionalmente adquirir algum prazer na labuta.'
+  rich_translated: <div>Aquele que ama ou exerce ou deseja a dor, pode ocasionalmente adquirir algum prazer na labuta.</div>
+  document: document_0
+  responsible: reginald
+  status: 2
+chunk_0_1:
+  order: 2
+  original: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+  translated: 'Para dar um exemplo trivial, qual de nós se submete a laborioso exercício físico, exceto para obter alguma vantagem com isso.'
+  rich_translated: <div>Para dar um exemplo trivial, qual de nós se submete a laborioso exercício físico, exceto para obter alguma vantagem com isso.</div>
+  document: document_0
+  status: 2
+chunk_0_2:
+  order: 3
+  original: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'
+  translated: 'Desmoralizado pelos encantos do prazer, percebe que a dor não resulta em prazer algum.'
+  rich_translated: <div>Desmoralizado pelos encantos do prazer, percebe que a dor não resulta em prazer algum.</div>
+  document: document_0
+  status: 2
+chunk_0_3:
+  order: 4
+  original: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+  translated: 'Está tão cego pelo desejo que não pode prever quem não cumprirá seu dever por fraqueza de vontade.'
+  rich_translated: <div>Está tão cego pelo desejo que não pode prever quem não cumprirá seu dever por fraqueza de vontade.</div>
+  document: document_0
+  status: 2
+chunk_1_0:
+  order: 1
+  original: 'noises'
+  translated: 'ruídos'
+  rich_translated: <div>ruídos</div>
+  document: document_01
+  status: 2
+chunk_1_1:
+  order: 1
+  original: "I’d ask what you’re up to, Klaus, but then it occurred to me… I don’t care."
+  translated: 'Eu perguntaria o que você está fazendo, Klaus, mas então me lembrei... Não ligo.'
+  rich_translated: "<div>Eu perguntaria o que você está fazendo, Klaus, mas então me lembrei... Não ligo.</div>"
+  document: document_1
+  status: 2

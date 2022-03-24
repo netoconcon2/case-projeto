@@ -1,0 +1,105 @@
+:not(trix-editor) {
+  & > h3, & > h4 {
+    em {
+      font-style: normal;
+      font-weight: 600;
+      color: $decode-orange;
+    }
+  }
+}
+p.md-light {
+  font-size: 1.55vw;
+  font-weight: 300;
+  font-family: 'Futura Md BT', 'sans-serif';
+}
+.md-light {
+  text-transform: uppercase;
+  font-size: 1.8rem;
+  line-height: 2rem;
+  em {
+    font-style: normal;
+    color: $decode-orange;
+    font-weight: 600;
+  }
+}
+.lg-light-white {
+  color: $white !important;
+  font-family: 'Futura Std' !important;
+  font-size: 4.5vw !important;
+  line-height: 4.5vw;
+}
+.md-bold-orange {
+  color: $decode-orange;
+  font-family: 'Futura xBlk BT', 'sans-serif';
+  font-weight: 100;
+  font-size: 2vw;
+  line-height: 3vw;
+}
+.sm-regular {
+  font-family: 'Futura Std';
+  font-size: .9rem;
+}
+a.sm-regular:hover {
+  transition: color .3s;
+  &:hover {
+    text-decoration: none;
+    color: $decode-orange;
+  }
+}
+.upcase {
+  text-transform: uppercase;
+}
+.check {
+  color: green;
+  cursor: default;
+  &::before {
+    content: "\f00c";
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    font-size: 1.5rem;
+  }
+}
+@media (max-width: $large) {
+  .lg-light-white {
+    font-size: 5.5vw !important;
+    line-height: 5.5vw;
+  }
+  .md-bold-orange {
+    font-size: 2.5vw;
+  }
+}
+@media (max-width: $medium) {
+  p.md-light {
+    font-size: 2.2vw;
+  }
+}
+@media (max-width: $small) {
+  .lg-light-white {
+    font-size: 6vw !important;
+    line-height: 6.5vw;
+  }
+  .md-bold-orange {
+    font-size: 3.5vw;
+  }
+  p.md-light {
+    font-size: 3vw;
+    line-height: 3.5vw;
+  }
+}
+@media (max-width: $extra-small) {
+  p.md-light {
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+  }
+  .md-bold-orange {
+    font-size: 1.5rem;
+  }
+  .lg-light-white {
+    font-size: 2.5rem !important;
+    line-height: 3rem;
+  }
+}
+
+.line-height-0 {
+  line-height: 0;
+}

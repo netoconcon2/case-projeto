@@ -1,0 +1,16 @@
+<div class="col-12 col-lg-6 px-3 pt-0">
+  <div class="translation-title">
+    <p><%= t('documents.show.original_text') %></p>
+  </div>
+  <div class="user-editor user-editor-disabled">
+    <% if document.rich_original %>
+      <div class="textarea-alike">
+        <%= document.rich_original.html_safe %>
+      </div>
+    <% else %>
+      <%= form_with(model:document) do |form| %>
+        <%= form.text_area :original_text, rows: 17, disabled: true %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,6 @@
+
+<table id="tableChunks" class='table editor-table'>
+  <% @chunks.each do |txt| %>
+    <%= render 'documents/chunk', txt: txt, document: txt.document %>
+  <% end %>
+</table>

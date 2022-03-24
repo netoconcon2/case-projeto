@@ -1,0 +1,96 @@
+<div class="index-header">
+  <h2><%= t('.manage_company') %></h2>
+  <div>
+    <%= link_to t('.see_app'), admin_applies_path, class: 'btn-orange'  %>
+  </div>
+</div>
+<div id="filters-form" class="dash-box" data-controller="input" data-provide='datepicker'>
+  <%= simple_form_for :query, :method => :get, url: admin_companies_path, html: { class: "grid-search" }, data: { checkboxes: "query_status", action: "input->input#dropdownCheckbox" } do |f| %>
+  <div class="query_text">
+    <%= f.input :name, label: t('.name_query_label'), required: false, placeholder: t('.name_query_placeholder'), input_html: { value: @name } %>
+    <button type="button" class="btn-arrows collapsed" title="<%= t('javascript.toggle_btn') %>" data-bs-toggle="collapse" data-bs-target=".multicollapse" aria-expanded="false" aria-controls="multiCollapse1 multiCollapse2">
+      <i class="fas fa-angle-double-up"></i>
+    </button>
+  </div>
+  <div id="multiCollapse1" class="query_enum collapse multicollapse show">
+    <div class="form-group select required query_enum f-column">
+      <span id="status_label"><%= t('.status') %></span>
+      <div id="enum-dropdown" role="listbox" aria-labelledby="status_label">
+        <button id="dropdownSelectBtn" class="dropdown-toggle-button form-control" type="button" data-bs-toggle="dropdown"
+        aria-expanded="false" aria-haspopup="true" title="<%= t('javascript.dropdown_select.title') %>">
+        <%= t('.status') %>
+      </button>
+      <ul class="dropdown-menu">
+        <% @statuses.each do |translation, key, value| %>
+        <li>
+          <label for="status_<%= value %>">
+            <%= check_box_tag( "query[status][]", value.to_i, @status.include?(value.to_s), { id: "status_#{value}", role: "option", data: { action: "input->input#selectAll focus->input#dropdownInputFocus blur->input#dropdownInputBlur" } } ) %>
+            <%= translation %>
+          </label>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
+<div id="multiCollapse2" class="multicollapse collapse show query_date">
+  <div class="flex-s-between">
+    <%= f.input :date_start, label: t('.date_start_query_label'), required: false, wrapper_html: { data: { "input-target": "dateStartGroup" } }, input_html: { value:@date_start, autocomplete: "off", placeholder: t('.date_query_placeholder'), data: { action: "input->input#inputmaskDate" }} %>
+    <%= f.input :date_end, label: t('.date_end_query_label'), required: false, input_html: { value: @date_end, autocomplete: "off", placeholder: t('.date_query_placeholder'), data: { action: "input->input#inputmaskDate"} } %>
+  </div>
+</div>
+<div class="form-submit">
+  <% if params[:query].present? %>
+    <%= link_to admin_companies_path, class: "btn-clean", data: { tippy_content: t('.clean_filters') } do %>
+      <i class='fas fa-times'></i>
+      <span class="visibility-hidden"><%= t('.clean_filters') %></span>
+    <% end %>
+  <% end %>
+  <%= f.submit t('.query_submit_button'), class: "btn-orange" %>
+</div>
+<% end %>
+</div>
+
+<div role="table" aria-describedby="table-desc" id="grid-list" class="dash-box">
+  <div class="grid-opt">
+    <h3 id="table-desc"><%= t('.index') %></h3>
+    <div class="flex-s-between">
+      <div class="pages">
+        <%= paginate @companies, window: 1, right: 1, left: 1  %>
+      </div>
+    </div>
+  </div>
+  <div class="grid-6">
+    <div role="rowgroup" class="grid-headers">
+      <div role="row" class="grid-row">
+        <span role="columnheader"><%= t('.company') %></span>
+        <span role="columnheader"><%= t('.created_at') %></span>
+        <span role="columnheader"><%= t('.responsible') %></span>
+        <span role="columnheader"><%= t('.status') %></span>
+        <span role="columnheader"><%= t('.plan') %></span>
+        <span role="columnheader"><%= t('.actions') %></span>
+      </div>
+    </div>
+    <div role="rowgroup" class="grid-table">
+      <% @companies.page(@page).each do |company| %>
+        <div role="row" class="grid-row">
+          <span role="cell"><%= company.name %></span>
+          <span role="cell"><%= l(company.created_at, format: :short) %></span>
+          <span role="cell"><%= company.owner.email %></span>
+          <span role="cell"><%= company.translated_status %></span>
+          <span role="cell"><%= company.plan.present? ? company.plan.name : "<strong>#{t('.no_plan')}</strong>".html_safe %></span>
+          <span role="cell">
+            <% if policy(company).admin? %>
+              <!-- show button -->
+              <%= link_to "<i class='fas fa-eye mx-1' data-tippy-content='#{t('.see_btn')}'></i>".html_safe, admin_company_path(company) %>
+              <!-- edit button -->
+              <%= link_to "<i class='fas fa-pen mx-1' data-tippy-content='#{t('.edit_btn')}'></i>".html_safe, edit_admin_company_path(company)  %>
+              <!-- destroy button -->
+              <%= link_to "<i class='fas fa-times text-danger mx-1' data-tippy-content='#{t('.delete_btn')}'></i>".html_safe, company, method: :delete, remote: true, data: { confirm: t('alert.delete_company') } %>
+            <% end %>
+          </span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

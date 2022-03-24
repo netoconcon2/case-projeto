@@ -1,0 +1,15 @@
+<footer class="bg-gray">
+  <div class="f-end flex-s-between">
+    <%= image_tag 'decodeFullLogo', alt: "decode" %>
+    <div class="links">
+      <%= link_to t('.policy'), root_path, class: "sm-regular" %>
+      <%= link_to t('.terms'), root_path, class: "sm-regular" %>
+      <%= link_to t('.legal'), root_path, class: "sm-regular" %>
+      <%= link_to t('.developed'), "https://northern.com.br/", class: "sm-regular" %>
+    </div>
+  </div>
+  <div class="copyright">
+    <p class="sm-regular">© Copyright • <%= Date.today.year %> • DECODE. </p>
+    <p class="sm-regular"><%= t('.rights') %></p>
+  </div>
+</footer>

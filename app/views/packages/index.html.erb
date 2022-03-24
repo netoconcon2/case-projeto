@@ -1,0 +1,56 @@
+<div class="f-center container-public-cards">
+  <%= link_to t('.plans'), plans_path, class: "btn-prices left" %>
+  <span class="btn-prices right active">
+    <%= t('.packages') %>
+  </span>
+</div>
+<div class="grid-1-4 container-public-cards">
+  <div class="card-presentation">
+    <h1>
+      <%= t('.choose_a_package') %>
+    </h1>
+    <p>
+      <%= t('.presentation') %>
+    </p>
+    <ul>
+      <li>
+        <%= t('.machine_learning') %>
+      </li>
+      <li>
+        <%= t('.unlimited_files') %>
+      </li>
+      <li>
+        <%= t('.security') %>
+      </li>
+      <li>
+        <%= t('.access_to_review') %>
+      </li>
+    </ul>
+  </div>
+  <div class="cards-grid">
+    <% @packages.each do |package| %>
+      <div class="card-package">
+        <div>
+          <div class="card-package-header">
+            <h4>
+              <%= package.name %>
+            </h4>
+            <span class="">
+              <%= t('.words_number', count: package.words) %>
+            </span>
+          </div>
+            <h3 class="price">
+              <%= humanized_money_with_symbol package.price.format %>
+            </h3>
+            <span class="word-price">
+              <%= price_per_word(package) %>
+                <%= t('.price_per_word') %>
+            </span>
+        </div>
+        <% if current_user && policy(current_user).validated? %>
+          <%= link_to t('.buy_package'), package_checkout_path(package), class: 'btn-orange' , id: "checkout-#{package.id}" %>
+        <% end %>
+      </div>
+      <% end %>
+  </div>
+</div>

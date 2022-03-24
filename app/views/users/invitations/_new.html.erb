@@ -1,0 +1,22 @@
+<%= simple_form_for(resource, as: resource_name, url: invitation_path(resource_name), remote: true, html: { method: :post }, data: { controller: "modal", action: "ajax:success->modal#closeModal" }) do |f| %>
+  <%= f.error_notification %>
+  <div class="form-inputs">
+    <div class=grid-2>
+      <%= f.input :first_name %>
+      <%= f.input :last_name %>
+    </div>
+    <%= f.input :email %>
+    <% unless @company&.owner.pj? %>
+      <%= f.input :company_id, label: false, input_html: { value: @company.id, hidden: true } %>
+    <% end %>
+    <%= f.input :which_role,
+                as: :select,
+                collection: [[t('activerecord.attributes.user.role_list.employee'), 3], [t('activerecord.attributes.user.role_list.manager'), 1]],
+                label: t('activerecord.attributes.user.role'),
+                validate: true,
+                include_blank: false %>
+  </div>
+  <div class="form-actions">
+    <%= f.button :submit, t("devise.invitations.new.submit_button"), class:"btn-orange", remote: true %>
+  </div>
+<% end %>

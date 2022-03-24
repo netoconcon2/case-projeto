@@ -1,0 +1,30 @@
+<%= turbo_frame_tag 'modal' %>
+<%= turbo_frame_tag 'flash' %>
+<div class="index-header">
+  <h1><%= @glossary.name %></h1>
+</div>
+<div role="table" aria-describedby="table-desc" id="grid-list" class="dash-box" data-controller="input">
+  <div class="grid-opt">
+    <div class="d-flex align-items-center">
+      <%= link_to t('.new_term'), new_glossary_term_path(glossary_id: @glossary.id), class: 'btn-orange', data: { turbo: true, turbo_frame: 'new-term' } %>
+      <%= link_to glossary_import_terms_path(glossary_id: @glossary.id), data: { turbo: true, turbo_frame: 'modal' }, class: 'ms-2' do %>
+        <i class="fas fa-file-import"></i> <%= t('.import_terms') %>
+      <% end %>
+    </div>
+  </div>
+  <div class="grid-5">
+    <div role="rowgroup" class="grid-headers">
+      <div role="row" class="grid-row">
+        <span role="columnheader"><%= t('.term', language: t("languages.#{@glossary.language_1}")) %></span>
+        <span role="columnheader"><%= t('.term', language: t("languages.#{@glossary.language_2}")) %></span>
+        <span role="columnheader"><%= t('.modified_by') %></span>
+        <span role="columnheader"><%= t('.modified_at') %></span>
+        <span role="columnheader"><%= t('.actions') %></span>
+      </div>
+    </div>
+    <div role="rowgroup" class="grid-table" data-controller='term'>
+      <%= turbo_frame_tag "new-term" %>
+      <%= render 'terms_rows', terms: @glossary.terms.order('lower(source)') %>
+    </div>
+  </div>
+</div>

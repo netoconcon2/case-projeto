@@ -1,0 +1,12 @@
+<%= turbo_frame_tag "new-term" do %>
+  <%= simple_form_for @term, url: glossary_terms_path(), html: { data: { turbo: true } } do |f| %>
+    <%= render 'terms/form_row', f: f do %>
+      <button type="button" data-action='term#cancelForm' data-frame-target='new-term' class="inline-form-button">
+        <i class="fas fa-times text-danger"></i>
+        <span class="visibility-hidden">
+          <%= t('.cancel') %>
+        </span>
+      </button>
+    <% end %>
+  <% end %>
+<% end %>

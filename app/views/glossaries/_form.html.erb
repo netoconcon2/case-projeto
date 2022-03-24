@@ -1,0 +1,31 @@
+<%= simple_form_for glossary, data: { controller: 'input toggle'} do |f| %>
+  <%= f.input :name %>
+  <div class="grid-2">
+    <%= f.input :language_1, collection: language_select_options, wrapper_html: { class: 'f-grow' } %>
+    <%= f.input :language_2, collection: language_select_options, wrapper_html: { class: 'f-grow' } %>
+  </div>
+  <%# Import xlsx file only for new glossaries %>
+  <% if glossary.id.nil? %>
+    <%# ---------------------------- TOGGLE BUTTON ---------------------------- %>
+    <div class="d-flex align-items-center">
+      <label class="btn-switch mb-3">
+        <%= check_box_tag(:switch, true, false, data: { action: 'change->toggle#switchToggleable change->toggle#resetInputOnHide' }, class: 'btn-switch') %>
+        <span class="slider round"></span>
+      </label>
+      <p class="ms-3"><%= t('glossaries.show.import_terms') %></p>
+    </div>
+    <%# ----------------------------------------------------------------------- %>
+    <div class="d-none" data-toggle-target="toggleable">
+      <%= f.input :xlsx,
+                  as: :file,
+                  label: t('.select_file'),
+                  label_html: { class: 'btn btn-secondary mb-0' },
+                  input_html: { accept: '.xlsx', data: { action: 'change->input#handleChange', input_target: 'fileInput', toggle_target: 'resetableInput' }, class: 'd-none' },
+                  wrapper_html: { class: 'gap' },
+                  hint: '',
+                  hint_html: { data: { input_target: 'span', toggle_target: 'resetableTag' }, class: 'ms-2' } %>
+      <%= f.input :has_header, as: :boolean, label: t('.has_header') %>
+    </div>
+  <% end %>
+  <%= f.submit t('.submit'), class: 'btn btn-orange' %>
+<% end %>

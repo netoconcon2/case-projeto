@@ -1,0 +1,14 @@
+<%# Modal base for using with Turbo Hotwire %>
+<%# OBS: When rendering, it must receive as arguments: title, modal_width %>
+  <%= turbo_frame_tag 'modal' do %>
+  <div id="editTitleModal" data-controller="turbo-modal" data-turbo="true">
+    <div class="transparent-overlay dark-transparent-background" data-action="click->turbo-modal#closeModal"></div>
+    <%= turbo_frame_tag 'modal-body' do %>
+      <div class="modal-card <%= modal_width %>">
+        <h3 class="modal-title"><%= title %></h5>
+        <i class="fas fa-times modal-close-button" data-action= "click->turbo-modal#closeModal" data-modal-layer= 'editTitleModal'></i>
+        <%= yield %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

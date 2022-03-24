@@ -1,0 +1,7 @@
+<%= t('.hello') %>
+
+<%= t('.finished_document', title: @document.title, href: link_to(t('.here'), document_url(id: @document.id))).html_safe %>
+
+<%= t('.case_not_able') %>
+
+<%= t('.thanks') %>

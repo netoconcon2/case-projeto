@@ -1,0 +1,19 @@
+<div class="editor-content glossary">
+  <div class='f-center flex-s-between m-2 gap flex-grow-0'>
+    <strong><%= t('documents.editor.terms') %></strong>
+    <%= link_to t('documents.editor.select_glossaries'), select_glossaries_document_path(document), class: 'btn-orange w-50', data: { turbo: true, turbo_frame: 'modal' } %>
+  </div>
+  <div class="flex-grow-1">
+    <table class="table">
+      <tbody id="glossaries_terms">
+      </tbody>
+    </table>
+  </div>
+  <div class="f-center flex-grow-0">
+    <%= link_to editor_new_path(document: document), data: { tippy_content: t('documents.editor.new_term'), turbo: true, turbo_frame: 'modal' } do %>
+      <div class="f-center icon-round">
+        <i class="fas fa-plus"></i>
+      </div>
+    <% end %>
+  </div>
+</div>

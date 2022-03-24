@@ -1,0 +1,145 @@
+.swal2-popup {
+  .swal2-close {
+    &:focus, &:hover {
+      box-shadow: none;
+      color: $red;
+    }
+  }
+}
+
+// LAYER WITH TRANSPARENCY THAT WILL OVERLAP THE REST OF THE PAGE
+.transparent-overlay {
+  height: 100%;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+// DARK BACKGROUND
+.dark-transparent-background {
+  background-color: $modal-bg;
+}
+
+// MODAL CARD - STANDARD WIDTH FOR SMALLER PAGES
+.modal-card {
+  // Colors
+  background-color: $white;
+  background-clip: padding-box;
+  // Shape & Size
+  border-radius: 0.4rem;
+  margin: 50vh auto;
+  max-height: 80vh;
+  padding: 1.5rem 2.5rem;
+  // Display & Position
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  transform: translateY(-50%);
+  z-index: 1001;
+  .modal-close-button {
+    font-size: 1.2rem;
+    color: $decode-orange;
+    opacity: 0;
+    transition: 0.5s;
+    position: absolute;
+    top: 1rem;
+    cursor: pointer;
+    right: 1rem;
+  }
+  &:hover {
+    .modal-close-button {
+      opacity: 1;
+    }
+  }
+  .overflow-y-scroll {
+    max-height: 60vh;
+  }
+}
+
+// MODAL WIDTHS
+
+// Standard width for shorter pages
+.modal-md-width {
+  max-width: 500px;
+  width: 500px;
+}
+
+// Larger width for bigger pages
+.modal-lg-width {
+  max-width: 60rem;
+  width: 80vw;
+}
+
+.modal-title {
+  font-weight: 600;
+  line-height: 1;
+  margin-bottom: 1.5rem !important;
+  text-align: center;
+}
+
+.modal-open {
+  .dark-transparent-background {
+    animation: fadeIn .3s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+  }
+  .modal-card {
+    animation: slideDown .3s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+  }
+}
+
+.modal-close {
+  .dark-transparent-background {
+    animation: fadeOut .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+  }
+  .modal-card {
+    animation: slideUp .15s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+  }
+}
+
+// Animations
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-70%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(-50%);
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(-50%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-70%);
+    opacity: 0;
+  }
+}

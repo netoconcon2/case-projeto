@@ -1,0 +1,19 @@
+<%= turbo_frame_tag "editor-new-term", data: { controller: 'editor' } do %>
+  <% if @glossary && @page == "2" %>
+    <%= simple_form_for @term, url: glossary_editor_terms_path(glossary_id: @glossary.id, document: document), html: { data: { turbo: true, turbo_frame: 'editor-new-term', action: 'turbo:submit-end->editor#submitNewTerm' } } do |f| %>
+      <%= f.input :source, label: t('.term_of', language: t("languages.#{@glossary.language_1}")), autofocus: true %>
+      <%= f.input :target, label: t('.term_of', language: t("languages.#{@glossary.language_2}")) %>
+      <div class="flex-s-between">
+        <%= link_to t('.go_back'), editor_new_path(term: { glossary: @glossary.id }, document: document), data: { turbo: true }, class: 'btn-orange' %>
+        <button type="submit" class='btn-orange'><%= t('.save') %></button>
+      </div>
+    <% end %>
+  <% else %>
+    <%= simple_form_for @term, url: editor_new_path(page: 2, document: document), method: :get, html: { data: { turbo: true } } do |f| %>
+      <%= f.input :glossary, label: t('.select_glossary'), collection: @glossaries.map {|g| [g.name, g.id]}, autofocus: true, presence: true, selected: @glossary ? [@glossary.name, @glossary.id] : "" %>
+      <div class="f-end">
+        <button type="submit" class='btn-orange'><%= t('.continue') %></button>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

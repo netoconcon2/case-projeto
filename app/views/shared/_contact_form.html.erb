@@ -1,0 +1,22 @@
+<%= simple_form_for :contact, url: root_path, remote: true, method: :get, html: { class: "f-column" }, data: { } do |f| %>
+  <div class="form-group string required contact_name">
+    <%= f.input :name, label: false, wrapper: false, required: true, input_html: { onchange: "this.setAttribute('value', this.value);", value: "" } %>
+    <%= f.label :name, t('.name') %>
+    <span class="focus-border"></span>
+  </div>
+  <div class="form-group email required contact_email">
+    <%= f.input :email, label: false, wrapper: false, required: true, input_html: { onchange: "this.setAttribute('value', this.value);", value: "" } %>
+    <%= f.label :email, t('.email') %>
+    <span class="focus-border"></span>
+  </div>
+  <div class="form-group string required contact_company">
+    <%= f.input :company, label: false, wrapper: false, required: false, input_html: { onchange: "this.setAttribute('value', this.value);", value: "" } %>
+    <%= f.label :company, t('.company') %>
+    <span class="focus-border"></span>
+  </div>
+  <div class="form-group text required contact_message">
+    <%= f.input :message, as: :text, label: false, wrapper: false, required: true, input_html: { onchange: "this.setAttribute('value', this.value);", value: "" }, hint: t('.hint') %>
+    <%= f.label :message, t('.message') %>
+  </div>
+  <button type="submit" name="commit" class="btn-white-border"><%= t('.send') %></button>
+<% end %>

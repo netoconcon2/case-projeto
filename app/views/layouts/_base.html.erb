@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <title>Decode Juris</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= favicon_link_tag asset_path('favicon.png') %>
+    <%= Gon::Base.render_data %>
+    <%= javascript_pack_tag 'application', 'data-turbo-track': 'reload', defer: true %>
+    <link rel="alternate" hreflang="en" href="/en" />
+    <link rel="alternate" hreflang="pt-BR" href="/" />
+  </head>
+
+  <body>
+    <%= yield %>
+    <%= render 'shared/flashes' %>
+  </body>
+</html>

@@ -1,0 +1,91 @@
+<div class="form-banner">
+  <div class="form-box">
+    <div class="form-area">
+        <div class="f-column f-center">
+          <h2><%= t('plan_name', name: @plan.name).html_safe %> </h2>
+        </div>
+        <br>
+        <% unless @plan.discarded? %>
+          <div class="d-flex">
+              <%= link_to t('.edit'), edit_admin_plan_path(@plan), class: "btn-orange btn-sm me-5" %>
+          </div>
+        <% end %>
+        <br>
+        <div class="container devise-form">
+
+          <% if @plan.published? %>
+            <hr>
+            <h4><%= t('.subs_number', count: @plan.companies.count) %> </h4>
+            <% if @plan.companies.count.zero? %>
+              <%= link_to t('.deactivate'), admin_plan_deactivate_path(@plan), method: :post, class: "btn-orange btn-sm btn-deactivate" %>
+            <% else %>
+              <span><%= t('.to_cancel') %></span>
+            <% end %>
+
+            <% unless @plan.companies.count.zero? %>
+              <hr>
+              <h4 class="mb-2"><%= t('.subscribers') %></h4>
+              <ul>
+                <% @plan.companies.each do |company| %>
+                  <li class="mt-2"> <%= company.name.upcase %> | cnpj: <%= company.cnpj %> | status: <%= company.translated_status %> | usuário: <%= company.user_id %> | assinatura: <%= company.pagarme_subscription_id %> | palavras disponíveis: <%= company.available_words %> <%= link_to "cancelar", admin_company_cancel_path(company), method: :patch, class:"btn btn-sm btn-warning" %></li>
+                <% end %>
+              </ul>
+            <% end %>
+          <% end %>
+
+          <hr>
+          <h3><%= t('.details') %></h3>
+
+          <h4><%= t('.value', price: @plan.price_cents.format) %></h4>
+          <p><%= t('.value_message') %></p>
+
+
+          <br>
+
+          <h4><%= t('.days', days: @plan.days) %></h4>
+          <p><%= t('.days_message') %></p>
+          <p> <strong><%= t('.days_obs') %></strong> </p>
+
+          <br>
+
+          <h4><%= t('.trial_days', days: @plan.trial_days) %> </h4>
+
+          <p><%= t('.trial_message') %></p>
+
+
+          <br>
+          <p><%= t('.payment_message') %></p>
+
+
+          <br>
+
+          <h4><%= t('.charges', charges: @plan.charges) %></h4>
+          <p><%= t('.charge_message') %></p>
+          <p><strong><%= t('.charge_obs') %></strong></p>
+
+
+          <br>
+
+          <h4><%= t('.installments', number: @plan.installments) %></h4>
+          <p><%= t('.installments_message') %></p>
+          <p><%= t('.installment_example') %></p>
+          <p><%= t('.installments_obs') %></p>
+
+
+          <br>
+
+          <h4><%= t('.invoice', day: @plan.invoice_reminder) %></h4>
+          <p><%= t('.invoice_message') %></p>
+
+
+          <br>
+
+          <h4><%= t('.words', words: @plan.words) %></h4>
+          <p><%= t('.words_message') %></p>
+
+          <br>
+          <h4><%= t('.review') %> <em><%= @plan.include_review ? t('.include_review') : t('.not_include_review')  %></em></h4>
+        </div>
+    </div>
+  </div>
+</div>

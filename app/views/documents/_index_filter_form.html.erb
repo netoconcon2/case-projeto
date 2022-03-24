@@ -1,0 +1,47 @@
+<div id="filters-form" class="dash-box form-no-margin-bottom" data-controller="input" data-provide='datepicker'>
+  <%= simple_form_for :query, :method => :get, url: documents_path, html: { class: "grid-search", id: "query_doc_form", data: { action: "input->input#dropdownCheckbox", checkboxes: "query_status" } } do |f| %>
+    <div class="query_text">
+      <%= f.input :title, label: t('.name_query_label'), required: false, placeholder: t('.name_query_placeholder'), input_html: { value: doc_title }, wrapper_html: { class: "mb-0"} %>
+      <button type="button" class="btn-arrows collapsed mb-0" title="<%= t('javascript.toggle_btn') %>" data-bs-toggle="collapse" data-bs-target=".multicollapse" aria-expanded="false" aria-controls="multiCollapse1 multiCollapse2">
+          <i class="fas fa-angle-double-up"></i>
+      </button>
+    </div>
+    <%# START - COLLAPSIBLE OPTIONS %>
+    <div id="multiCollapse1" class="query_enum collapse multicollapse show">
+      <div class="form-group select required query_enum f-column mb-0">
+        <span id="status_label"><%= t('documents.index.status') %></span>
+        <div id="enum-dropdown" role="listbox" aria-labelledby="status_label">
+          <button id="dropdownSelectBtn" class="dropdown-toggle-button form-control" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" title="<%= t('.open_close_multiple_selection') %>">
+            <%= t('documents.index.status') %>
+          </button>
+          <ul class="dropdown-menu">
+            <% Document.translated_statuses.each do |translation, key, value| %>
+              <li>
+                <label for="status_<%= value %>">
+                  <%= check_box_tag( "query[status][]", value.to_i, doc_status.include?(value.to_s), { id: "status_#{value}", role: "option", data: { action: "input->input#selectAll focus->input#dropdownInputFocus blur->input#dropdownInputBlur" } } ) %>
+                  <%= translation %>
+                </label>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div id="multiCollapse2" class="multicollapse collapse show query_date">
+      <div class="flex-s-between">
+        <%= f.input :date_start, label: t('.date_start_query_label'), required: false, wrapper_html: { data: { "input-target": "dateStartGroup" } }, input_html: { value: doc_date_start, autocomplete: "off", placeholder: t('.date_query_placeholder'), data: { action: "input->input#inputmaskDate" }} %>
+        <%= f.input :date_end, label: t('.date_end_query_label'), required: false, input_html: { value: doc_date_end, autocomplete: "off", placeholder: t('.date_query_placeholder'), data: { action: "input->input#inputmaskDate"} } %>
+      </div>
+    </div>
+    <%# END - COLLAPSIBLE OPTIONS %>
+    <div class="form-submit mb-0">
+      <% if params[:query].present? %>
+        <%= link_to documents_path, class: "btn-clean", data: { tippy_content: t('.clean_filters') } do %>
+          <i class='fas fa-times'></i>
+          <span class="visibility-hidden"><%= t('.clean_filters') %></span>
+        <% end %>
+      <% end %>
+      <%= f.submit t('.search'), class: "btn-orange" %>
+    </div>
+  <% end %>
+</div>
